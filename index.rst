@@ -1,20 +1,16 @@
-.. fem_labs documentation master file, created by
-   sphinx-quickstart on Sun Jan  2 11:55:14 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Лабораторные работы "Моделирование систем с распределенными параметрами"
+========================================================================
 
-Welcome to fem_labs's documentation!
-====================================
+Данный курс лабораторных работы посвящен написанию программного обеспечения для решения ``дифференциальных уравнений в 
+частных производных (ДУЧП)`` с помощью ``Метода конечных разностей (МКР)`` и ``Метода конечных элементов (МКЭ)``.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   
+   common
+   lab1
+   lab2
+   lab3
+   lab4
+   lab5
+   lab6
