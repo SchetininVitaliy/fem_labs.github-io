@@ -14,6 +14,7 @@
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
         <script type="text/javascript" src="_static/translations.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
@@ -40,19 +41,18 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Постановки задач</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id2">Одномерные линейные эллиптические дифференциальные уравнения</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Граничные условия</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Сильная форма дифференциального уравнения</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Аналитическое решение</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">Уравнения теплостатики и диффузии</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Определяющие соотношения среды</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Уравнения стационарной теплопроводности и диффузии</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="lab1.html"><code class="docutils literal notranslate"><span class="pre">МКР</span></code> для решения 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab2.html"><code class="docutils literal notranslate"><span class="pre">МКЭ</span></code> для решения 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3.html"><code class="docutils literal notranslate"><span class="pre">МКЭ</span></code> c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4.html"><code class="docutils literal notranslate"><span class="pre">МКР</span></code> для решения 2D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab5.html"><code class="docutils literal notranslate"><span class="pre">МКЭ</span></code> для решения 2D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab6.html"><code class="docutils literal notranslate"><span class="pre">МКЭ</span></code> для решения 3D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab1.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab2.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab3.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab5.html">МКЭ для решения 2D и 3D линейного эллиптического уравнения скалярного переменного</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab6.html">МКР для решения 1D параболического уравнения</a></li>
 </ul>
 
         </div>
@@ -84,26 +84,95 @@
 <div class="section" id="id2">
 <h2>Одномерные линейные эллиптические дифференциальные уравнения<a class="headerlink" href="#id2" title="Ссылка на этот заголовок"></a></h2>
 <p>Рассмотрим постановку задачи решения линейного одномерного эллиптического дифференциального уравнения.</p>
-<p><strong>Задачи механики сплошной среды, которые описывает данный тип уравнения:</strong></p>
+<p><strong>Модели механики сплошной среды, которые описывает данный тип уравнений:</strong></p>
 <ul class="simple">
 <li>Статика упругой среды</li>
 <li>Стационарная теплопроводность</li>
 <li>Стационарная массовая диффузия</li>
-<li>Электростатика</li>
 </ul>
-<p>Будем рассматривать постановку задачи в терминах статики упругой среды.</p>
+<p>Будем рассматривать постановку задачи в терминах статики упругой среды.
+Представим одномерную балку длиной <span class="math notranslate nohighlight">\(L\)</span>. Один конец балки зафиксирован (перемещение равно нулю), а второй может:</p>
+<ul class="simple">
+<li>быть перемещен на величину <span class="math notranslate nohighlight">\(u_g\)</span> (given);</li>
+<li>испытывать реакцию <span class="math notranslate nohighlight">\(t\)</span> (вектор нормальных напряжений).</li>
+</ul>
+<p>По длине балки распределена нагрузка <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <a class="reference internal image-reference" href="_images/1d_statique.svg"><img alt="Одномерная задача статики упругой среды" src="_images/1d_statique.svg" width="400" /></a>
+<p><strong>Постановка задачи одномерной статики упругой среды:</strong></p>
+<p>Необходимо найти функцию <cite>поля перемещений</cite> <span class="math notranslate nohighlight">\(u(x)\)</span>, которая является отображением из <span class="math notranslate nohighlight">\((0, L)\)</span> в <span class="math notranslate nohighlight">\(\mathbb{R}^1\)</span>
+при том, что известны:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(u_0\)</span>,</li>
+<li><span class="math notranslate nohighlight">\(u_g\)</span> или <span class="math notranslate nohighlight">\(t\)</span>,</li>
+<li><span class="math notranslate nohighlight">\(f\)</span>,</li>
+<li><cite>определяющие соотношения среды</cite>: <span class="math notranslate nohighlight">\(\sigma = E \frac{\partial u}{\partial x}\)</span>,</li>
+</ul>
+<p>удовлетворяющую уравнению статики упругой среды:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial{\sigma}}{\partial{x}} + f = 0 \in (0, L),\]</div>
+<p>c граничными условиями:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(u(0) = u_0\)</span></li>
+<li><span class="math notranslate nohighlight">\(u(L) = u_g\)</span> или <span class="math notranslate nohighlight">\(\sigma(L) = t\)</span></li>
+</ul>
 <div class="section" id="id3">
 <h3>Граничные условия<a class="headerlink" href="#id3" title="Ссылка на этот заголовок"></a></h3>
+<p>В курсе лабораторных рассматриваются только два типа граничных условий:</p>
+<ul class="simple">
+<li>Граничные условия Дирихле (1-го рода, условие на значение): <span class="math notranslate nohighlight">\(u(0) = u_0\)</span> и <span class="math notranslate nohighlight">\(u(L) = u_g\)</span></li>
+<li>Граничные условия Неймана (2-го рода, условие на значение производной): <span class="math notranslate nohighlight">\(\sigma(L) = t \implies  E \left.\frac{\partial u}{\partial x}\right|_{x=L} = t\)</span></li>
+</ul>
 </div>
 <div class="section" id="id4">
-<h3>Сильная форма дифференциального уравнения<a class="headerlink" href="#id4" title="Ссылка на этот заголовок"></a></h3>
+<h3>Определяющие соотношения среды<a class="headerlink" href="#id4" title="Ссылка на этот заголовок"></a></h3>
+<p>Уравнение статики упругой среды записано относительно <cite>поля напряжений</cite> <span class="math notranslate nohighlight">\(\sigma\)</span>. Решение данного
+уравнения возможно как относительно поля напряжений, так и относительно поля перемещений. При разработке вычислительных
+методов решения первичным полем чаще всего выбирают поле перемещений.</p>
+<p>Для связи поля напряжений и перемещений служат определяющие соотношения среды. Данные соотношения задают модель материала
+среды.</p>
+<p>Определяющие соотношения изотропной упругой среды с модулем Юнга (физическая константа) <span class="math notranslate nohighlight">\(E\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sigma = E \frac{\partial u}{\partial x}.\]</div>
+<p>После подстановки определяющих соотношений в уравнение статики получаем эллиптический вид дифференциального уравнения:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial{x}}(E\frac{\partial{u}}{\partial{x}}) + f = 0 \in (0, L).\]</div>
 </div>
 <div class="section" id="id5">
-<h3>Аналитическое решение<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
-</div>
-<div class="section" id="id6">
-<h3>Уравнения теплостатики и диффузии<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h3>
+<h3>Уравнения стационарной теплопроводности и диффузии<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
+<p>Эллиптические уравнения также являются моделью для стационарной теплопроводности и массовой диффузии.</p>
+<p>Таблица с аналогиями физических величин и соотношений:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="19%" />
+<col width="23%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Модель</th>
+<th class="head">Поле типа «потенциал»</th>
+<th class="head">Поле типа «поток»</th>
+<th class="head">Константы определяющих соотношений</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Статика упругой среды</td>
+<td>Перемещения <span class="math notranslate nohighlight">\(u\)</span></td>
+<td>Напряжения <span class="math notranslate nohighlight">\(\sigma\)</span></td>
+<td>Модуль Юнга <span class="math notranslate nohighlight">\(E\)</span></td>
+</tr>
+<tr class="row-odd"><td>Стационарная теплопроводность</td>
+<td>Температура <span class="math notranslate nohighlight">\(T\)</span></td>
+<td>Поток температуры <span class="math notranslate nohighlight">\(j\)</span></td>
+<td>Коэффициент теплопроводности math:<cite>K</cite></td>
+</tr>
+<tr class="row-even"><td>Стационарная массовая диффузия</td>
+<td>Масса <span class="math notranslate nohighlight">\(m\)</span></td>
+<td>Поток массы <span class="math notranslate nohighlight">\(q\)</span></td>
+<td>Коэффициент диффузии math:<cite>D</cite></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
