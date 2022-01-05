@@ -8,7 +8,7 @@
    :maxdepth: 2
    
    common
-   lab1
+   notebooks/1d_elliptic
    lab2
    lab3
    lab4

@@ -14,7 +14,9 @@
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
         <script type="text/javascript" src="_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
@@ -38,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="common.html">Постановки задач</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab1.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/1d_elliptic.html">Title</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab2.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab3.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab4.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
@@ -70,7 +72,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="id1">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="id1">
 <h1>Лабораторные работы «Моделирование систем с распределенными параметрами»<a class="headerlink" href="#id1" title="Ссылка на этот заголовок"></a></h1>
 <p>Данный курс лабораторных работы посвящен написанию программного обеспечения для решения <code class="docutils literal notranslate"><span class="pre">дифференциальных</span> <span class="pre">уравнений</span> <span class="pre">в</span>
 <span class="pre">частных</span> <span class="pre">производных</span> <span class="pre">(ДУЧП)</span></code> с помощью <code class="docutils literal notranslate"><span class="pre">Метода</span> <span class="pre">конечных</span> <span class="pre">разностей</span> <span class="pre">(МКР)</span></code> и <code class="docutils literal notranslate"><span class="pre">Метода</span> <span class="pre">конечных</span> <span class="pre">элементов</span> <span class="pre">(МКЭ)</span></code>.</p>
@@ -80,7 +106,7 @@
 <li class="toctree-l2"><a class="reference internal" href="common.html#id2">Одномерные линейные эллиптические дифференциальные уравнения</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="lab1.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/1d_elliptic.html">Title</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab2.html">МКЭ для решения 1D линейного эллиптического уравнения</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="lab2.html#id1">Слабая форма уравнения</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab2.html#id2">Слабая форма Галёркина</a></li>
