@@ -21,7 +21,7 @@
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
     <link rel="next" title="МКЭ для решения 1D линейного эллиптического уравнения" href="../lab2.html" />
-    <link rel="prev" title="Постановки задач" href="../common.html" /> 
+    <link rel="prev" title="Дифференциальные уравнения и математические модели" href="../common.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,12 +40,21 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../common.html">Постановки задач</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Дифференциальные уравнения и математические модели</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">МКР для решения 1D линейного эллиптического уравнения</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Постановка-задачи">Постановка задачи</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Аналитическое-решение">Аналитическое решение</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Численное-решение">Численное решение</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Анализ-решения">Анализ решения</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Краевая-задача-c-граничными-условиями-Дирихле">Краевая задача c граничными условиями Дирихле</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Аналитическое-решение">Аналитическое решение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Численное-решение">Численное решение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Анализ-решения">Анализ решения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Краевая-задача-c-граничным-условием-Неймана">Краевая задача c граничным условием Неймана</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Аналитическое решение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Численное решение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Анализ решения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Упражнения">Упражнения</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab2.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
@@ -351,18 +360,17 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="МКР-для-решения-1D-линейного-эллиптического-уравнения">
 <h1>МКР для решения 1D линейного эллиптического уравнения<a class="headerlink" href="#МКР-для-решения-1D-линейного-эллиптического-уравнения" title="Ссылка на этот заголовок"></a></h1>
-<div class="section" id="Постановка-задачи">
-<h2>Постановка задачи<a class="headerlink" href="#Постановка-задачи" title="Ссылка на этот заголовок"></a></h2>
+<div class="section" id="Краевая-задача-c-граничными-условиями-Дирихле">
+<h2>Краевая задача c граничными условиями Дирихле<a class="headerlink" href="#Краевая-задача-c-граничными-условиями-Дирихле" title="Ссылка на этот заголовок"></a></h2>
 <p>Необходимо найти функцию <span class="math notranslate nohighlight">\(u(x)\)</span>, такую что:</p>
 <p><span class="math">\begin{align}
 &\frac{\partial}{\partial x} E \frac{\partial u}{\partial x} + f = 0 \\
-&u(0) = 0, u(1) = 0.001 \\
+&u(0) = 0, u(1) = 0.01 \\
 &E = 10. \\
 &f = 2x + 1
 \end{align}</span></p>
-</div>
 <div class="section" id="Аналитическое-решение">
-<h2>Аналитическое решение<a class="headerlink" href="#Аналитическое-решение" title="Ссылка на этот заголовок"></a></h2>
+<h3>Аналитическое решение<a class="headerlink" href="#Аналитическое-решение" title="Ссылка на этот заголовок"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -375,11 +383,14 @@ div.rendered_html tbody tr:hover {
 
 <span class="n">E</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">u_s</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">u_t</span> <span class="o">=</span> <span class="mf">0.01</span>
 
 <span class="n">equation</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span>
 
 <span class="n">exact</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span>
-                  <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span><span class="mf">0.001</span><span class="p">})</span>
+                  <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="n">u_s</span><span class="p">,</span>
+                       <span class="n">u</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span><span class="n">u_t</span><span class="p">})</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exact</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -389,7 +400,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="math notranslate nohighlight">
-$\displaystyle u{\left(x \right)} = - \frac{x^{3}}{30} - \frac{x^{2}}{20} + 0.0843333333333333 x$</div></div>
+$\displaystyle u{\left(x \right)} = - \frac{x^{3}}{30} - \frac{x^{2}}{20} + 0.0933333333333333 x$</div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -400,6 +411,8 @@ $\displaystyle u{\left(x \right)} = - \frac{x^{3}}{30} - \frac{x^{2}}{20} + 0.08
 
 <span class="n">x_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_exact</span><span class="p">,</span> <span class="p">[</span><span class="n">exact</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">i</span><span class="p">})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_exact</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -409,7 +422,7 @@ $\displaystyle u{\left(x \right)} = - \frac{x^{3}}{30} - \frac{x^{2}}{20} + 0.08
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&lt;matplotlib.lines.Line2D at 0x7fc2d498f9a0&gt;]
+Text(0, 0.5, &#39;u&#39;)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -421,7 +434,7 @@ $\displaystyle u{\left(x \right)} = - \frac{x^{3}}{30} - \frac{x^{2}}{20} + 0.08
 </div>
 </div>
 <div class="section" id="Численное-решение">
-<h2>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h2>
+<h3>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h3>
 <ol class="arabic simple">
 <li>Определяем узлы конечно-разностной сетки</li>
 </ol>
@@ -481,7 +494,7 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">equations</span> <span class="o">=</span> <span class="p">[(</span><span class="n">E</span> <span class="o">*</span> <span class="p">(</span><span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
-             <span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="mf">0.001</span><span class="p">})</span>
+             <span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="n">u_s</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="n">u_t</span><span class="p">})</span>
              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
 <span class="kn">import</span> <span class="nn">pprint</span>
 <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">equations</span><span class="p">)</span>
@@ -497,7 +510,7 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
  360.0*u(1) - 720.0*u(2) + 360.0*u(3) + 1.66666666666667,
  360.0*u(2) - 720.0*u(3) + 360.0*u(4) + 2.0,
  360.0*u(3) - 720.0*u(4) + 360.0*u(5) + 2.33333333333333,
- 360.0*u(4) - 720.0*u(5) + 3.02666666666667]
+ 360.0*u(4) - 720.0*u(5) + 6.26666666666667]
 </pre></div></div>
 </div>
 <ol class="arabic simple" start="4">
@@ -507,7 +520,8 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linsolve</span><span class="p">(</span><span class="n">equations</span><span class="p">,</span> <span class="n">u_approx</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unknowns</span> <span class="o">=</span> <span class="n">u_approx</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="c1"># исключены крайние узлы</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linsolve</span><span class="p">(</span><span class="n">equations</span><span class="p">,</span> <span class="n">unknowns</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -517,7 +531,7 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{(0.0125123456790123, 0.021320987654321, 0.0255, 0.0241234567901235, 0.0162654320987654)}
+{(0.0140123456790123, 0.024320987654321, 0.03, 0.0301234567901235, 0.0237654320987654)}
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -526,7 +540,8 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
 <span class="n">approx</span> <span class="o">=</span> <span class="p">{</span><span class="n">u_approx</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]))}</span>
-<span class="n">approx</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="mf">0.001</span><span class="p">})</span>
+<span class="n">approx</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="n">u_s</span><span class="p">,</span>
+               <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="n">u_t</span><span class="p">})</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">approx</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -536,12 +551,12 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{u(1): 0.0125123456790123, u(2): 0.0213209876543210, u(3): 0.0255000000000000, u(4): 0.0241234567901235, u(5): 0.0162654320987654, u(0): 0, u(6): 0.001}
+{u(1): 0.0140123456790123, u(2): 0.0243209876543210, u(3): 0.0300000000000000, u(4): 0.0301234567901235, u(5): 0.0237654320987654, u(0): 0, u(6): 0.01}
 </pre></div></div>
 </div>
 </div>
 <div class="section" id="Анализ-решения">
-<h2>Анализ решения<a class="headerlink" href="#Анализ-решения" title="Ссылка на этот заголовок"></a></h2>
+<h3>Анализ решения<a class="headerlink" href="#Анализ-решения" title="Ссылка на этот заголовок"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -551,6 +566,8 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_exact</span><span class="p">,</span> <span class="p">[</span><span class="n">exact</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">i</span><span class="p">})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_exact</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="p">[</span><span class="n">approx</span><span class="p">[</span><span class="n">u_p</span><span class="p">]</span> <span class="k">for</span> <span class="n">u_p</span> <span class="ow">in</span> <span class="n">u_approx</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;approx&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -560,7 +577,7 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x7fc2cc88b460&gt;
+Text(0, 0.5, &#39;u&#39;)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -570,14 +587,183 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
 <img alt="../_images/notebooks_1d_elliptic_15_1.png" src="../_images/notebooks_1d_elliptic_15_1.png" />
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</div>
+</div>
+<div class="section" id="Краевая-задача-c-граничным-условием-Неймана">
+<h2>Краевая задача c граничным условием Неймана<a class="headerlink" href="#Краевая-задача-c-граничным-условием-Неймана" title="Ссылка на этот заголовок"></a></h2>
+<p>Необходимо найти функцию <span class="math notranslate nohighlight">\(u(x)\)</span>, такую что:</p>
+<p><span class="math">\begin{align}
+&\frac{\partial}{\partial x} E \frac{\partial u}{\partial x} + f = 0 \\
+&u(0) = 0, \left.E\frac{\partial u(x)}{\partial x}\right|_{x=1}  = t \\
+&E = 10. \\
+&f = 2x + 1 \\
+&t = -1.
+\end{align}</span></p>
+<div class="section" id="id5">
+<h3>Аналитическое решение<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">init_printing</span><span class="p">()</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="n">E</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">u_s</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span>
+
+<span class="n">equation</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span>
+
+<span class="n">exact</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span>
+                  <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="n">u_s</span><span class="p">,</span>
+                       <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span><span class="n">t</span> <span class="o">/</span> <span class="n">E</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">exact</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$\displaystyle u{\left(x \right)} = - \frac{x^{3}}{30} - \frac{x^{2}}{20} + 0.1 x$</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_exact</span><span class="p">,</span> <span class="p">[</span><span class="n">exact</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">i</span><span class="p">})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_exact</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;u&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_1d_elliptic_18_1.png" src="../_images/notebooks_1d_elliptic_18_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>Численное решение<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h3>
+<p>Граничное условие Неймана в конечно-разностном виде:</p>
+<p><span class="math">\begin{align}
+\left.E\frac{\partial u(x)}{\partial x}\right|_{x=x_i}  = E \frac{x_i - x_{i-1}}{h} = t
+\end{align}</span></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># количество узлов</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">n</span> <span class="c1"># шаг конечной разности</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+<span class="n">u_approx</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+<span class="n">equations</span> <span class="o">=</span> <span class="p">[(</span><span class="n">E</span> <span class="o">*</span> <span class="p">(</span><span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+             <span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="n">u_s</span><span class="p">})</span>
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
+<span class="c1"># Добавляем условие Неймана</span>
+<span class="n">equations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="o">*</span><span class="p">(</span><span class="n">u_approx</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">equations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-720.0*u(1) + 360.0*u(2) + 1.33333333333333,
+ 360.0*u(1) - 720.0*u(2) + 360.0*u(3) + 1.66666666666667,
+ 360.0*u(2) - 720.0*u(3) + 360.0*u(4) + 2.0,
+ 360.0*u(3) - 720.0*u(4) + 360.0*u(5) + 2.33333333333333,
+ 360.0*u(4) - 720.0*u(5) + 360.0*u(6) + 2.66666666666667,
+ -60.0*u(5) + 60.0*u(6) + 1.0]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unknowns</span> <span class="o">=</span> <span class="n">u_approx</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># исключен начальный узел</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linsolve</span><span class="p">(</span><span class="n">equations</span><span class="p">,</span> <span class="n">unknowns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+<span class="n">approx</span> <span class="o">=</span> <span class="p">{</span><span class="n">u_approx</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]))}</span>
+<span class="n">approx</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">approx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{(0.0111111111111111, 0.0185185185185185, 0.0212962962962963, 0.0185185185185185, 0.00925925925925925, -0.00740740740740741)}
+{u(1): 0.0111111111111111, u(2): 0.0185185185185185, u(3): 0.0212962962962963, u(4): 0.0185185185185185, u(5): 0.00925925925925925, u(6): -0.00740740740740741, u(0): 0}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>Анализ решения<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_exact</span><span class="p">,</span> <span class="p">[</span><span class="n">exact</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">i</span><span class="p">})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_exact</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="p">[</span><span class="n">approx</span><span class="p">[</span><span class="n">u_p</span><span class="p">]</span> <span class="k">for</span> <span class="n">u_p</span> <span class="ow">in</span> <span class="n">u_approx</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;approx&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;u&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_1d_elliptic_23_1.png" src="../_images/notebooks_1d_elliptic_23_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Упражнения">
+<h2>Упражнения<a class="headerlink" href="#Упражнения" title="Ссылка на этот заголовок"></a></h2>
+<ol class="arabic simple">
+<li>Анализ сходимости численного решения к аналитическому</li>
+<li>Аналитически и численно найти поле температур в балке длиной <span class="math notranslate nohighlight">\(L=10 [м]\)</span>. С одного конца балки поддерживается температура <span class="math notranslate nohighlight">\(T_0 = 10.[K]\)</span>, с другого конца балки температура отводится таким образом, чтобы тепловой поток был постоянен и равен <span class="math notranslate nohighlight">\(j_t=1 [Вт/м]\)</span>. Коэффициент теплопроводности материала равен 10 [Вт/(м·K)].</li>
+<li>Аналитически и численно найти поле перемещений в вертикальной балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Один конец балки зафиксирван, другой перемещен на 0.1[м]. Модуль Юнга балки равен 10 [Па]. Учесть влияеие силы тяжести.</li>
+</ol>
 </div>
 </div>
 
@@ -585,7 +771,7 @@ E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
-        <a href="../common.html" class="btn btn-neutral float-left" title="Постановки задач" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="../common.html" class="btn btn-neutral float-left" title="Дифференциальные уравнения и математические модели" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
         <a href="../lab2.html" class="btn btn-neutral float-right" title="МКЭ для решения 1D линейного эллиптического уравнения" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

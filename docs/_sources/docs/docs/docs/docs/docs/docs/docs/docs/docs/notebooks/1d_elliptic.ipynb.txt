@@ -2,16 +2,36 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "id": "bc596886",
+   "id": "1544ddb4",
    "metadata": {},
    "source": [
-    "$\\frac{\\partial}{\\partial x} E \\frac{\\partial u}{\\partial x} + f = 0$"
+    "# МКР для решения 1D линейного эллиптического уравнения"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "dff4f188",
+   "metadata": {},
+   "source": [
+    "## Постановка задачи\n",
+    "\n",
+    "\\begin{align}\n",
+    "\\frac{\\partial}{\\partial x} E \\frac{\\partial u}{\\partial x} + f = 0\n",
+    "\\end{align}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8e85a2dd",
+   "metadata": {},
+   "source": [
+    "## Аналитическое решение"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 42,
-   "id": "5cb52784",
+   "execution_count": 43,
+   "id": "edaeb241",
    "metadata": {},
    "outputs": [
     {
@@ -27,7 +47,7 @@
        "         60                       "
       ]
      },
-     "execution_count": 42,
+     "execution_count": 43,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -47,7 +67,7 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "ef9b078f",
+   "id": "1d03fe3f",
    "metadata": {},
    "outputs": [],
    "source": []
