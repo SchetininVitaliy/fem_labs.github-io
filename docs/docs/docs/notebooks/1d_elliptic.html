@@ -38,7 +38,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../common.html">Постановки задач</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../common.html">Дифференциальные уравнения и математические модели</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/1d_elliptic.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../lab2.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../lab3.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
@@ -345,6 +345,7 @@ div.rendered_html tbody tr:hover {
 <h1>МКР для решения 1D линейного эллиптического уравнения<a class="headerlink" href="#МКР-для-решения-1D-линейного-эллиптического-уравнения" title="Ссылка на этот заголовок"></a></h1>
 <div class="section" id="Постановка-задачи">
 <h2>Постановка задачи<a class="headerlink" href="#Постановка-задачи" title="Ссылка на этот заголовок"></a></h2>
+<p>Необходимо найти функцию <span class="math notranslate nohighlight">\(u(x)\)</span>, такую что:</p>
 <p><span class="math">\begin{align}
 &\frac{\partial}{\partial x} E \frac{\partial u}{\partial x} + f = 0 \\
 &u(0) = 0, u(1) = 0.001 \\
@@ -369,18 +370,197 @@ div.rendered_html tbody tr:hover {
 
 <span class="n">equation</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span>
 
-<span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span>
-          <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span><span class="mf">0.001</span><span class="p">})</span>
+<span class="n">exact</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span>
+                  <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span><span class="mf">0.001</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">exact</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="math notranslate nohighlight">
 $\displaystyle u{\left(x \right)} = - \frac{x^{3}}{30} - \frac{x^{2}}{20} + 0.0843333333333333 x$</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_exact</span><span class="p">,</span> <span class="p">[</span><span class="n">exact</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">i</span><span class="p">})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_exact</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x7fc2d498f9a0&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/docs_docs_notebooks_1d_elliptic_4_1.png" src="../../../_images/docs_docs_notebooks_1d_elliptic_4_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Численное-решение">
+<h2>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h2>
+<ol class="arabic simple">
+<li>Определяем узлы конечно-разностной сетки</li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># количество узлов</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">n</span> <span class="c1"># шаг конечной разности</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333333, 1.0]
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Определяем искомую функцию и ее аппроксимацию в узлах</li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+<span class="n">u_approx</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">u_approx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[u(0), u(1), u(2), u(3), u(4), u(5), u(6)]
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Используя конечные разности и полагая Е постоянной:</li>
+</ol>
+<p><span class="math">\begin{align}
+\left.\frac{\partial u(x)}{\partial x}\right|_{x_i} = \frac{u(x_{i+1}) - u(x_{i-1})}{2h} + O(h^2)\\
+\left.\frac{\partial}{\partial x} E \frac{\partial u}{\partial x}\right|_{x_i} = E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + O(h^2)
+\end{align}</span></p>
+<p>запишем систему конечно-разностных уравнений:</p>
+<p><span class="math">\begin{align}
+E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
+\end{align}</span></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">equations</span> <span class="o">=</span> <span class="p">[(</span><span class="n">E</span> <span class="o">*</span> <span class="p">(</span><span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+             <span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="mf">0.001</span><span class="p">})</span>
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">equations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-720.0*u(1) + 360.0*u(2) + 1.33333333333333,
+ 360.0*u(1) - 720.0*u(2) + 360.0*u(3) + 1.66666666666667,
+ 360.0*u(2) - 720.0*u(3) + 360.0*u(4) + 2.0,
+ 360.0*u(3) - 720.0*u(4) + 360.0*u(5) + 2.33333333333333,
+ 360.0*u(4) - 720.0*u(5) + 3.02666666666667]
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Решим систему линейных алгебраических уравнений</li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linsolve</span><span class="p">(</span><span class="n">equations</span><span class="p">,</span> <span class="n">u_approx</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{(0.0125123456790123, 0.021320987654321, 0.0255, 0.0241234567901235, 0.0162654320987654)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+<span class="n">approx</span> <span class="o">=</span> <span class="p">{</span><span class="n">u_approx</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span> <span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]))}</span>
+<span class="n">approx</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="mf">0.001</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">approx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{u(1): 0.0125123456790123, u(2): 0.0213209876543210, u(3): 0.0255000000000000, u(4): 0.0241234567901235, u(5): 0.0162654320987654, u(0): 0, u(6): 0.001}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Анализ-решения">
+<h2>Анализ решения<a class="headerlink" href="#Анализ-решения" title="Ссылка на этот заголовок"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_exact</span><span class="p">,</span> <span class="p">[</span><span class="n">exact</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">i</span><span class="p">})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_exact</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="p">[</span><span class="n">approx</span><span class="p">[</span><span class="n">u_p</span><span class="p">]</span> <span class="k">for</span> <span class="n">u_p</span> <span class="ow">in</span> <span class="n">u_approx</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;approx&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x7fc2cc88b460&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/docs_docs_notebooks_1d_elliptic_15_1.png" src="../../../_images/docs_docs_notebooks_1d_elliptic_15_1.png" />
+</div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
