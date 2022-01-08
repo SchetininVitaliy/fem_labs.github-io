@@ -20,7 +20,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
-    <link rel="next" title="МКЭ для решения 1D линейного эллиптического уравнения" href="../lab2.html" />
+    <link rel="next" title="МКР для решения 2D линейного эллиптического уравнения скалярного переменного" href="../lab2.html" />
     <link rel="prev" title="Дифференциальные уравнения и математические модели" href="../common.html" /> 
 </head>
 
@@ -57,11 +57,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#Упражнения">Упражнения</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../lab2.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab3.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab4.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5.html">МКЭ для решения 2D и 3D линейного эллиптического уравнения скалярного переменного</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6.html">МКР для решения 1D параболического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3.html">МКР для решения 1D параболического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6.html">МКЭ для решения 2D и 3D линейного эллиптического уравнения скалярного переменного</a></li>
 </ul>
 
         </div>
@@ -485,6 +485,7 @@ Text(0, 0.5, &#39;u&#39;)
 \left.\frac{\partial u(x)}{\partial x}\right|_{x_i} = \frac{u(x_{i+1}) - u(x_{i-1})}{2h} + O(h^2)\\
 \left.\frac{\partial}{\partial x} E \frac{\partial u}{\partial x}\right|_{x_i} = E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + O(h^2)
 \end{align}</span></p>
+<p><img alt="fd_1d" src="../_images/fd_1d.svg" /></p>
 <p>запишем систему конечно-разностных уравнений:</p>
 <p><span class="math">\begin{align}
 E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
@@ -772,7 +773,7 @@ Text(0, 0.5, &#39;u&#39;)
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
         <a href="../common.html" class="btn btn-neutral float-left" title="Дифференциальные уравнения и математические модели" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
-        <a href="../lab2.html" class="btn btn-neutral float-right" title="МКЭ для решения 1D линейного эллиптического уравнения" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../lab2.html" class="btn btn-neutral float-right" title="МКР для решения 2D линейного эллиптического уравнения скалярного переменного" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

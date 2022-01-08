@@ -79,7 +79,7 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "455e6448",
+   "id": "7cde1c82",
    "metadata": {},
    "outputs": [
     {
@@ -148,7 +148,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "e66ee50f",
+   "id": "66d168c8",
    "metadata": {},
    "source": [
     "2. Определяем искомую функцию и ее аппроксимацию в узлах"
@@ -176,7 +176,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "c060b455",
+   "id": "6452b59a",
    "metadata": {},
    "source": [
     "3. Используя конечные разности и полагая Е постоянной:\n",
@@ -221,7 +221,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "8f9e05f8",
+   "id": "ce18f257",
    "metadata": {},
    "source": [
     "4. Решим систему линейных алгебраических уравнений"
@@ -230,7 +230,7 @@
   {
    "cell_type": "code",
    "execution_count": 6,
-   "id": "a67bf283",
+   "id": "223376dd",
    "metadata": {},
    "outputs": [
     {
@@ -250,7 +250,7 @@
   {
    "cell_type": "code",
    "execution_count": 7,
-   "id": "95305e41",
+   "id": "565a2a9d",
    "metadata": {},
    "outputs": [
     {
@@ -271,7 +271,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "191a37ec",
+   "id": "2092d1a6",
    "metadata": {},
    "source": [
     "### Анализ решения\n"
@@ -280,7 +280,7 @@
   {
    "cell_type": "code",
    "execution_count": 8,
-   "id": "d1aa8c35",
+   "id": "b02deccc",
    "metadata": {},
    "outputs": [
     {
@@ -318,7 +318,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "ebc61959",
+   "id": "721b19e6",
    "metadata": {},
    "source": [
     "## Краевая задача c граничным условием Неймана\n",
@@ -341,7 +341,7 @@
   {
    "cell_type": "code",
    "execution_count": 9,
-   "id": "34172687",
+   "id": "3515d03b",
    "metadata": {},
    "outputs": [
     {
@@ -384,7 +384,7 @@
   {
    "cell_type": "code",
    "execution_count": 10,
-   "id": "9d890914",
+   "id": "9bc121a4",
    "metadata": {},
    "outputs": [
     {
@@ -418,7 +418,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "021839e3",
+   "id": "84740aa9",
    "metadata": {},
    "source": [
     "### Численное решение\n",
@@ -433,7 +433,7 @@
   {
    "cell_type": "code",
    "execution_count": 11,
-   "id": "2e709b43",
+   "id": "47b49d44",
    "metadata": {},
    "outputs": [
     {
@@ -469,7 +469,7 @@
   {
    "cell_type": "code",
    "execution_count": 12,
-   "id": "df1900a6",
+   "id": "ff3fb773",
    "metadata": {},
    "outputs": [
     {
@@ -493,7 +493,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "e0de92b7",
+   "id": "86a30c53",
    "metadata": {},
    "source": [
     "### Анализ решения"
@@ -502,7 +502,7 @@
   {
    "cell_type": "code",
    "execution_count": 13,
-   "id": "0688fa97",
+   "id": "a659f261",
    "metadata": {},
    "outputs": [
     {
@@ -540,10 +540,10 @@
   },
   {
    "cell_type": "markdown",
-   "id": "4067d57a",
+   "id": "ff96df68",
    "metadata": {},
    "source": [
-    "# Упражнения\n",
+    "## Упражнения\n",
     "\n",
     "1. Анализ сходимости численного решения к аналитическому\n",
     "2. Аналитически и численно найти поле температур в балке длиной $L=10 [м]$. С одного конца балки поддерживается температура $T_0 = 10.[K]$, с другого конца балки температура отводится таким образом, чтобы тепловой поток был постоянен и равен $j_t=1 [Вт/м]$. Коэффициент теплопроводности материала равен 10 [Вт/(м·K)].\n",
