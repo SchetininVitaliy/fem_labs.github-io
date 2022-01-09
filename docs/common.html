@@ -47,14 +47,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">Уравнения стационарной теплопроводности и диффузии</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Двумерные линейные эллиптические дифференциальные уравнения скалярного переменного</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/1d_elliptic.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab2.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab5.html">МКЭ для решения 2D и 3D линейного эллиптического уравнения скалярного переменного</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab6.html">МКР для решения 1D параболического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab2.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab3.html">МКР для решения 1D параболического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab5.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab6.html">МКЭ для решения 2D и 3D линейного эллиптического уравнения скалярного переменного</a></li>
 </ul>
 
         </div>
@@ -116,13 +117,14 @@
 <li>Стационарная теплопроводность</li>
 <li>Стационарная массовая диффузия</li>
 </ul>
-<p>Будем рассматривать постановку задачи в терминах статики упругой среды.
-Представим одномерную балку длиной <span class="math notranslate nohighlight">\(L\)</span>. Один конец балки зафиксирован (перемещение равно нулю), а второй может:</p>
+<p>Будем рассматривать постановку задачи в терминах <em>статики упругой среды</em>.</p>
+<p>Представим одномерную балку длиной <span class="math notranslate nohighlight">\(L\)</span>. Один конец балки зафиксирован (перемещение равно нулю), а второй может:</p>
 <ul class="simple">
 <li>быть перемещен на величину <span class="math notranslate nohighlight">\(u_g\)</span> (given);</li>
 <li>испытывать реакцию <span class="math notranslate nohighlight">\(t\)</span> (вектор нормальных напряжений).</li>
 </ul>
-<p>По длине балки распределена нагрузка <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>По длине балки распределена нагрузка <span class="math notranslate nohighlight">\(f\)</span> - вектор плотности объемных сил (в случае гравитационных сил:
+<span class="math notranslate nohighlight">\(f(x) = \rho(x) * g\)</span>, где <span class="math notranslate nohighlight">\(\rho(x)\)</span> - плотность тела, <span class="math notranslate nohighlight">\(g\)</span> - ускорение свободного падения).</p>
 <a class="reference internal image-reference" href="_images/1d_statique.svg"><img alt="Одномерная задача статики упругой среды" src="_images/1d_statique.svg" width="400" /></a>
 <p><strong>Постановка задачи одномерной статики упругой среды:</strong></p>
 <p>Необходимо найти функцию <cite>поля перемещений</cite> <span class="math notranslate nohighlight">\(u(x)\)</span>, которая является отображением из <span class="math notranslate nohighlight">\((0, L)\)</span> в <span class="math notranslate nohighlight">\(\mathbb{R}^1\)</span>
@@ -200,6 +202,21 @@
 </tbody>
 </table>
 </div>
+</div>
+<div class="section" id="id6">
+<h2>Двумерные линейные эллиптические дифференциальные уравнения скалярного переменного<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h2>
+<p>Рассмотрим постановку задачи решения линейного двумерного эллиптического дифференциального уравнения <strong>скалярного</strong>
+переменного.</p>
+<p><strong>Модели механики сплошной среды, которые описывает данный тип уравнений:</strong></p>
+<ul class="simple">
+<li>Стационарная теплопроводность</li>
+<li>Стационарная массовая диффузия</li>
+</ul>
+<p>Будем рассматривать постановку задачи в терминах стационарной теплопроводности.</p>
+<p>Представим двумерную область <span class="math notranslate nohighlight">\(\omega\)</span> с границей <span class="math notranslate nohighlight">\(\partial \omega\)</span>. На части границы <span class="math notranslate nohighlight">\(\partial \omega_T\)</span>
+задана температура <span class="math notranslate nohighlight">\(T\)</span>, а на части границы <span class="math notranslate nohighlight">\(\partial \omega_j\)</span> задан поток температуры <span class="math notranslate nohighlight">\(\vec{j_n}\)</span>
+в направлении нормали <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p>
+<p>В области распределены источники тепла с объемной плотностью теплового потока <span class="math notranslate nohighlight">\(\vec{f}(x)\)</span>.</p>
 </div>
 </div>
 
