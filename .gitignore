@@ -1,2 +1,3 @@
 _build
 .vscode
+notebooks/.ipynb_checkpoints/

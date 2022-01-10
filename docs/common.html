@@ -47,11 +47,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">Уравнения стационарной теплопроводности и диффузии</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">Двумерные линейные эллиптические дифференциальные уравнения скалярного переменного</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Двумерные линейные эллиптические дифференциальные уравнения скалярного переменного</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Определяющие соотношения среды</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/1d_elliptic.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab2.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/2d_elliptic.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab3.html">МКР для решения 1D параболического уравнения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab4.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab5.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
@@ -113,9 +116,9 @@
 <p>Рассмотрим постановку задачи решения линейного одномерного эллиптического дифференциального уравнения.</p>
 <p><strong>Модели механики сплошной среды, которые описывает данный тип уравнений:</strong></p>
 <ul class="simple">
-<li>Статика упругой среды</li>
-<li>Стационарная теплопроводность</li>
-<li>Стационарная массовая диффузия</li>
+<li>Статика упругой среды;</li>
+<li>Стационарная теплопроводность;</li>
+<li>Стационарная массовая диффузия.</li>
 </ul>
 <p>Будем рассматривать постановку задачи в терминах <em>статики упругой среды</em>.</p>
 <p>Представим одномерную балку длиной <span class="math notranslate nohighlight">\(L\)</span>. Один конец балки зафиксирован (перемещение равно нулю), а второй может:</p>
@@ -127,28 +130,28 @@
 <span class="math notranslate nohighlight">\(f(x) = \rho(x) * g\)</span>, где <span class="math notranslate nohighlight">\(\rho(x)\)</span> - плотность тела, <span class="math notranslate nohighlight">\(g\)</span> - ускорение свободного падения).</p>
 <a class="reference internal image-reference" href="_images/1d_statique.svg"><img alt="Одномерная задача статики упругой среды" src="_images/1d_statique.svg" width="400" /></a>
 <p><strong>Постановка задачи одномерной статики упругой среды:</strong></p>
-<p>Необходимо найти функцию <cite>поля перемещений</cite> <span class="math notranslate nohighlight">\(u(x)\)</span>, которая является отображением из <span class="math notranslate nohighlight">\((0, L)\)</span> в <span class="math notranslate nohighlight">\(\mathbb{R}^1\)</span>
+<p>Необходимо найти <cite>поле перемещений</cite> <span class="math notranslate nohighlight">\(u(x)\)</span>, которое является отображением из <span class="math notranslate nohighlight">\((0, L)\)</span> в <span class="math notranslate nohighlight">\(\mathbb{R}^1\)</span>
 при том, что известны:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(u_0\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(u_g\)</span> или <span class="math notranslate nohighlight">\(t\)</span>,</li>
-<li><span class="math notranslate nohighlight">\(f\)</span>,</li>
+<li><span class="math notranslate nohighlight">\(u_0\)</span>;</li>
+<li><span class="math notranslate nohighlight">\(u_g\)</span> или <span class="math notranslate nohighlight">\(t\)</span>;</li>
+<li><span class="math notranslate nohighlight">\(f\)</span>;</li>
 <li><cite>определяющие соотношения среды</cite>: <span class="math notranslate nohighlight">\(\sigma = E \frac{\partial u}{\partial x}\)</span>,</li>
 </ul>
-<p>удовлетворяющую уравнению статики упругой среды:</p>
+<p>удовлетворяющее уравнению статики упругой среды:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial{\sigma}}{\partial{x}} + f = 0 \in (0, L),\]</div>
 <p>c граничными условиями:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(u(0) = u_0\)</span></li>
-<li><span class="math notranslate nohighlight">\(u(L) = u_g\)</span> или <span class="math notranslate nohighlight">\(\sigma(L) = t\)</span></li>
+<li><span class="math notranslate nohighlight">\(u(0) = u_0\)</span>;</li>
+<li><span class="math notranslate nohighlight">\(u(L) = u_g\)</span> или <span class="math notranslate nohighlight">\(\sigma(L) = t\)</span>.</li>
 </ul>
 <div class="section" id="id3">
 <h3>Граничные условия<a class="headerlink" href="#id3" title="Ссылка на этот заголовок"></a></h3>
 <p>В курсе лабораторных рассматриваются только два типа граничных условий:</p>
 <ul class="simple">
-<li>Граничные условия Дирихле (1-го рода, условие на значение): <span class="math notranslate nohighlight">\(u(0) = u_0\)</span> и <span class="math notranslate nohighlight">\(u(L) = u_g\)</span></li>
-<li>Граничные условия Неймана (2-го рода, условие на значение производной): <span class="math notranslate nohighlight">\(\sigma(L) = t \implies  E \left.\frac{\partial u}{\partial x}\right|_{x=L} = t\)</span></li>
+<li>Граничные условия Дирихле (1-го рода, условие на значение): <span class="math notranslate nohighlight">\(u(0) = u_0\)</span> и <span class="math notranslate nohighlight">\(u(L) = u_g\)</span>;</li>
+<li>Граничные условия Неймана (2-го рода, условие на значение производной): <span class="math notranslate nohighlight">\(\sigma(L) = t \implies  E \left.\frac{\partial u}{\partial x}\right|_{x=L} = t\)</span>.</li>
 </ul>
 </div>
 <div class="section" id="id4">
@@ -163,7 +166,7 @@
 \[\sigma = E \frac{\partial u}{\partial x}.\]</div>
 <p>После подстановки определяющих соотношений в уравнение статики получаем эллиптический вид дифференциального уравнения:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial}{\partial{x}}(E\frac{\partial{u}}{\partial{x}}) + f = 0 \in (0, L).\]</div>
+\[\frac{\partial}{\partial{x}}\left(E\frac{\partial{u}}{\partial{x}}\right) + f = 0, x \in (0, L).\]</div>
 </div>
 <div class="section" id="id5">
 <h3>Уравнения стационарной теплопроводности и диффузии<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
@@ -171,10 +174,10 @@
 <p>Таблица с аналогиями физических величин и соотношений:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="26%" />
-<col width="19%" />
 <col width="23%" />
-<col width="32%" />
+<col width="17%" />
+<col width="27%" />
+<col width="33%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Модель</th>
@@ -191,12 +194,12 @@
 </tr>
 <tr class="row-odd"><td>Стационарная теплопроводность</td>
 <td>Температура <span class="math notranslate nohighlight">\(T\)</span></td>
-<td>Поток температуры <span class="math notranslate nohighlight">\(j\)</span></td>
-<td>Коэффициент теплопроводности <span class="math notranslate nohighlight">\(K\)</span></td>
+<td>Плотность теплового потока <span class="math notranslate nohighlight">\(q\)</span></td>
+<td>Коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda\)</span></td>
 </tr>
 <tr class="row-even"><td>Стационарная массовая диффузия</td>
 <td>Масса <span class="math notranslate nohighlight">\(m\)</span></td>
-<td>Поток массы <span class="math notranslate nohighlight">\(q\)</span></td>
+<td>Плотность потока массы <span class="math notranslate nohighlight">\(q\)</span></td>
 <td>Коэффициент диффузии <span class="math notranslate nohighlight">\(D\)</span></td>
 </tr>
 </tbody>
@@ -209,14 +212,47 @@
 переменного.</p>
 <p><strong>Модели механики сплошной среды, которые описывает данный тип уравнений:</strong></p>
 <ul class="simple">
-<li>Стационарная теплопроводность</li>
-<li>Стационарная массовая диффузия</li>
+<li>Стационарная теплопроводность;</li>
+<li>Стационарная массовая диффузия.</li>
 </ul>
 <p>Будем рассматривать постановку задачи в терминах стационарной теплопроводности.</p>
-<p>Представим двумерную область <span class="math notranslate nohighlight">\(\omega\)</span> с границей <span class="math notranslate nohighlight">\(\partial \omega\)</span>. На части границы <span class="math notranslate nohighlight">\(\partial \omega_T\)</span>
-задана температура <span class="math notranslate nohighlight">\(T\)</span>, а на части границы <span class="math notranslate nohighlight">\(\partial \omega_j\)</span> задан поток температуры <span class="math notranslate nohighlight">\(\vec{j_n}\)</span>
-в направлении нормали <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p>
+<p>Представим двумерную область <span class="math notranslate nohighlight">\(\Omega\)</span> с границей <span class="math notranslate nohighlight">\(\partial \Omega\)</span>. На части границы <span class="math notranslate nohighlight">\(\partial \Omega_T\)</span>
+задана температура <span class="math notranslate nohighlight">\(T_g\)</span>, а на части границы <span class="math notranslate nohighlight">\(\partial \Omega_q\)</span>
+(<span class="math notranslate nohighlight">\(\partial \Omega_T \cap \partial \Omega_q = \emptyset\)</span>; <span class="math notranslate nohighlight">\(\partial \Omega = \partial \Omega_T \cup \partial \Omega_q\)</span>)
+задан поток температуры <span class="math notranslate nohighlight">\(q_n\)</span> в направлении нормали <span class="math notranslate nohighlight">\(\vec{n}\)</span>.</p>
 <p>В области распределены источники тепла с объемной плотностью теплового потока <span class="math notranslate nohighlight">\(\vec{f}(x)\)</span>.</p>
+<a class="reference internal image-reference" href="_images/2d_elliptic.svg"><img alt="Двумерная задача стационарной теплопроводности" src="_images/2d_elliptic.svg" width="400" /></a>
+<p><strong>Постановка задачи двумерной теплопроводности:</strong></p>
+<p>Необходимо найти <cite>поле температур</cite> <span class="math notranslate nohighlight">\(T(x)\)</span>, которое является отображением из <span class="math notranslate nohighlight">\(\Omega\)</span> в <span class="math notranslate nohighlight">\(\mathbb{R}^1\)</span>
+при том, что известны:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(T_g\)</span>;</li>
+<li><span class="math notranslate nohighlight">\(q_n\)</span>;</li>
+<li><span class="math notranslate nohighlight">\(f\)</span>;</li>
+<li><cite>определяющие соотношения среды</cite>: <span class="math notranslate nohighlight">\(\vec{j} = - \hat{\lambda} \nabla T\)</span>,</li>
+</ul>
+<p>удовлетворяющее уравнению стационарной теплопроводности:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial{q_1}}{\partial{x_1}} + \frac{\partial{q_2}}{\partial{x_2}} + f = 0, \vec{x} \in (\Omega),\]</div>
+<p>c граничными условиями:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(T = T_g, \vec{x} \in \partial \Omega_T\)</span> - граничные условия Дирихле;</li>
+<li><span class="math notranslate nohighlight">\(-\vec{q} \cdot \vec{n} = q_n, \vec{x} \in \partial \Omega_q\)</span> - граничные условия Неймана.</li>
+</ul>
+<div class="section" id="id7">
+<h3>Определяющие соотношения среды<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h3>
+<p>В задаче теплопроводности определяющие соотношения связывают вектор плотности теплового потока <span class="math notranslate nohighlight">\(\vec{j}\)</span> и градиент
+температуры <span class="math notranslate nohighlight">\(\nabla T\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\vec{j} = - \hat{\lambda} \nabla T,\]</div>
+<p>где <span class="math notranslate nohighlight">\(\hat{\lambda}=\begin{bmatrix} \lambda_{11} &amp; \lambda_{12} \\  \lambda_{21} &amp; \lambda_{22} \end{bmatrix}\)</span> - тензор теплопроводности.</p>
+<p>Будем рассматривать изотропные материалы. В этом случае тензор теплопроводности принимает вид:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{\lambda}=\begin{bmatrix} \lambda &amp; 0 \\ 0 &amp; \lambda \end{bmatrix}.\end{split}\]</div>
+<p>Подставив данное выражение в уравнение стационарной теплопроводности получим:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial x_1}\left(\lambda \frac{\partial T}{\partial x_1}\right) + \frac{\partial}{\partial x_2} \left( \lambda \frac{\partial T}{\partial x_2} \right) + f = 0.\]</div>
+</div>
 </div>
 </div>
 

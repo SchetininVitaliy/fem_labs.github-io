@@ -9,7 +9,7 @@
    
    common
    notebooks/1d_elliptic
-   lab2
+   notebooks/2d_elliptic
    lab3
    lab4
    lab5
