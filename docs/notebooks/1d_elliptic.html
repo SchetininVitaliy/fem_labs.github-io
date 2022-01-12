@@ -42,13 +42,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../common.html">Дифференциальные уравнения и математические модели</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">МКР для решения 1D линейного эллиптического уравнения</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Краевая-задача-c-граничными-условиями-Дирихле">Краевая задача c граничными условиями Дирихле</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Задача-c-граничными-условиями-Дирихле">Задача c граничными условиями Дирихле</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Аналитическое-решение">Аналитическое решение</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Численное-решение">Численное решение</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Анализ-решения">Анализ решения</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Краевая-задача-c-граничным-условием-Неймана">Краевая задача c граничным условием Неймана</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Задача-c-граничным-условием-Неймана">Задача c граничным условием Неймана</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id5">Аналитическое решение</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">Численное решение</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id7">Анализ решения</a></li>
@@ -360,8 +360,8 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="МКР-для-решения-1D-линейного-эллиптического-уравнения">
 <h1>МКР для решения 1D линейного эллиптического уравнения<a class="headerlink" href="#МКР-для-решения-1D-линейного-эллиптического-уравнения" title="Ссылка на этот заголовок"></a></h1>
-<div class="section" id="Краевая-задача-c-граничными-условиями-Дирихле">
-<h2>Краевая задача c граничными условиями Дирихле<a class="headerlink" href="#Краевая-задача-c-граничными-условиями-Дирихле" title="Ссылка на этот заголовок"></a></h2>
+<div class="section" id="Задача-c-граничными-условиями-Дирихле">
+<h2>Задача c граничными условиями Дирихле<a class="headerlink" href="#Задача-c-граничными-условиями-Дирихле" title="Ссылка на этот заголовок"></a></h2>
 <p>Необходимо найти функцию <span class="math notranslate nohighlight">\(u(x)\)</span>, такую что:</p>
 <p><span class="math">\begin{align}
 &\frac{\partial}{\partial x} \left( E \frac{\partial u}{\partial x}\right) + f = 0 \\
@@ -482,8 +482,8 @@ Text(0, 0.5, &#39;u&#39;)
 <li>Используя конечные разности и полагая Е постоянной:</li>
 </ol>
 <p><span class="math">\begin{align}
-\left.\frac{\partial u(x)}{\partial x}\right|_{x_i} = \frac{u(x_{i+1}) - u(x_{i-1})}{2h} + O(h^2)\\
-\left.\frac{\partial}{\partial x} \left(E \frac{\partial u}{\partial x}\right)\right|_{x_i} = E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + O(h^2)
+\left.\frac{\partial u(x)}{\partial x}\right|_{x_i} \approx \frac{u(x_{i+1}) - u(x_{i-1})}{2h}\\
+\left.\frac{\partial}{\partial x} \left(E \frac{\partial u}{\partial x}\right)\right|_{x_i} \approx E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2}
 \end{align}</span></p>
 <p><img alt="fd_1d" src="../_images/fd_1d.svg" /></p>
 <p>запишем систему конечно-разностных уравнений:</p>
@@ -590,8 +590,8 @@ Text(0, 0.5, &#39;u&#39;)
 </div>
 </div>
 </div>
-<div class="section" id="Краевая-задача-c-граничным-условием-Неймана">
-<h2>Краевая задача c граничным условием Неймана<a class="headerlink" href="#Краевая-задача-c-граничным-условием-Неймана" title="Ссылка на этот заголовок"></a></h2>
+<div class="section" id="Задача-c-граничным-условием-Неймана">
+<h2>Задача c граничным условием Неймана<a class="headerlink" href="#Задача-c-граничным-условием-Неймана" title="Ссылка на этот заголовок"></a></h2>
 <p>Необходимо найти функцию <span class="math notranslate nohighlight">\(u(x)\)</span>, такую что:</p>
 <p><span class="math">\begin{align}
 &\frac{\partial}{\partial x} \left( E \frac{\partial u}{\partial x} \right) + f = 0 \\

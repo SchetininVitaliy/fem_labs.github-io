@@ -43,7 +43,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../common.html">Дифференциальные уравнения и математические модели</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1d_elliptic.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Краевая-задача-c-граничными-условиями-Дирихле">Краевая задача c граничными условиями Дирихле</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Задача-c-граничными-условиями-Дирихле">Задача c граничными условиями Дирихле</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Численное-решение">Численное решение</a></li>
 </ul>
 </li>
@@ -351,8 +351,8 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="МКР-для-решения-2D-линейного-эллиптического-уравнения-скалярного-переменного">
 <h1>МКР для решения 2D линейного эллиптического уравнения скалярного переменного<a class="headerlink" href="#МКР-для-решения-2D-линейного-эллиптического-уравнения-скалярного-переменного" title="Ссылка на этот заголовок"></a></h1>
-<div class="section" id="Краевая-задача-c-граничными-условиями-Дирихле">
-<h2>Краевая задача c граничными условиями Дирихле<a class="headerlink" href="#Краевая-задача-c-граничными-условиями-Дирихле" title="Ссылка на этот заголовок"></a></h2>
+<div class="section" id="Задача-c-граничными-условиями-Дирихле">
+<h2>Задача c граничными условиями Дирихле<a class="headerlink" href="#Задача-c-граничными-условиями-Дирихле" title="Ссылка на этот заголовок"></a></h2>
 <p>Необходимо найти поле температуры <span class="math notranslate nohighlight">\(T\)</span> в прямоугольной пластине. Значение поля на каждой грани пластины известно. Пластина изотропна и коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda=1.\)</span>.</p>
 <p><img alt="fd_2d_task" src="../_images/fd_2d_task.svg" /></p>
 <p>Поле температур будет удовлетворять уравнению:</p>
@@ -361,11 +361,141 @@ div.rendered_html tbody tr:hover {
 \end{align}</span></p>
 <div class="section" id="Численное-решение">
 <h3>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h3>
+<ol class="arabic simple">
+<li>Построим конечно-разностную сетку:</li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">L_1</span><span class="p">,</span> <span class="n">L_2</span> <span class="o">=</span> <span class="mf">10.</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">n_1</span><span class="p">,</span> <span class="n">n_2</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span> <span class="c1"># количество узлов</span>
+<span class="n">h_1</span><span class="p">,</span> <span class="n">h_2</span> <span class="o">=</span> <span class="n">L_1</span><span class="o">/</span><span class="p">(</span><span class="n">n_1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">L_2</span><span class="o">/</span><span class="p">(</span><span class="n">n_2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># шаг конечной разности</span>
+
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">i</span> <span class="o">*</span> <span class="n">h_1</span><span class="p">,</span> <span class="n">j</span> <span class="o">*</span> <span class="n">h_2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_1</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_2</span><span class="p">)])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_nodes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.collections.PathCollection at 0x7fca182a7130&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_2d_elliptic_1_1.png" src="../_images/notebooks_2d_elliptic_1_1.png" />
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Используя конечно разностные аппроксимации производных, запишем систему уравнений:</li>
+</ol>
+<p><span class="math">\begin{align}
+\left.\frac{\partial}{\partial x_1} \left(\lambda \frac{\partial T}{\partial x_1}\right)\right|_{x_{i, j}} \approx \lambda \frac{T(x_{i+1, j}) - 2T(x_{i, j}) + T(x_{i-1, j})}{h_1^2} \\
+\left.\frac{\partial}{\partial x_2} \left(\lambda \frac{\partial T}{\partial x_2}\right)\right|_{x_{i, j}} \approx \lambda \frac{T(x_{i, j+1}) - 2T(x_{i, j}) + T(x_{i, j-1})}{h_2^2}
+\end{align}</span></p>
+<p><span class="math">\begin{align}
+\lambda \frac{T(x_{i+1, j}) - 2T(x_{i, j}) + T(x_{i-1, j})}{h_1^2} + \lambda \frac{T(x_{i, j+1}) - 2T(x_{i, j}) + T(x_{i, j-1})}{h_2^2} = 0
+\end{align}</span></p>
+<p>Для поиска решения с помощью методов линейной алгебры необходимо свести систему к матричному виду:</p>
+<p><span class="math">\begin{align}
+[A] \{T\} = 0,
+\end{align}</span></p>
+<p>где <span class="math notranslate nohighlight">\([A]\)</span> - матрица коэфициентов, <span class="math notranslate nohighlight">\(\{T\}\)</span> - вектор температур в узлах сетки.</p>
+<p>Для построения матрицы коэффициентов необходимо двумерную нумерацию узлов свести к одномерной. Для этого заменим индексы <span class="math notranslate nohighlight">\(i, j\)</span> на индекс <span class="math notranslate nohighlight">\(k = i * n_1 + j\)</span></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">n_1</span> <span class="o">+</span> <span class="n">j</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_1</span> <span class="o">*</span> <span class="n">n_2</span><span class="p">,</span> <span class="n">n_1</span> <span class="o">*</span> <span class="n">n_2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)][</span><span class="n">k</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h_1</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)][</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.</span> <span class="o">/</span> <span class="n">h_1</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">2.</span> <span class="o">/</span> <span class="n">h_2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)][</span><span class="n">k</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h_1</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)][</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h_1</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)][</span><span class="n">k</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h_1</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+     0     1     2    3     4     5     6     7     8     9     10    11   12  \
+0   0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+1   0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+2   0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+3   0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+4   0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+5   0.0  0.09  0.00  0.0  0.09 -1.38  0.09  0.00  0.00  0.09  0.00  0.00  0.0
+6   0.0  0.00  0.09  0.0  0.00  0.09 -1.38  0.09  0.00  0.00  0.09  0.00  0.0
+7   0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+8   0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+9   0.0  0.00  0.00  0.0  0.00  0.09  0.00  0.00  0.09 -1.38  0.09  0.00  0.0
+10  0.0  0.00  0.00  0.0  0.00  0.00  0.09  0.00  0.00  0.09 -1.38  0.09  0.0
+11  0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+12  0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+13  0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+14  0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+15  0.0  0.00  0.00  0.0  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.0
+
+      13    14   15
+0   0.00  0.00  0.0
+1   0.00  0.00  0.0
+2   0.00  0.00  0.0
+3   0.00  0.00  0.0
+4   0.00  0.00  0.0
+5   0.00  0.00  0.0
+6   0.00  0.00  0.0
+7   0.00  0.00  0.0
+8   0.00  0.00  0.0
+9   0.09  0.00  0.0
+10  0.00  0.09  0.0
+11  0.00  0.00  0.0
+12  0.00  0.00  0.0
+13  0.00  0.00  0.0
+14  0.00  0.00  0.0
+15  0.00  0.00  0.0
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Добавим в систему граничные условия:</li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Решим СЛАУ:</li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
