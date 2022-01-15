@@ -13,6 +13,7 @@
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
         <script type="text/javascript" src="../_static/translations.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -43,15 +44,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../common.html">Дифференциальные уравнения и математические модели</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">МКР для решения 1D линейного эллиптического уравнения</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Задача-c-граничными-условиями-Дирихле">Задача c граничными условиями Дирихле</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Формулировка-математической-модели:">Формулировка математической модели:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Аналитическое-решение">Аналитическое решение</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Численное-решение">Численное решение</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Анализ-решения">Анализ решения</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Задача-c-граничным-условием-Неймана">Задача c граничным условием Неймана</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Аналитическое решение</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">Численное решение</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">Анализ решения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Формулировка-математической-модели">Формулировка математической модели</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Аналитическое решение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Численное решение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Анализ решения</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Упражнения">Упражнения</a></li>
@@ -362,13 +365,17 @@ div.rendered_html tbody tr:hover {
 <h1>МКР для решения 1D линейного эллиптического уравнения<a class="headerlink" href="#МКР-для-решения-1D-линейного-эллиптического-уравнения" title="Ссылка на этот заголовок"></a></h1>
 <div class="section" id="Задача-c-граничными-условиями-Дирихле">
 <h2>Задача c граничными условиями Дирихле<a class="headerlink" href="#Задача-c-граничными-условиями-Дирихле" title="Ссылка на этот заголовок"></a></h2>
-<p>Необходимо найти функцию <span class="math notranslate nohighlight">\(u(x)\)</span>, такую что:</p>
+<p>Необходимо найти поле перемещений <span class="math notranslate nohighlight">\(u(x)\)</span> в балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>, один конец которой зафиксирован, а второй перемещен на 0.01[м]. Балка испытывает инерционную нагрузку от ускорения <span class="math notranslate nohighlight">\(a=1[м/c^2]\)</span>. Плотность балки распределена по закону <span class="math notranslate nohighlight">\(\rho(x) = 2x + 1 [кг/м^3]\)</span>. Модуль Юнга балки <span class="math notranslate nohighlight">\(E = 10 [Па]\)</span>.</p>
+<p><img alt="fd_1d_task_1" src="../_images/fd_1d_task_2.svg" /></p>
+<div class="section" id="Формулировка-математической-модели:">
+<h3>Формулировка математической модели:<a class="headerlink" href="#Формулировка-математической-модели:" title="Ссылка на этот заголовок"></a></h3>
 <p><span class="math">\begin{align}
 &\frac{\partial}{\partial x} \left( E \frac{\partial u}{\partial x}\right) + f = 0 \\
 &u(0) = 0, u(1) = 0.01 \\
 &E = 10. \\
-&f = 2x + 1
+&f = a * \rho(x) = 2x + 1
 \end{align}</span></p>
+</div>
 <div class="section" id="Аналитическое-решение">
 <h3>Аналитическое решение<a class="headerlink" href="#Аналитическое-решение" title="Ссылка на этот заголовок"></a></h3>
 <div class="nbinput docutils container">
@@ -429,7 +436,7 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1d_elliptic_4_1.png" src="../_images/notebooks_1d_elliptic_4_1.png" />
+<img alt="../_images/notebooks_1d_elliptic_3_1.png" src="../_images/notebooks_1d_elliptic_3_1.png" />
 </div>
 </div>
 </div>
@@ -482,13 +489,12 @@ Text(0, 0.5, &#39;u&#39;)
 <li>Используя конечные разности и полагая Е постоянной:</li>
 </ol>
 <p><span class="math">\begin{align}
-\left.\frac{\partial u(x)}{\partial x}\right|_{x_i} \approx \frac{u(x_{i+1}) - u(x_{i-1})}{2h}\\
-\left.\frac{\partial}{\partial x} \left(E \frac{\partial u}{\partial x}\right)\right|_{x_i} \approx E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2}
+\frac{\partial}{\partial x} \left(E \frac{\partial u_{i}}{\partial x}\right) \approx E \frac{u_{i+1} - 2u_{i} + u_{i-1}}{h^2}
 \end{align}</span></p>
 <p><img alt="fd_1d" src="../_images/fd_1d.svg" /></p>
-<p>запишем систему конечно-разностных уравнений:</p>
+<p>запишем уравнение для каждого узла:</p>
 <p><span class="math">\begin{align}
-E \frac{u(x_{i+1}) - 2u(x_{i}) + u(x_{i-1})}{h^2} + 2x_i + 1 = 0.
+E \frac{u_{i+1} - 2u_{i} + u_{i-1}}{h^2} + 2x_i + 1 = 0.
 \end{align}</span></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -585,14 +591,17 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1d_elliptic_15_1.png" src="../_images/notebooks_1d_elliptic_15_1.png" />
+<img alt="../_images/notebooks_1d_elliptic_14_1.png" src="../_images/notebooks_1d_elliptic_14_1.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="Задача-c-граничным-условием-Неймана">
 <h2>Задача c граничным условием Неймана<a class="headerlink" href="#Задача-c-граничным-условием-Неймана" title="Ссылка на этот заголовок"></a></h2>
-<p>Необходимо найти функцию <span class="math notranslate nohighlight">\(u(x)\)</span>, такую что:</p>
+<p>Необходимо найти поле перемещений <span class="math notranslate nohighlight">\(u(x)\)</span> в балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>, один конец которой зафиксирован, а ко второму приложена сила растягивающая сила <span class="math notranslate nohighlight">\(t = 1 [Н]\)</span>. Балка испытывает инерционную нагрузку от ускорения <span class="math notranslate nohighlight">\(a=1[м/c^2]\)</span>. Плотность балки распределена по закону <span class="math notranslate nohighlight">\(\rho(x) = 2x + 1 [кг/м^3]\)</span>. Модуль Юнга балки <span class="math notranslate nohighlight">\(E = 10 [Па]\)</span>.</p>
+<p><img alt="fd_1d_task_1" src="../_images/fd_1d_task_2.svg" /></p>
+<div class="section" id="Формулировка-математической-модели">
+<h3>Формулировка математической модели<a class="headerlink" href="#Формулировка-математической-модели" title="Ссылка на этот заголовок"></a></h3>
 <p><span class="math">\begin{align}
 &\frac{\partial}{\partial x} \left( E \frac{\partial u}{\partial x} \right) + f = 0 \\
 &u(0) = 0, \left.E\frac{\partial u(x)}{\partial x}\right|_{x=1}  = t \\
@@ -600,8 +609,9 @@ Text(0, 0.5, &#39;u&#39;)
 &f = 2x + 1 \\
 &t = -1.
 \end{align}</span></p>
-<div class="section" id="id5">
-<h3>Аналитическое решение<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
+</div>
+<div class="section" id="id7">
+<h3>Аналитическое решение<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -656,15 +666,15 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1d_elliptic_18_1.png" src="../_images/notebooks_1d_elliptic_18_1.png" />
+<img alt="../_images/notebooks_1d_elliptic_17_1.png" src="../_images/notebooks_1d_elliptic_17_1.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id6">
-<h3>Численное решение<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h3>
+<div class="section" id="id8">
+<h3>Численное решение<a class="headerlink" href="#id8" title="Ссылка на этот заголовок"></a></h3>
 <p>Граничное условие Неймана в конечно-разностном виде:</p>
 <p><span class="math">\begin{align}
-\left.E\frac{\partial u(x)}{\partial x}\right|_{x=x_i}  = E \frac{x_i - x_{i-1}}{h} = t
+E\frac{\partial u_i}{\partial x} = E \frac{u_i - u_{i-1}}{h} = t
 \end{align}</span></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -680,6 +690,7 @@ Text(0, 0.5, &#39;u&#39;)
 <span class="n">equations</span> <span class="o">=</span> <span class="p">[(</span><span class="n">E</span> <span class="o">*</span> <span class="p">(</span><span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
              <span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="n">u_s</span><span class="p">})</span>
              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
+
 <span class="c1"># Добавляем условие Неймана</span>
 <span class="n">equations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="o">*</span><span class="p">(</span><span class="n">u_approx</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">u_approx</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">h</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">pprint</span>
@@ -724,8 +735,8 @@ Text(0, 0.5, &#39;u&#39;)
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id7">
-<h3>Анализ решения<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h3>
+<div class="section" id="id9">
+<h3>Анализ решения<a class="headerlink" href="#id9" title="Ссылка на этот заголовок"></a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -753,7 +764,7 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_1d_elliptic_23_1.png" src="../_images/notebooks_1d_elliptic_23_1.png" />
+<img alt="../_images/notebooks_1d_elliptic_22_1.png" src="../_images/notebooks_1d_elliptic_22_1.png" />
 </div>
 </div>
 </div>
@@ -761,11 +772,17 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="section" id="Упражнения">
 <h2>Упражнения<a class="headerlink" href="#Упражнения" title="Ссылка на этот заголовок"></a></h2>
 <ol class="arabic simple">
-<li>Анализ сходимости численного решения к аналитическому.</li>
-<li>Найти поле напряжений <span class="math notranslate nohighlight">\(\sigma\)</span>.</li>
 <li>Аналитически и численно найти поле температур в балке длиной <span class="math notranslate nohighlight">\(L=10 [м]\)</span>. С одного конца балки поддерживается температура <span class="math notranslate nohighlight">\(T_0 = 10[K]\)</span>, с другого конца балки температура отводится таким образом, чтобы тепловой поток был постоянен и равен <span class="math notranslate nohighlight">\(j_t=1 [Вт/м]\)</span>. Коэффициент теплопроводности материала равен 10 [Вт/(м·K)].</li>
 <li>Аналитически и численно найти поле перемещений в вертикальной балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Один конец балки зафиксирван, другой перемещен на 0.1[м]. Модуль Юнга балки равен 10 [Па]. Плотность балки <span class="math notranslate nohighlight">\(\rho=1[кг/м]\)</span>. Учесть влияние силы тяжести.</li>
 </ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

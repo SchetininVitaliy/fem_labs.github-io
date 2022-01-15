@@ -23,6 +23,12 @@ project = 'fem_labs'
 copyright = '2022, Vitaliy Schetinin'
 author = 'Vitaliy Schetinin'
 
+from ipywidgets.embed import DEFAULT_EMBED_REQUIREJS_URL
+
+html_js_files = [
+    DEFAULT_EMBED_REQUIREJS_URL,
+]
+
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
