@@ -3185,7 +3185,7 @@
   {
    "cell_type": "code",
    "execution_count": 7,
-   "id": "ae5738a6",
+   "id": "63f0c3fd",
    "metadata": {},
    "outputs": [],
    "source": [
@@ -3200,16 +3200,16 @@
   },
   {
    "cell_type": "markdown",
-   "id": "9d117da7",
+   "id": "b32e8627",
    "metadata": {},
    "source": [
-    "2. Используя конечно разностные аппроксимации производных запишем уравнение для каждого узла $(i, j)$ конечно-разностной сетки:\n"
+    "2. Используя конечно-разностные аппроксимации производных запишем уравнение для каждого узла $(i, j)$ конечно-разностной сетки:\n"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 12,
-   "id": "97ab7f72",
+   "id": "602eab3e",
    "metadata": {},
    "outputs": [],
    "source": [
@@ -3238,7 +3238,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "c3151a88",
+   "id": "ffb40107",
    "metadata": {},
    "source": [
     "3. Добавим в систему граничные условия:\n",
@@ -3267,7 +3267,7 @@
   {
    "cell_type": "code",
    "execution_count": 9,
-   "id": "5fbfae16",
+   "id": "5ef07ffb",
    "metadata": {},
    "outputs": [],
    "source": [
@@ -3301,7 +3301,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "8ee52312",
+   "id": "29671004",
    "metadata": {},
    "source": [
     "4. Решим СЛАУ:"
@@ -3310,7 +3310,7 @@
   {
    "cell_type": "code",
    "execution_count": 10,
-   "id": "e27b664d",
+   "id": "f3ce53e2",
    "metadata": {},
    "outputs": [
     {
@@ -4312,7 +4312,7 @@
   {
    "cell_type": "code",
    "execution_count": 11,
-   "id": "7bff8a96",
+   "id": "c569f77d",
    "metadata": {},
    "outputs": [
     {
@@ -5318,7 +5318,7 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "00c46088",
+   "id": "12cb59c1",
    "metadata": {},
    "outputs": [],
    "source": []

@@ -1,0 +1,3545 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="ru" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>МКР для решения 1D параболического уравнения &mdash; Документация fem_labs </title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" />
+    <link rel="next" title="МКЭ для решения 1D линейного эллиптического уравнения" href="../lab4.html" />
+    <link rel="prev" title="МКР для решения 2D линейного эллиптического уравнения скалярного переменного" href="2d_elliptic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> fem_labs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Поиск в документации" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Меню навигации">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../common.html">Дифференциальные уравнения и математические модели</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1d_elliptic.html">МКР для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2d_elliptic.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">МКР для решения 1D параболического уравнения</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Формулировка-математической-модели">Формулировка математической модели</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Численное-решение.-Явная-схема.">Численное решение. Явная схема.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Численное-решение.-Неявная-схема.">Численное решение. Неявная схема.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Упражнения">Упражнения</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6.html">МКЭ для решения 2D и 3D линейного эллиптического уравнения скалярного переменного</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Меню навигации для мобильных устройств" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fem_labs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Навигация по страницам">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>МКР для решения 1D параболического уравнения</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/1d_parabolic.ipynb.txt" rel="nofollow"> Просмотреть исходный код страницы</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="МКР-для-решения-1D-параболического-уравнения">
+<h1>МКР для решения 1D параболического уравнения<a class="headerlink" href="#МКР-для-решения-1D-параболического-уравнения" title="Ссылка на этот заголовок"></a></h1>
+<p>Необходимо найти поле температуры <span class="math notranslate nohighlight">\(T(x, t)\)</span> в балке длиной <span class="math notranslate nohighlight">\(L\)</span> на интервале времени <span class="math notranslate nohighlight">\(t \in [0, 1]\)</span>. Температура с обоих концов балки известна и поддерживается постояной. Балка изотропна и коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda=1.\)</span>, коэфициент теплоемкости <span class="math notranslate nohighlight">\(\rho=1\)</span>. В начальный момент времени температура балки <span class="math notranslate nohighlight">\(T(x, t)\)</span>.</p>
+<div class="section" id="Формулировка-математической-модели">
+<h2>Формулировка математической модели<a class="headerlink" href="#Формулировка-математической-модели" title="Ссылка на этот заголовок"></a></h2>
+<p><span class="math">\begin{align}
+&\rho \frac{\partial T}{\partial t} = \frac{\partial}{\partial x}\left(\lambda \frac{\partial T}{\partial x}\right) + f\\
+&T(x, 0) = 0 \\
+&T(0, t) = T_1 \\
+&T(L, t) = T_2 \\
+&f(x, t) = 0
+\end{align}</span></p>
+</div>
+<div class="section" id="Численное-решение.-Явная-схема.">
+<h2>Численное решение. Явная схема.<a class="headerlink" href="#Численное-решение.-Явная-схема." title="Ссылка на этот заголовок"></a></h2>
+<ol class="arabic simple">
+<li>Построим конечно-разностную пространственную сетку:</li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> notebook
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">7</span> <span class="c1"># количество узлов</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># шаг конечной разности</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="output_javascript"></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+/* Put everything inside the global mpl namespace */
+/* global mpl */
+window.mpl = {};
+
+mpl.get_websocket_type = function () {
+    if (typeof WebSocket !== 'undefined') {
+        return WebSocket;
+    } else if (typeof MozWebSocket !== 'undefined') {
+        return MozWebSocket;
+    } else {
+        alert(
+            'Your browser does not have WebSocket support. ' +
+                'Please try Chrome, Safari or Firefox ≥ 6. ' +
+                'Firefox 4 and 5 are also supported but you ' +
+                'have to enable WebSockets in about:config.'
+        );
+    }
+};
+
+mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
+    this.id = figure_id;
+
+    this.ws = websocket;
+
+    this.supports_binary = this.ws.binaryType !== undefined;
+
+    if (!this.supports_binary) {
+        var warnings = document.getElementById('mpl-warnings');
+        if (warnings) {
+            warnings.style.display = 'block';
+            warnings.textContent =
+                'This browser does not support binary websocket messages. ' +
+                'Performance may be slow.';
+        }
+    }
+
+    this.imageObj = new Image();
+
+    this.context = undefined;
+    this.message = undefined;
+    this.canvas = undefined;
+    this.rubberband_canvas = undefined;
+    this.rubberband_context = undefined;
+    this.format_dropdown = undefined;
+
+    this.image_mode = 'full';
+
+    this.root = document.createElement('div');
+    this.root.setAttribute('style', 'display: inline-block');
+    this._root_extra_style(this.root);
+
+    parent_element.appendChild(this.root);
+
+    this._init_header(this);
+    this._init_canvas(this);
+    this._init_toolbar(this);
+
+    var fig = this;
+
+    this.waiting = false;
+
+    this.ws.onopen = function () {
+        fig.send_message('supports_binary', { value: fig.supports_binary });
+        fig.send_message('send_image_mode', {});
+        if (fig.ratio !== 1) {
+            fig.send_message('set_device_pixel_ratio', {
+                device_pixel_ratio: fig.ratio,
+            });
+        }
+        fig.send_message('refresh', {});
+    };
+
+    this.imageObj.onload = function () {
+        if (fig.image_mode === 'full') {
+            // Full images could contain transparency (where diff images
+            // almost always do), so we need to clear the canvas so that
+            // there is no ghosting.
+            fig.context.clearRect(0, 0, fig.canvas.width, fig.canvas.height);
+        }
+        fig.context.drawImage(fig.imageObj, 0, 0);
+    };
+
+    this.imageObj.onunload = function () {
+        fig.ws.close();
+    };
+
+    this.ws.onmessage = this._make_on_message_function(this);
+
+    this.ondownload = ondownload;
+};
+
+mpl.figure.prototype._init_header = function () {
+    var titlebar = document.createElement('div');
+    titlebar.classList =
+        'ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix';
+    var titletext = document.createElement('div');
+    titletext.classList = 'ui-dialog-title';
+    titletext.setAttribute(
+        'style',
+        'width: 100%; text-align: center; padding: 3px;'
+    );
+    titlebar.appendChild(titletext);
+    this.root.appendChild(titlebar);
+    this.header = titletext;
+};
+
+mpl.figure.prototype._canvas_extra_style = function (_canvas_div) {};
+
+mpl.figure.prototype._root_extra_style = function (_canvas_div) {};
+
+mpl.figure.prototype._init_canvas = function () {
+    var fig = this;
+
+    var canvas_div = (this.canvas_div = document.createElement('div'));
+    canvas_div.setAttribute(
+        'style',
+        'border: 1px solid #ddd;' +
+            'box-sizing: content-box;' +
+            'clear: both;' +
+            'min-height: 1px;' +
+            'min-width: 1px;' +
+            'outline: 0;' +
+            'overflow: hidden;' +
+            'position: relative;' +
+            'resize: both;'
+    );
+
+    function on_keyboard_event_closure(name) {
+        return function (event) {
+            return fig.key_event(event, name);
+        };
+    }
+
+    canvas_div.addEventListener(
+        'keydown',
+        on_keyboard_event_closure('key_press')
+    );
+    canvas_div.addEventListener(
+        'keyup',
+        on_keyboard_event_closure('key_release')
+    );
+
+    this._canvas_extra_style(canvas_div);
+    this.root.appendChild(canvas_div);
+
+    var canvas = (this.canvas = document.createElement('canvas'));
+    canvas.classList.add('mpl-canvas');
+    canvas.setAttribute('style', 'box-sizing: content-box;');
+
+    this.context = canvas.getContext('2d');
+
+    var backingStore =
+        this.context.backingStorePixelRatio ||
+        this.context.webkitBackingStorePixelRatio ||
+        this.context.mozBackingStorePixelRatio ||
+        this.context.msBackingStorePixelRatio ||
+        this.context.oBackingStorePixelRatio ||
+        this.context.backingStorePixelRatio ||
+        1;
+
+    this.ratio = (window.devicePixelRatio || 1) / backingStore;
+
+    var rubberband_canvas = (this.rubberband_canvas = document.createElement(
+        'canvas'
+    ));
+    rubberband_canvas.setAttribute(
+        'style',
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
+    );
+
+    // Apply a ponyfill if ResizeObserver is not implemented by browser.
+    if (this.ResizeObserver === undefined) {
+        if (window.ResizeObserver !== undefined) {
+            this.ResizeObserver = window.ResizeObserver;
+        } else {
+            var obs = _JSXTOOLS_RESIZE_OBSERVER({});
+            this.ResizeObserver = obs.ResizeObserver;
+        }
+    }
+
+    this.resizeObserverInstance = new this.ResizeObserver(function (entries) {
+        var nentries = entries.length;
+        for (var i = 0; i < nentries; i++) {
+            var entry = entries[i];
+            var width, height;
+            if (entry.contentBoxSize) {
+                if (entry.contentBoxSize instanceof Array) {
+                    // Chrome 84 implements new version of spec.
+                    width = entry.contentBoxSize[0].inlineSize;
+                    height = entry.contentBoxSize[0].blockSize;
+                } else {
+                    // Firefox implements old version of spec.
+                    width = entry.contentBoxSize.inlineSize;
+                    height = entry.contentBoxSize.blockSize;
+                }
+            } else {
+                // Chrome <84 implements even older version of spec.
+                width = entry.contentRect.width;
+                height = entry.contentRect.height;
+            }
+
+            // Keep the size of the canvas and rubber band canvas in sync with
+            // the canvas container.
+            if (entry.devicePixelContentBoxSize) {
+                // Chrome 84 implements new version of spec.
+                canvas.setAttribute(
+                    'width',
+                    entry.devicePixelContentBoxSize[0].inlineSize
+                );
+                canvas.setAttribute(
+                    'height',
+                    entry.devicePixelContentBoxSize[0].blockSize
+                );
+            } else {
+                canvas.setAttribute('width', width * fig.ratio);
+                canvas.setAttribute('height', height * fig.ratio);
+            }
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
+
+            rubberband_canvas.setAttribute('width', width);
+            rubberband_canvas.setAttribute('height', height);
+
+            // And update the size in Python. We ignore the initial 0/0 size
+            // that occurs as the element is placed into the DOM, which should
+            // otherwise not happen due to the minimum size styling.
+            if (fig.ws.readyState == 1 && width != 0 && height != 0) {
+                fig.request_resize(width, height);
+            }
+        }
+    });
+    this.resizeObserverInstance.observe(canvas_div);
+
+    function on_mouse_event_closure(name) {
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
+    }
+
+    rubberband_canvas.addEventListener(
+        'mousedown',
+        on_mouse_event_closure('button_press')
+    );
+    rubberband_canvas.addEventListener(
+        'mouseup',
+        on_mouse_event_closure('button_release')
+    );
+    rubberband_canvas.addEventListener(
+        'dblclick',
+        on_mouse_event_closure('dblclick')
+    );
+    // Throttle sequential mouse events to 1 every 20ms.
+    rubberband_canvas.addEventListener(
+        'mousemove',
+        on_mouse_event_closure('motion_notify')
+    );
+
+    rubberband_canvas.addEventListener(
+        'mouseenter',
+        on_mouse_event_closure('figure_enter')
+    );
+    rubberband_canvas.addEventListener(
+        'mouseleave',
+        on_mouse_event_closure('figure_leave')
+    );
+
+    canvas_div.addEventListener('wheel', function (event) {
+        if (event.deltaY < 0) {
+            event.step = 1;
+        } else {
+            event.step = -1;
+        }
+        on_mouse_event_closure('scroll')(event);
+    });
+
+    canvas_div.appendChild(canvas);
+    canvas_div.appendChild(rubberband_canvas);
+
+    this.rubberband_context = rubberband_canvas.getContext('2d');
+    this.rubberband_context.strokeStyle = '#000000';
+
+    this._resize_canvas = function (width, height, forward) {
+        if (forward) {
+            canvas_div.style.width = width + 'px';
+            canvas_div.style.height = height + 'px';
+        }
+    };
+
+    // Disable right mouse context menu.
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
+        event.preventDefault();
+        return false;
+    });
+
+    function set_focus() {
+        canvas.focus();
+        canvas_div.focus();
+    }
+
+    window.setTimeout(set_focus, 100);
+};
+
+mpl.figure.prototype._init_toolbar = function () {
+    var fig = this;
+
+    var toolbar = document.createElement('div');
+    toolbar.classList = 'mpl-toolbar';
+    this.root.appendChild(toolbar);
+
+    function on_click_closure(name) {
+        return function (_event) {
+            return fig.toolbar_button_onclick(name);
+        };
+    }
+
+    function on_mouseover_closure(tooltip) {
+        return function (event) {
+            if (!event.currentTarget.disabled) {
+                return fig.toolbar_button_onmouseover(tooltip);
+            }
+        };
+    }
+
+    fig.buttons = {};
+    var buttonGroup = document.createElement('div');
+    buttonGroup.classList = 'mpl-button-group';
+    for (var toolbar_ind in mpl.toolbar_items) {
+        var name = mpl.toolbar_items[toolbar_ind][0];
+        var tooltip = mpl.toolbar_items[toolbar_ind][1];
+        var image = mpl.toolbar_items[toolbar_ind][2];
+        var method_name = mpl.toolbar_items[toolbar_ind][3];
+
+        if (!name) {
+            /* Instead of a spacer, we start a new button group. */
+            if (buttonGroup.hasChildNodes()) {
+                toolbar.appendChild(buttonGroup);
+            }
+            buttonGroup = document.createElement('div');
+            buttonGroup.classList = 'mpl-button-group';
+            continue;
+        }
+
+        var button = (fig.buttons[name] = document.createElement('button'));
+        button.classList = 'mpl-widget';
+        button.setAttribute('role', 'button');
+        button.setAttribute('aria-disabled', 'false');
+        button.addEventListener('click', on_click_closure(method_name));
+        button.addEventListener('mouseover', on_mouseover_closure(tooltip));
+
+        var icon_img = document.createElement('img');
+        icon_img.src = '_images/' + image + '.png';
+        icon_img.srcset = '_images/' + image + '_large.png 2x';
+        icon_img.alt = tooltip;
+        button.appendChild(icon_img);
+
+        buttonGroup.appendChild(button);
+    }
+
+    if (buttonGroup.hasChildNodes()) {
+        toolbar.appendChild(buttonGroup);
+    }
+
+    var fmt_picker = document.createElement('select');
+    fmt_picker.classList = 'mpl-widget';
+    toolbar.appendChild(fmt_picker);
+    this.format_dropdown = fmt_picker;
+
+    for (var ind in mpl.extensions) {
+        var fmt = mpl.extensions[ind];
+        var option = document.createElement('option');
+        option.selected = fmt === mpl.default_extension;
+        option.innerHTML = fmt;
+        fmt_picker.appendChild(option);
+    }
+
+    var status_bar = document.createElement('span');
+    status_bar.classList = 'mpl-message';
+    toolbar.appendChild(status_bar);
+    this.message = status_bar;
+};
+
+mpl.figure.prototype.request_resize = function (x_pixels, y_pixels) {
+    // Request matplotlib to resize the figure. Matplotlib will then trigger a resize in the client,
+    // which will in turn request a refresh of the image.
+    this.send_message('resize', { width: x_pixels, height: y_pixels });
+};
+
+mpl.figure.prototype.send_message = function (type, properties) {
+    properties['type'] = type;
+    properties['figure_id'] = this.id;
+    this.ws.send(JSON.stringify(properties));
+};
+
+mpl.figure.prototype.send_draw_message = function () {
+    if (!this.waiting) {
+        this.waiting = true;
+        this.ws.send(JSON.stringify({ type: 'draw', figure_id: this.id }));
+    }
+};
+
+mpl.figure.prototype.handle_save = function (fig, _msg) {
+    var format_dropdown = fig.format_dropdown;
+    var format = format_dropdown.options[format_dropdown.selectedIndex].value;
+    fig.ondownload(fig, format);
+};
+
+mpl.figure.prototype.handle_resize = function (fig, msg) {
+    var size = msg['size'];
+    if (size[0] !== fig.canvas.width || size[1] !== fig.canvas.height) {
+        fig._resize_canvas(size[0], size[1], msg['forward']);
+        fig.send_message('refresh', {});
+    }
+};
+
+mpl.figure.prototype.handle_rubberband = function (fig, msg) {
+    var x0 = msg['x0'] / fig.ratio;
+    var y0 = (fig.canvas.height - msg['y0']) / fig.ratio;
+    var x1 = msg['x1'] / fig.ratio;
+    var y1 = (fig.canvas.height - msg['y1']) / fig.ratio;
+    x0 = Math.floor(x0) + 0.5;
+    y0 = Math.floor(y0) + 0.5;
+    x1 = Math.floor(x1) + 0.5;
+    y1 = Math.floor(y1) + 0.5;
+    var min_x = Math.min(x0, x1);
+    var min_y = Math.min(y0, y1);
+    var width = Math.abs(x1 - x0);
+    var height = Math.abs(y1 - y0);
+
+    fig.rubberband_context.clearRect(
+        0,
+        0,
+        fig.canvas.width / fig.ratio,
+        fig.canvas.height / fig.ratio
+    );
+
+    fig.rubberband_context.strokeRect(min_x, min_y, width, height);
+};
+
+mpl.figure.prototype.handle_figure_label = function (fig, msg) {
+    // Updates the figure title.
+    fig.header.textContent = msg['label'];
+};
+
+mpl.figure.prototype.handle_cursor = function (fig, msg) {
+    fig.rubberband_canvas.style.cursor = msg['cursor'];
+};
+
+mpl.figure.prototype.handle_message = function (fig, msg) {
+    fig.message.textContent = msg['message'];
+};
+
+mpl.figure.prototype.handle_draw = function (fig, _msg) {
+    // Request the server to send over a new figure.
+    fig.send_draw_message();
+};
+
+mpl.figure.prototype.handle_image_mode = function (fig, msg) {
+    fig.image_mode = msg['mode'];
+};
+
+mpl.figure.prototype.handle_history_buttons = function (fig, msg) {
+    for (var key in msg) {
+        if (!(key in fig.buttons)) {
+            continue;
+        }
+        fig.buttons[key].disabled = !msg[key];
+        fig.buttons[key].setAttribute('aria-disabled', !msg[key]);
+    }
+};
+
+mpl.figure.prototype.handle_navigate_mode = function (fig, msg) {
+    if (msg['mode'] === 'PAN') {
+        fig.buttons['Pan'].classList.add('active');
+        fig.buttons['Zoom'].classList.remove('active');
+    } else if (msg['mode'] === 'ZOOM') {
+        fig.buttons['Pan'].classList.remove('active');
+        fig.buttons['Zoom'].classList.add('active');
+    } else {
+        fig.buttons['Pan'].classList.remove('active');
+        fig.buttons['Zoom'].classList.remove('active');
+    }
+};
+
+mpl.figure.prototype.updated_canvas_event = function () {
+    // Called whenever the canvas gets updated.
+    this.send_message('ack', {});
+};
+
+// A function to construct a web socket function for onmessage handling.
+// Called in the figure constructor.
+mpl.figure.prototype._make_on_message_function = function (fig) {
+    return function socket_on_message(evt) {
+        if (evt.data instanceof Blob) {
+            var img = evt.data;
+            if (img.type !== 'image/png') {
+                /* FIXME: We get "Resource interpreted as Image but
+                 * transferred with MIME type text/plain:" errors on
+                 * Chrome.  But how to set the MIME type?  It doesn't seem
+                 * to be part of the websocket stream */
+                img.type = 'image/png';
+            }
+
+            /* Free the memory for the previous frames */
+            if (fig.imageObj.src) {
+                (window.URL || window.webkitURL).revokeObjectURL(
+                    fig.imageObj.src
+                );
+            }
+
+            fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
+                img
+            );
+            fig.updated_canvas_event();
+            fig.waiting = false;
+            return;
+        } else if (
+            typeof evt.data === 'string' &&
+            evt.data.slice(0, 21) === 'data:image/png;base64'
+        ) {
+            fig.imageObj.src = evt.data;
+            fig.updated_canvas_event();
+            fig.waiting = false;
+            return;
+        }
+
+        var msg = JSON.parse(evt.data);
+        var msg_type = msg['type'];
+
+        // Call the  "handle_{type}" callback, which takes
+        // the figure and JSON message as its only arguments.
+        try {
+            var callback = fig['handle_' + msg_type];
+        } catch (e) {
+            console.log(
+                "No handler for the '" + msg_type + "' message type: ",
+                msg
+            );
+            return;
+        }
+
+        if (callback) {
+            try {
+                // console.log("Handling '" + msg_type + "' message: ", msg);
+                callback(fig, msg);
+            } catch (e) {
+                console.log(
+                    "Exception inside the 'handler_" + msg_type + "' callback:",
+                    e,
+                    e.stack,
+                    msg
+                );
+            }
+        }
+    };
+};
+
+// from https://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
+
+/*
+ * return a copy of an object with only non-object keys
+ * we need this to avoid circular references
+ * https://stackoverflow.com/a/24161582/3208463
+ */
+function simpleKeys(original) {
+    return Object.keys(original).reduce(function (obj, key) {
+        if (typeof original[key] !== 'object') {
+            obj[key] = original[key];
+        }
+        return obj;
+    }, {});
+}
+
+mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
+    if (name === 'button_press') {
+        this.canvas.focus();
+        this.canvas_div.focus();
+    }
+
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
+
+    this.send_message(name, {
+        x: x,
+        y: y,
+        button: event.button,
+        step: event.step,
+        guiEvent: simpleKeys(event),
+    });
+
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
+    return false;
+};
+
+mpl.figure.prototype._key_event_extra = function (_event, _name) {
+    // Handle any extra behaviour associated with a key event
+};
+
+mpl.figure.prototype.key_event = function (event, name) {
+    // Prevent repeat events
+    if (name === 'key_press') {
+        if (event.key === this._key) {
+            return;
+        } else {
+            this._key = event.key;
+        }
+    }
+    if (name === 'key_release') {
+        this._key = null;
+    }
+
+    var value = '';
+    if (event.ctrlKey && event.key !== 'Control') {
+        value += 'ctrl+';
+    }
+    else if (event.altKey && event.key !== 'Alt') {
+        value += 'alt+';
+    }
+    else if (event.shiftKey && event.key !== 'Shift') {
+        value += 'shift+';
+    }
+
+    value += 'k' + event.key;
+
+    this._key_event_extra(event, name);
+
+    this.send_message(name, { key: value, guiEvent: simpleKeys(event) });
+    return false;
+};
+
+mpl.figure.prototype.toolbar_button_onclick = function (name) {
+    if (name === 'download') {
+        this.handle_save(this, null);
+    } else {
+        this.send_message('toolbar_button', { name: name });
+    }
+};
+
+mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
+    this.message.textContent = tooltip;
+};
+
+///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
+// prettier-ignore
+var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
+
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
+
+mpl.default_extension = "png";/* global mpl */
+
+var comm_websocket_adapter = function (comm) {
+    // Create a "websocket"-like object which calls the given IPython comm
+    // object with the appropriate methods. Currently this is a non binary
+    // socket, so there is still some room for performance tuning.
+    var ws = {};
+
+    ws.binaryType = comm.kernel.ws.binaryType;
+    ws.readyState = comm.kernel.ws.readyState;
+    function updateReadyState(_event) {
+        if (comm.kernel.ws) {
+            ws.readyState = comm.kernel.ws.readyState;
+        } else {
+            ws.readyState = 3; // Closed state.
+        }
+    }
+    comm.kernel.ws.addEventListener('open', updateReadyState);
+    comm.kernel.ws.addEventListener('close', updateReadyState);
+    comm.kernel.ws.addEventListener('error', updateReadyState);
+
+    ws.close = function () {
+        comm.close();
+    };
+    ws.send = function (m) {
+        //console.log('sending', m);
+        comm.send(m);
+    };
+    // Register the callback with on_msg.
+    comm.on_msg(function (msg) {
+        //console.log('receiving', msg['content']['data'], msg);
+        var data = msg['content']['data'];
+        if (data['blob'] !== undefined) {
+            data = {
+                data: new Blob(msg['buffers'], { type: data['blob'] }),
+            };
+        }
+        // Pass the mpl event to the overridden (by mpl) onmessage function.
+        ws.onmessage(data);
+    });
+    return ws;
+};
+
+mpl.mpl_figure_comm = function (comm, msg) {
+    // This is the function which gets called when the mpl process
+    // starts-up an IPython Comm through the "matplotlib" channel.
+
+    var id = msg.content.data.id;
+    // Get hold of the div created by the display call when the Comm
+    // socket was opened in Python.
+    var element = document.getElementById(id);
+    var ws_proxy = comm_websocket_adapter(comm);
+
+    function ondownload(figure, _format) {
+        window.open(figure.canvas.toDataURL());
+    }
+
+    var fig = new mpl.figure(id, ws_proxy, ondownload, element);
+
+    // Call onopen now - mpl needs it, as it is assuming we've passed it a real
+    // web socket which is closed, not our websocket->open comm proxy.
+    ws_proxy.onopen();
+
+    fig.parent_element = element;
+    fig.cell_info = mpl.find_output_cell("<div id='" + id + "'></div>");
+    if (!fig.cell_info) {
+        console.error('Failed to find cell for figure', id, fig);
+        return;
+    }
+    fig.cell_info[0].output_area.element.on(
+        'cleared',
+        { fig: fig },
+        fig._remove_fig_handler
+    );
+};
+
+mpl.figure.prototype.handle_close = function (fig, msg) {
+    var width = fig.canvas.width / fig.ratio;
+    fig.cell_info[0].output_area.element.off(
+        'cleared',
+        fig._remove_fig_handler
+    );
+    fig.resizeObserverInstance.unobserve(fig.canvas_div);
+
+    // Update the output cell to use the data from the current canvas.
+    fig.push_to_output();
+    var dataURL = fig.canvas.toDataURL();
+    // Re-enable the keyboard manager in IPython - without this line, in FF,
+    // the notebook keyboard shortcuts fail.
+    IPython.keyboard_manager.enable();
+    fig.parent_element.innerHTML =
+        '<img src="' + dataURL + '" width="' + width + '">';
+    fig.close_ws(fig, msg);
+};
+
+mpl.figure.prototype.close_ws = function (fig, msg) {
+    fig.send_message('closing', msg);
+    // fig.ws.close()
+};
+
+mpl.figure.prototype.push_to_output = function (_remove_interactive) {
+    // Turn the data on the canvas into data in the output cell.
+    var width = this.canvas.width / this.ratio;
+    var dataURL = this.canvas.toDataURL();
+    this.cell_info[1]['text/html'] =
+        '<img src="' + dataURL + '" width="' + width + '">';
+};
+
+mpl.figure.prototype.updated_canvas_event = function () {
+    // Tell IPython that the notebook contents must change.
+    IPython.notebook.set_dirty(true);
+    this.send_message('ack', {});
+    var fig = this;
+    // Wait a second, then push the new image to the DOM so
+    // that it is saved nicely (might be nice to debounce this).
+    setTimeout(function () {
+        fig.push_to_output();
+    }, 1000);
+};
+
+mpl.figure.prototype._init_toolbar = function () {
+    var fig = this;
+
+    var toolbar = document.createElement('div');
+    toolbar.classList = 'btn-toolbar';
+    this.root.appendChild(toolbar);
+
+    function on_click_closure(name) {
+        return function (_event) {
+            return fig.toolbar_button_onclick(name);
+        };
+    }
+
+    function on_mouseover_closure(tooltip) {
+        return function (event) {
+            if (!event.currentTarget.disabled) {
+                return fig.toolbar_button_onmouseover(tooltip);
+            }
+        };
+    }
+
+    fig.buttons = {};
+    var buttonGroup = document.createElement('div');
+    buttonGroup.classList = 'btn-group';
+    var button;
+    for (var toolbar_ind in mpl.toolbar_items) {
+        var name = mpl.toolbar_items[toolbar_ind][0];
+        var tooltip = mpl.toolbar_items[toolbar_ind][1];
+        var image = mpl.toolbar_items[toolbar_ind][2];
+        var method_name = mpl.toolbar_items[toolbar_ind][3];
+
+        if (!name) {
+            /* Instead of a spacer, we start a new button group. */
+            if (buttonGroup.hasChildNodes()) {
+                toolbar.appendChild(buttonGroup);
+            }
+            buttonGroup = document.createElement('div');
+            buttonGroup.classList = 'btn-group';
+            continue;
+        }
+
+        button = fig.buttons[name] = document.createElement('button');
+        button.classList = 'btn btn-default';
+        button.href = '#';
+        button.title = name;
+        button.innerHTML = '<i class="fa ' + image + ' fa-lg"></i>';
+        button.addEventListener('click', on_click_closure(method_name));
+        button.addEventListener('mouseover', on_mouseover_closure(tooltip));
+        buttonGroup.appendChild(button);
+    }
+
+    if (buttonGroup.hasChildNodes()) {
+        toolbar.appendChild(buttonGroup);
+    }
+
+    // Add the status bar.
+    var status_bar = document.createElement('span');
+    status_bar.classList = 'mpl-message pull-right';
+    toolbar.appendChild(status_bar);
+    this.message = status_bar;
+
+    // Add the close button to the window.
+    var buttongrp = document.createElement('div');
+    buttongrp.classList = 'btn-group inline pull-right';
+    button = document.createElement('button');
+    button.classList = 'btn btn-mini btn-primary';
+    button.href = '#';
+    button.title = 'Stop Interaction';
+    button.innerHTML = '<i class="fa fa-power-off icon-remove icon-large"></i>';
+    button.addEventListener('click', function (_evt) {
+        fig.handle_close(fig, {});
+    });
+    button.addEventListener(
+        'mouseover',
+        on_mouseover_closure('Stop Interaction')
+    );
+    buttongrp.appendChild(button);
+    var titlebar = this.root.querySelector('.ui-dialog-titlebar');
+    titlebar.insertBefore(buttongrp, titlebar.firstChild);
+};
+
+mpl.figure.prototype._remove_fig_handler = function (event) {
+    var fig = event.data.fig;
+    if (event.target !== this) {
+        // Ignore bubbled events from children.
+        return;
+    }
+    fig.close_ws(fig, {});
+};
+
+mpl.figure.prototype._root_extra_style = function (el) {
+    el.style.boxSizing = 'content-box'; // override notebook setting of border-box.
+};
+
+mpl.figure.prototype._canvas_extra_style = function (el) {
+    // this is important to make the div 'focusable
+    el.setAttribute('tabindex', 0);
+    // reach out to IPython and tell the keyboard manager to turn it's self
+    // off when our div gets focus
+
+    // location in version 3
+    if (IPython.notebook.keyboard_manager) {
+        IPython.notebook.keyboard_manager.register_events(el);
+    } else {
+        // location in version 2
+        IPython.keyboard_manager.register_events(el);
+    }
+};
+
+mpl.figure.prototype._key_event_extra = function (event, _name) {
+    // Check for shift+enter
+    if (event.shiftKey && event.which === 13) {
+        this.canvas_div.blur();
+        // select the cell after this one
+        var index = IPython.notebook.find_cell_index(this.cell_info[0]);
+        IPython.notebook.select(index + 1);
+    }
+};
+
+mpl.figure.prototype.handle_save = function (fig, _msg) {
+    fig.ondownload(fig, null);
+};
+
+mpl.find_output_cell = function (html_output) {
+    // Return the cell and output element which can be found *uniquely* in the notebook.
+    // Note - this is a bit hacky, but it is done because the "notebook_saving.Notebook"
+    // IPython event is triggered only after the cells have been serialised, which for
+    // our purposes (turning an active figure into a static one), is too late.
+    var cells = IPython.notebook.get_cells();
+    var ncells = cells.length;
+    for (var i = 0; i < ncells; i++) {
+        var cell = cells[i];
+        if (cell.cell_type === 'code') {
+            for (var j = 0; j < cell.output_area.outputs.length; j++) {
+                var data = cell.output_area.outputs[j];
+                if (data.data) {
+                    // IPython >= 3 moved mimebundle to data attribute of output
+                    data = data.data;
+                }
+                if (data['text/html'] === html_output) {
+                    return [cell, data, j];
+                }
+            }
+        }
+    }
+};
+
+// Register the function which deals with the matplotlib target/channel.
+// The kernel may be null if the page has been refreshed.
+if (IPython.notebook.kernel !== null) {
+    IPython.notebook.kernel.comm_manager.register_target(
+        'matplotlib',
+        mpl.mpl_figure_comm
+    );
+}
+
+</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAasAAAFACAYAAAACklMsAAAAAXNSR0IArs4c6QAAHrRJREFUeF7t3A9s1eW5wPEHS1pc1OC/hARroamtZvberAlqEwk4qompC5jYOsYMRqBLTO9dtUYpF43rqpIlWnKviBPa0to2uiW61bnZ2u7OzC2hNQ1X7rpYsAJKbKKB5hJE4/DcvG9yulOEHqDl9Hn6fE9CbhjntM/zeZ7zPr/n/I53TiKRSAgPBBBAAAEElArMCQ+GldLqEBYCCCCAQBRgWNEICCCAAALqBRhW6ktEgAgggAACDCt6AAEEEEBAvQDDSn2JCBABBBBAgGFFDyCAAAIIqBdgWKkvEQEigAACCDCs6AEEEEAAAfUCDCv1JSJABBBAAAGGFT2AAAIIIKBegGGlvkQEiAACCCDAsKIHEEAAAQTUCzCs1JeIABFAAAEEGFb0AAIIIICAegGGlfoSESACCCCAAMOKHkAAAQQQUC/AsFJfIgJEAAEEEGBY0QMIIIAAAuoFGFbqS0SACCCAAAIMK3oAAQQQQEC9AMNKfYkIEAEEEECAYUUPIIAAAgioF2BYqS8RASKAAAIIMKzoAQQQQAAB9QIMK/UlIkAEEEAAAYYVPYAAAgggoF6AYaW+RASIAAIIIMCwogcQQAABBNQLMKzUl4gAEUAAAQQYVvQAAggggIB6AYaV+hIRIAIIIIAAw4oeQAABBBBQL8CwUl8iAkQAAQQQYFjRAwgggAAC6gUYVupLRIAIIIAAAgwregABBBBAQL0Aw0p9iQgQAQQQQGDWDqtFixZJfn4+FUYAAQQQOIPAyMiIHDhwwITPrB1W3//+9+WPf/yjiSIQJAIIIDATApbOSYbVTHQIvxMBBBBQIMCwoggKBAgBAQQQmFyAYaWgQywVQQEXISCAgEMBS+ckHwM6bFBSRgABBIIAw0pBH1gqggIuQkAAAYcCls5JNiuHDUrKCCCAAJuVkh6wdMWghIwwEEDAmYClc5LNyllzki4CCCCQFGBYKegFS0VQwEUICCDgUMDSOclm5bBBSRkBBBDgnpWSHrB0xaCEjDAQQMCZgKVzks3KWXOSLgIIIMA9K0U9YOmKQREboSCAgCMBS+ckm5WjxiRVBBBAIFWAYaWgHywVQQEXISCAgEMBS+ckm5XDBiVlBBBAIAgwrBT0gaUiKOAiBAQQcChg6Zxks3LYoKSMAAIIsFkp6QFLVwxKyAgDAQScCVg6J9msnDUn6SKAAAJJAYaVgl6wVAQFXISAAAIOBSydk2xWDhuUlBFAAAHuWSnpAUtXDErICAMBBJwJWDon2aycNSfpIoAAAtyzUtQDlq4YFLERCgIIOBKwdE6yWTlqTFJFAAEEUgUYVgr6wVIRFHARAgIIOBSwdE6yWTlsUFJGAAEEggDDKk0ftLe3y7Zt2+KzGhoaZMWKFeOvSCQSUltbKwMDA5KTkyMtLS2Sm5s7/u87duyQqqoqCc+b7GGpCLxtEEAAgZkQsHROZnyzGhsbk2XLlsnu3bvl+PHjsnz5ctmzZ49kZWXFWvX09EhbW5uEgdbb2xuHVUdHR/y3Y8eOyb333it/+9vf5ODBgwyrmehuficCCMwaAYbVJKXs7u6Wrq6u8c2qvLxcGhsbpbCwML6qrq5OSkpKpKKiIm5PRUVFMjw8HP9t06ZNcQtbt26dHDhwgGE1a94yJIIAAjMhwLCaRL2zs1OGhobix3/hsWbNGqmurpbS0tL49/ARX2VlpZSVlcW/5+fny8jISNykHnroIXnttddk0aJFDKuZ6Gx+JwIIzCoBhtUF2KzCUAtb14033njGYdXa2irhT3iMjo7GocgDAQQQQOD0AgyrSTojec+qv78/3rMK969S71mFjwnDPapw36qvr0+ampokbGO33HKLzJ8/P/7kd955R26//fb4ceKZHpaKwBsJAQQQmAkBS+dkxr9gEQoSBtH27dtjberr66W4uFi2bNkiW7dujfepampqZHBwULKzs6W5uVny8vIm1JGPAWeirfmdCCAw2wQYVgoqaqkICrgIAQEEHApYOidnZLPKRE9YKkImPPgdCCCAwKkCls5JhhX9iwACCDgVYFgpKLylIijgIgQEEHAoYOmcZLNy2KCkjAACCAQBhpWCPrBUBAVchIAAAg4FLJ2TbFYOG5SUEUAAATYrJT1g6YpBCRlhIICAMwFL5ySblbPmJF0EEEAgKcCwUtALloqggIsQEEDAoYClc5LNymGDkjICCCDAPSslPWDpikEJGWEggIAzAUvnJJuVs+YkXQQQQIB7Vop6wNIVgyI2QkEAAUcCls5JNitHjUmqCCCAQKoAw0pBP1gqggIuQkAAAYcCls5JNiuHDUrKCCCAQBBgWCnoA0tFUMBFCAgg4FDA0jnJZuWwQUkZAQQQYLNS0gOWrhiUkBEGAgg4E7B0TrJZOWtO0kUAAQSSAgwrBb1gqQgKuAgBAQQcClg6J9msHDYoKSOAAALcs1LSA5auGJSQEQYCCDgTsHROslk5a07SRQABBLhnpagHLF0xKGIjFAQQcCRg6Zxks3LUmKSKAAIIpAowrBT0g6UiKOAiBAQQcChg6Zxks3LYoKSMAAIIBAGGlYI+sFQEBVyEgAACDgUsnZNsVg4blJQRQAABNislPWDpikEJGWEggIAzAUvnJJuVs+YkXQQQQCApwLBS0AuWiqCAixAQQMChgKVzks3KYYOSMgIIIMA9KyU9YOmKQQkZYSCAgDMBS+ckm5Wz5iRdBBBAgHtWinrA0hWDIjZCQQABRwKWzskZ2aza29tl27ZtsSUaGhpkxYoV4+2RSCSktrZWBgYGJCcnR1paWiQ3N1e2bt0qnZ2dMm/ePFm4cKHs2rUr/vuZHpaK4Oi9QaoIIKBIwNI5mfFhNTY2JsuWLZPdu3fL8ePHZfny5bJnzx7JysqKJezp6ZG2tjYJA623tzcOq46ODtm3b58UFBTInDlzZOPGjZKfny9VVVUMK0WNTygIIGBLgGE1Sb26u7ulq6trfLMqLy+XxsZGKSwsjK+qq6uTkpISqaiokLBlFRUVyfDw8ISfuHnzZlm8eLGsW7eOYWXrvUG0CCCgSIBhNUkxwkd5Q0ND8eO/8FizZo1UV1dLaWlp/HvYliorK6WsrCz+PWxQIyMj4z9x7969snbtWnn33XflO9/5DsNKUeMTCgII2BJgWF2gzWr//v1y7733yq9//es4xE59tLa2SvgTHqOjo3Eo8kAAAQQQOL0Aw2qSzkjes+rv74/3rML9q9R7VuFjwnCPKty36uvrk6ampvjFikOHDsmqVavk5Zdflu9+97tpe89SEdImwxMQQACBCyBg6ZzM+BcsgncYRNu3b4/09fX1UlxcLFu2bInf+Av3qWpqamRwcFCys7OlublZ8vLy5J577pH33ntPFi1aFF/3ox/9iC9YXIDm5UcigIAfAYaVglpbKoICLkJAAAGHApbOyRnZrDLRE5aKkAkPfgcCCCBwqoClc5JhRf8igAACTgUYVgoKb6kICrgIAQEEHApYOifZrBw2KCkjgAACQYBhpaAPLBVBARchIICAQwFL5ySblcMGJWUEEECAzUpJD1i6YlBCRhgIIOBMwNI5yWblrDlJFwEEEEgKMKwU9IKlIijgIgQEEHAoYOmcZLNy2KCkjAACCHDPSkkPWLpiUEJGGAgg4EzA0jnJZuWsOUkXAQQQ4J6Voh6wdMWgiI1QEEDAkYClc5LNylFjkioCCCCQKsCwUtAPloqggIsQEEDAoYClc5LNymGDkjICCCAQBBhWCvrAUhEUcBECAgg4FLB0TrJZOWxQUkYAAQTYrJT0gKUrBiVkhIEAAs4ELJ2TbFbOmpN0EUAAgaQAw0pBL1gqggIuQkAAAYcCls5JNiuHDUrKCCCAAPeslPSApSsGJWSEgQACzgQsnZNsVs6ak3QRQAAB7lkp6gFLVwyK2AgFAQQcCVg6J9msHDUmqSKAAAKpAgwrBf1gqQgKuAgBAQQcClg6J9msHDYoKSOAAAJBgGGloA8sFUEBFyEggIBDAUvnJJuVwwYlZQQQQIDNSkkPWLpiUEJGGAgg4EzA0jnJZuWsOUkXAQQQSAowrBT0gqUiKOAiBAQQcChg6Zxks3LYoKSMAAIIcM9KSQ9YumJQQkYYCCDgTMDSOclm5aw5SRcBBBDgnpWiHrB0xaCIjVAQQMCRgKVzckY2q/b2dtm2bVtsiYaGBlmxYsV4eyQSCamtrZWBgQHJycmRlpYWyc3Nla+++ko2bNggH330kVxxxRXS2toq8+fPP2NbWSqCo/cGqSKAgCIBS+dkxofV2NiYLFu2THbv3i3Hjx+X5cuXy549eyQrKyuWsKenR9ra2iQMtN7e3jisOjo65KWXXpJDhw7F4bZz5844tJ566qlpHVaHx07IC/+9X/7nkzH512vmy4O3FcjC+Rcraq2zC4U8zs4pU8+iHpmSPrvfQz3+6cSwmqRnuru7paura3yzKi8vl8bGRiksLIyvqqurk5KSEqmoqJCwZRUVFcnw8LCsXr1aHn74YVmyZIl89tlnsnLlSvnrX/86bcMqNHD5f/5Zjp34h5xMJCRrzhy59OK58ua/LzU1sMjj7A6sTD2LemRK+ux+D/WY6MSwmqRvOjs7ZWhoKG5I4bFmzRqprq6W0tLS+PeqqiqprKyUsrKy+Pf8/HwZGRmRO+64Q1544QUpKCiQr7/+Wm688Ub54IMPpm1Y/cfre+WV/o/joEo+si6aIz9ckitP3V18du8EBc8iDwVFSAmBelCPCyEwXX3FsJqhzSrcxwp/wmN0dDQOxbN93PVff5b/Pfx/33p68cLL5I1/W3q2P2bGn0ceM16CCQFQD+pxIQSmq68YVpNUJ3nPqr+/P96zCvevUu9ZhY8Jwz2qcN+qr69PmpqaJGxjv/zlL+Xw4cNSX18f/7cPP/xQnn766Qu+Wa2+KVcaVtnfrMjjQhwZ6X/mma6AqUd6uwvxDOoxUZVhlabLwiDavn17fFYYPsXFxbJlyxbZunVrvE9VU1Mjg4ODkp2dLc3NzZKXlxe/Dbh+/Xo5ePBg/BZg2KAuv/zyaRtW459lf/kPOflNQsJHgJfOM3zPijwuxFl3zj+Tvjpnsgv6AurBsLqgDXY+P/x8rhiS3xJ6/5Mx+ZdZ8G1A8jifzpn+19BX0286lZ9IPf6pdz7n5FTsp/LajH91fSrBnstrLRXhXPLiuQgggMB0CVg6JxlW01V1fg4CCCBgTIBhpaBgloqggIsQEEDAoYClc5LNymGDkjICCCAQBBhWCvrAUhEUcBECAgg4FLB0TrJZOWxQUkYAAQTYrJT0gKUrBiVkhIEAAs4ELJ2TbFbOmpN0EUAAgaQAw0pBL1gqggIuQkAAAYcCls5JNiuHDUrKCCCAAPeslPSApSsGJWSEgQACzgQsnZNsVs6ak3QRQAAB7lkp6gFLVwyK2AgFAQQcCVg6J9msHDUmqSKAAAKpAgwrBf1gqQgKuAgBAQQcClg6J9msHDYoKSOAAAJBgGGloA8sFUEBFyEggIBDAUvnJJuVwwYlZQQQQIDNSkkPWLpiUEJGGAgg4EzA0jnJZuWsOUkXAQQQSAowrBT0gqUiKOAiBAQQcChg6Zxks3LYoKSMAAIIcM9KSQ9YumJQQkYYCCDgTMDSOclm5aw5SRcBBBDgnpWiHrB0xaCIjVAQQMCRgKVzks3KUWOSKgIIIJAqwLBS0A+WiqCAixAQQMChgKVzks3KYYOSMgIIIBAEGFYK+sBSERRwEQICCDgUsHROslk5bFBSRgABBNislPSApSsGJWSEgQACzgQsnZNsVs6ak3QRQACBpADDSkEvWCqCAi5CQAABhwKWzkk2K4cNSsoIIIAA96yU9IClKwYlZISBAALOBCydk2xWzpqTdBFAAAHuWSnqAUtXDIrYCAUBBBwJWDonM75ZJRIJqa2tlYGBAcnJyZGWlhbJzc2d0B5jY2Oydu1aOXLkiCxevFh27NgRn3vffffJ/v3743NXrlwpGzduPGNbWSqCo/cGqSKAgCIBS+dkxodVT0+PtLW1SXt7u/T29sZh1dHRMaF8mzZtkvz8fFm/fr1s3rxZ8vLyZMOGDTI8PCyFhYXyzTffyK233iq7du2Kfz/dw1IRFPUuoSCAgCMBS+dkxodVXV2dlJSUSEVFhYQtq6ioKA6h1Edpaal0dXXJ1VdfHTewxsZG6ezsnPCcpUuXxkFXUFDAsHL05iJVBBCYPgGG1SSWVVVVUllZKWVlZfFZYYMaGRmZ8IqwLQ0NDcncuXNl3759Ul1dLd3d3ePPCUMqbGWnbmStra0S/oTH6Oho/Bk8EEAAAQROL+B+WJ08eVJuvvnmb+kUFxfLggULprRZ/fa3v5Xnn39e3njjDZk3b94Ze9BSEXgjIYAAAjMhYOmczPjHgGFDChtRuG/V19cnTU1N3/qIL3xUeN1118kDDzwgjz/+ePwCRtjIwv2u+vp6+cMf/iCXXnrppLW1VISZaFJ+JwIIIGDpnMz4sAr3qWpqamRwcFCys7Olubk5foHirbfeih/d3X///XL06NH4bcDwrcDwbzt37ozfBrzqqqvkmmuukfnz58cu+8UvfiE33XTTaTvOUhF4yyCAAAIzIWDpnMz4sMpUQSwVIVMm/B4EEEAgVcDSOcmwoncRQAABpwIMKwWFt1QEBVyEgAACDgUsnZNsVg4blJQRQACBIMCwUtAHloqggIsQEEDAoYClc5LNymGDkjICCCDAZqWkByxdMSghIwwEEHAmYOmcZLNy1pykiwACCCQFGFYKesFSERRwEQICCDgUsHROslk5bFBSRgABBLhnpaQHLF0xKCEjDAQQcCZg6Zxks3LWnKSLAAIIcM9KUQ9YumJQxEYoCCDgSMDSOclm5agxSRUBBBBIFWBYKegHS0VQwEUICCDgUMDSOclm5bBBSRkBBBAIAgwrBX1gqQgKuAgBAQQcClg6J9msHDYoKSOAAAJsVkp6wNIVgxIywkAAAWcCls5JNitnzUm6CCCAQFKAYaWgFywVQQEXISCAgEMBS+ckm5XDBiVlBBBAgHtWSnrA0hWDEjLCQAABZwKWzkk2K2fNSboIIIAA96wU9YClKwZFbISCAAKOBCydk2xWjhqTVBFAAIFUAYaVgn6wVAQFXISAAAIOBSydk2xWDhuUlBFAAIEgwLBS0AeWiqCAixAQQMChgKVzks3KYYOSMgIIIMBmpaQHLF0xKCEjDAQQcCZg6Zxks3LWnKSLAAIIJAUYVgp6wVIRFHARAgIIOBSwdE6yWTlsUFJGAAEEuGelpAcsXTEoISMMBBBwJmDpnGSzctacpIsAAghwz0pRD1i6YlDERigIIOBIwNI5yWblqDFJFQEEEEgVYFhN0g+JREJqa2tlYGBAcnJypKWlRXJzcye8YmxsTNauXStHjhyRxYsXy44dO+Jzk48f//jH8sknn8if/vSnM/4mS0Xg7YMAAgjMhIClczLjm1VPT4+0tbVJe3u79Pb2xmHV0dExoU6bNm2S/Px8Wb9+vWzevFny8vJkw4YN8Tn9/f3yzDPPyNGjRxlWM9Hd/E4EEJg1AgyrSUpZV1cnJSUlUlFRIWHLKioqkuHh4QmvKC0tla6uLrn66qvjBtbY2CidnZ3xOeXl5VJfXx+3MzarWfOeIREEEJgBAYbVJOhVVVVSWVkpZWVl8VlhgxoZGZnwisLCQhkaGpK5c+fKvn37pLq6Wrq7u+XVV1+VgwcPxtfff//93xpWra2tEv6Ex+joaPwZPBBAAAEETi/gflidPHlSbr755m/pFBcXy4IFC85rswofF95xxx1xaIVBdLphlfoLLRWBNxICCCAwEwKWzsmM37MKwybcowr3rfr6+qSpqWn8I75kscJHhdddd5088MAD8vjjj8cvYCxdulTCFyvCR4MnTpyQvXv3yoMPPigNDQ2nrbGlIsxEk/I7EUAAAUvnZMaHVbhPVVNTI4ODg5KdnS3Nzc3xCxRvvfXW+MYUvjwRvg0YvhUY/m3nzp0Tvg144MABNiveZwgggMAUBRhWUwScjpdbKsJ05MvPQAABBM5VwNI5mfHN6lwxz/f5lopwvjnyOgQQQGAqApbOSYbVVCrNaxFAAAHDAgwrBcWzVAQFXISAAAIOBSydk2xWDhuUlBFAAIEgwLBS0AeWiqCAixAQQMChgKVzks3KYYOSMgIIIMBmpaQHLF0xKCEjDAQQcCZg6Zxks3LWnKSLAAIIJAUYVgp6wVIRFHARAgIIOBSwdE6yWTlsUFJGAAEEuGelpAcsXTEoISMMBBBwJmDpnGSzctacpIsAAghwz0pRD1i6YlDERigIIOBIwNI5yWblqDFJFQEEEEgVYFgp6AdLRVDARQgIIOBQwNI5yWblsEFJGQEEEAgCDCsFfWCpCAq4CAEBBBwKWDon2awcNigpI4AAAmxWSnrA0hWDEjLCQAABZwKWzkk2K2fNSboIIIBAUoBhpaAXLBVBARchIICAQwFL5ySblcMGJWUEEECAe1ZKesDSFYMSMsJAAAFnApbOSTYrZ81JuggggAD3rBT1gKUrBkVshIIAAo4ELJ2TbFaOGpNUEUAAgVQBhpWCfrBUBAVchIAAAg4FLJ2TbFYOG5SUEUAAgSDAsFLQB5aKoICLEBBAwKGApXNy1m5WixYtkvz8/PNqv9HRUVmwYMF5vdbii8jXYtXOPmbqe/ZWFp85lfqOjIzIgQMHTKQ9a4fVVPQtXW1MJc/ka8l3OhT1/gzqq7c20xGZl/oyrE7TLV6Kz7CajqNC/8+gn/XXaCoReqkvw+o0XdLa2ipr166dSv+Yei35mirXOQdLfc+ZzNQLvNSXYWWqLQkWAQQQ8CnAsPJZd7JGAAEETAm4H1bt7e2ybdu2WLSGhgZZsWLFeAETiYTU1tbKwMCA5OTkSEtLi+Tm5poq8KnBTpbvq6++Ks8995xcfPHFcskll0j4eOHKK6+ctfkmE+vt7ZXbb79dPvroIwnfIrX8mKy+Ia9XXnlFXnrpJQm9vWrVKvnpT39qOV2ZLN8jR47I6tWr5csvv5SvvvpKnnnmGbntttvM5rt06VL5+9//LtXV1fLkk09+K4/ZeF6lJul6WI2NjcmyZctk9+7dcvz4cVm+fLns2bNHsrKyolFPT4+0tbXFN0Q40MKw6ujoMNvs6fINX2O99tprZe7cufLiiy/KoUOH5Omnn561+YbETp48KeXl5RIOtl/96lemh1W6+oaD7mc/+5l0dnbKRRddZLauycDT5bt161YJzwkHe7gQqaiokPfee89s3h9//LH09fXFr5qfbljNtvPq1EK5Hlbd3d3S1dU1vlmFQ6uxsVEKCwujU11dnZSUlMQmD1ctRUVFMjw8bLbZ0+WbmtjOnTvl4MGD8vOf/3xW5xu2jHBx8vLLL8uuXbtMD6t09a2vr5fw3+R8+OGHMednn31Wbrjhhllb37ffflvefPNNCUMrDKknnnhCfv/735vNNwQeevRMw2q2nVcMqxSBcIU5NDQUP/4LjzVr1sQVu7S0NP69qqpKKisrpaysLP49/EfGYfuw+kiXbzKvw4cPy5133hk3S8v/cXS6fI8dOyZ33323hEM+fPxrfVily/cnP/mJfPrpp/L666/L4OCg1NTUyF/+8her7Rw3xMnev0ePHpUf/OAHEv7v559/Lr/73e9kyZIlZvNNN6xm23nFsEoRSHclOtuuVNLlG2g+++wzueuuu+T55583/8ZOl+/GjRvjx8BhMIePgK0Pq3T5hn5euHBhvCALj8WLF8ePx6w+zibfyy67LH5CErbJcGHy/vvvW003xs1mFT7jcvhIfubd398f71mFgyv1nlV4M4R7VOG+VfisuKmpKV7NWX2kyzf8ezi4w30qyzeik/VJl+/KlSvjjffwCD1QXFwsv/nNb+Tyyy83WeJ0+Yb7ruHjzvDFmfAJQfjUwPI9nHT5hiFVUFAg69ati/euvve975kezumG1Ww7r9isThEIg2j79u3xfw2f6YcDa8uWLfFz7jDDw0cl4SOT7OxsaW5ulry8PJMHWTLoyfJ95JFH4pdJrr/++vj08F/Gh8/5LT8myzc1r9mwWYV80vXzY489Fr9Q9PXXX8dvft5yyy2WyztpvuH+3H333Rdz/eKLL+TRRx+Ve+65x2y+4f9RQbi4OHHiRLwlES4+Qo6z+bxKLZbrL1iY7VoCRwABBJwJMKycFZx0EUAAAYsCDCuLVSNmBBBAwJkAw8pZwUkXAQQQsCjAsLJYNWJGAAEEnAkwrJwVnHQRQAABiwIMK4tVI2YEEEDAmQDDylnBSRcBBBCwKMCwslg1YkYAAQScCTCsnBWcdBFAAAGLAgwri1UjZgQQQMCZAMPKWcFJFwEEELAowLCyWDViRgABBJwJMKycFZx0EUAAAYsCDCuLVSNmBBBAwJkAw8pZwUkXAQQQsCjAsLJYNWJGAAEEnAkwrJwVnHQRQAABiwIMK4tVI2YEEEDAmQDDylnBSRcBBBCwKMCwslg1YkYAAQScCTCsnBWcdBFAAAGLAmFY/T8DTIFeWhvqCQAAAABJRU5ErkJggg==" width="640.4999809116131"></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.collections.PathCollection at 0x7fdc0d3ab910&gt;
+</pre></div></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Используя конечные разности запишем уравнение для каждого узла:</li>
+</ol>
+<p><span class="math">\begin{align}
+\rho \frac{T_i^n - T_i^{n-1}}{\Delta t} = \lambda \frac{T_{i+1}^{n-1} - 2T_{i}^{n-1} + T_{i-1}^{n-1}}{h^2}
+\end{align}</span></p>
+<p>Используя матричную форму:</p>
+<p><span class="math">\begin{align}
+\rho \frac{\{T\}^{n} - \{T\}^{n-1}}{\Delta t} = [A]\{T\}^{n-1}  + \{f\}
+\end{align}</span></p>
+<dl class="docutils">
+<dt>:nbsphinx-math:<a href="#id3"><span class="problematic" id="id4">`</span></a>begin{align}</dt>
+<dd>{T}^{n}  =  {T}^{n-1} + frac{ Delta t }{rho} ([A]{T}^{n-1} + {f})</dd>
+</dl>
+<p>end{align}`</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_1</span> <span class="o">=</span> <span class="mf">5.</span>
+<span class="n">T_2</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="n">l</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="c1"># индекс неизвестного</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span><span class="mi">2</span>
+
+        <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>  <span class="n">l</span> <span class="o">*</span> <span class="n">T_1</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span><span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+
+        <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">*</span> <span class="n">T_2</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span><span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">n_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span> <span class="o">-</span> <span class="n">t_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta_t</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_time</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_time</span><span class="p">):</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">time</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">time</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">delta_t</span><span class="o">/</span> <span class="n">rho</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="n">time</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">im</span>
+
+<span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="output_javascript"></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+/* Put everything inside the global mpl namespace */
+/* global mpl */
+window.mpl = {};
+
+mpl.get_websocket_type = function () {
+    if (typeof WebSocket !== 'undefined') {
+        return WebSocket;
+    } else if (typeof MozWebSocket !== 'undefined') {
+        return MozWebSocket;
+    } else {
+        alert(
+            'Your browser does not have WebSocket support. ' +
+                'Please try Chrome, Safari or Firefox ≥ 6. ' +
+                'Firefox 4 and 5 are also supported but you ' +
+                'have to enable WebSockets in about:config.'
+        );
+    }
+};
+
+mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
+    this.id = figure_id;
+
+    this.ws = websocket;
+
+    this.supports_binary = this.ws.binaryType !== undefined;
+
+    if (!this.supports_binary) {
+        var warnings = document.getElementById('mpl-warnings');
+        if (warnings) {
+            warnings.style.display = 'block';
+            warnings.textContent =
+                'This browser does not support binary websocket messages. ' +
+                'Performance may be slow.';
+        }
+    }
+
+    this.imageObj = new Image();
+
+    this.context = undefined;
+    this.message = undefined;
+    this.canvas = undefined;
+    this.rubberband_canvas = undefined;
+    this.rubberband_context = undefined;
+    this.format_dropdown = undefined;
+
+    this.image_mode = 'full';
+
+    this.root = document.createElement('div');
+    this.root.setAttribute('style', 'display: inline-block');
+    this._root_extra_style(this.root);
+
+    parent_element.appendChild(this.root);
+
+    this._init_header(this);
+    this._init_canvas(this);
+    this._init_toolbar(this);
+
+    var fig = this;
+
+    this.waiting = false;
+
+    this.ws.onopen = function () {
+        fig.send_message('supports_binary', { value: fig.supports_binary });
+        fig.send_message('send_image_mode', {});
+        if (fig.ratio !== 1) {
+            fig.send_message('set_device_pixel_ratio', {
+                device_pixel_ratio: fig.ratio,
+            });
+        }
+        fig.send_message('refresh', {});
+    };
+
+    this.imageObj.onload = function () {
+        if (fig.image_mode === 'full') {
+            // Full images could contain transparency (where diff images
+            // almost always do), so we need to clear the canvas so that
+            // there is no ghosting.
+            fig.context.clearRect(0, 0, fig.canvas.width, fig.canvas.height);
+        }
+        fig.context.drawImage(fig.imageObj, 0, 0);
+    };
+
+    this.imageObj.onunload = function () {
+        fig.ws.close();
+    };
+
+    this.ws.onmessage = this._make_on_message_function(this);
+
+    this.ondownload = ondownload;
+};
+
+mpl.figure.prototype._init_header = function () {
+    var titlebar = document.createElement('div');
+    titlebar.classList =
+        'ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix';
+    var titletext = document.createElement('div');
+    titletext.classList = 'ui-dialog-title';
+    titletext.setAttribute(
+        'style',
+        'width: 100%; text-align: center; padding: 3px;'
+    );
+    titlebar.appendChild(titletext);
+    this.root.appendChild(titlebar);
+    this.header = titletext;
+};
+
+mpl.figure.prototype._canvas_extra_style = function (_canvas_div) {};
+
+mpl.figure.prototype._root_extra_style = function (_canvas_div) {};
+
+mpl.figure.prototype._init_canvas = function () {
+    var fig = this;
+
+    var canvas_div = (this.canvas_div = document.createElement('div'));
+    canvas_div.setAttribute(
+        'style',
+        'border: 1px solid #ddd;' +
+            'box-sizing: content-box;' +
+            'clear: both;' +
+            'min-height: 1px;' +
+            'min-width: 1px;' +
+            'outline: 0;' +
+            'overflow: hidden;' +
+            'position: relative;' +
+            'resize: both;'
+    );
+
+    function on_keyboard_event_closure(name) {
+        return function (event) {
+            return fig.key_event(event, name);
+        };
+    }
+
+    canvas_div.addEventListener(
+        'keydown',
+        on_keyboard_event_closure('key_press')
+    );
+    canvas_div.addEventListener(
+        'keyup',
+        on_keyboard_event_closure('key_release')
+    );
+
+    this._canvas_extra_style(canvas_div);
+    this.root.appendChild(canvas_div);
+
+    var canvas = (this.canvas = document.createElement('canvas'));
+    canvas.classList.add('mpl-canvas');
+    canvas.setAttribute('style', 'box-sizing: content-box;');
+
+    this.context = canvas.getContext('2d');
+
+    var backingStore =
+        this.context.backingStorePixelRatio ||
+        this.context.webkitBackingStorePixelRatio ||
+        this.context.mozBackingStorePixelRatio ||
+        this.context.msBackingStorePixelRatio ||
+        this.context.oBackingStorePixelRatio ||
+        this.context.backingStorePixelRatio ||
+        1;
+
+    this.ratio = (window.devicePixelRatio || 1) / backingStore;
+
+    var rubberband_canvas = (this.rubberband_canvas = document.createElement(
+        'canvas'
+    ));
+    rubberband_canvas.setAttribute(
+        'style',
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
+    );
+
+    // Apply a ponyfill if ResizeObserver is not implemented by browser.
+    if (this.ResizeObserver === undefined) {
+        if (window.ResizeObserver !== undefined) {
+            this.ResizeObserver = window.ResizeObserver;
+        } else {
+            var obs = _JSXTOOLS_RESIZE_OBSERVER({});
+            this.ResizeObserver = obs.ResizeObserver;
+        }
+    }
+
+    this.resizeObserverInstance = new this.ResizeObserver(function (entries) {
+        var nentries = entries.length;
+        for (var i = 0; i < nentries; i++) {
+            var entry = entries[i];
+            var width, height;
+            if (entry.contentBoxSize) {
+                if (entry.contentBoxSize instanceof Array) {
+                    // Chrome 84 implements new version of spec.
+                    width = entry.contentBoxSize[0].inlineSize;
+                    height = entry.contentBoxSize[0].blockSize;
+                } else {
+                    // Firefox implements old version of spec.
+                    width = entry.contentBoxSize.inlineSize;
+                    height = entry.contentBoxSize.blockSize;
+                }
+            } else {
+                // Chrome <84 implements even older version of spec.
+                width = entry.contentRect.width;
+                height = entry.contentRect.height;
+            }
+
+            // Keep the size of the canvas and rubber band canvas in sync with
+            // the canvas container.
+            if (entry.devicePixelContentBoxSize) {
+                // Chrome 84 implements new version of spec.
+                canvas.setAttribute(
+                    'width',
+                    entry.devicePixelContentBoxSize[0].inlineSize
+                );
+                canvas.setAttribute(
+                    'height',
+                    entry.devicePixelContentBoxSize[0].blockSize
+                );
+            } else {
+                canvas.setAttribute('width', width * fig.ratio);
+                canvas.setAttribute('height', height * fig.ratio);
+            }
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
+
+            rubberband_canvas.setAttribute('width', width);
+            rubberband_canvas.setAttribute('height', height);
+
+            // And update the size in Python. We ignore the initial 0/0 size
+            // that occurs as the element is placed into the DOM, which should
+            // otherwise not happen due to the minimum size styling.
+            if (fig.ws.readyState == 1 && width != 0 && height != 0) {
+                fig.request_resize(width, height);
+            }
+        }
+    });
+    this.resizeObserverInstance.observe(canvas_div);
+
+    function on_mouse_event_closure(name) {
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
+    }
+
+    rubberband_canvas.addEventListener(
+        'mousedown',
+        on_mouse_event_closure('button_press')
+    );
+    rubberband_canvas.addEventListener(
+        'mouseup',
+        on_mouse_event_closure('button_release')
+    );
+    rubberband_canvas.addEventListener(
+        'dblclick',
+        on_mouse_event_closure('dblclick')
+    );
+    // Throttle sequential mouse events to 1 every 20ms.
+    rubberband_canvas.addEventListener(
+        'mousemove',
+        on_mouse_event_closure('motion_notify')
+    );
+
+    rubberband_canvas.addEventListener(
+        'mouseenter',
+        on_mouse_event_closure('figure_enter')
+    );
+    rubberband_canvas.addEventListener(
+        'mouseleave',
+        on_mouse_event_closure('figure_leave')
+    );
+
+    canvas_div.addEventListener('wheel', function (event) {
+        if (event.deltaY < 0) {
+            event.step = 1;
+        } else {
+            event.step = -1;
+        }
+        on_mouse_event_closure('scroll')(event);
+    });
+
+    canvas_div.appendChild(canvas);
+    canvas_div.appendChild(rubberband_canvas);
+
+    this.rubberband_context = rubberband_canvas.getContext('2d');
+    this.rubberband_context.strokeStyle = '#000000';
+
+    this._resize_canvas = function (width, height, forward) {
+        if (forward) {
+            canvas_div.style.width = width + 'px';
+            canvas_div.style.height = height + 'px';
+        }
+    };
+
+    // Disable right mouse context menu.
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
+        event.preventDefault();
+        return false;
+    });
+
+    function set_focus() {
+        canvas.focus();
+        canvas_div.focus();
+    }
+
+    window.setTimeout(set_focus, 100);
+};
+
+mpl.figure.prototype._init_toolbar = function () {
+    var fig = this;
+
+    var toolbar = document.createElement('div');
+    toolbar.classList = 'mpl-toolbar';
+    this.root.appendChild(toolbar);
+
+    function on_click_closure(name) {
+        return function (_event) {
+            return fig.toolbar_button_onclick(name);
+        };
+    }
+
+    function on_mouseover_closure(tooltip) {
+        return function (event) {
+            if (!event.currentTarget.disabled) {
+                return fig.toolbar_button_onmouseover(tooltip);
+            }
+        };
+    }
+
+    fig.buttons = {};
+    var buttonGroup = document.createElement('div');
+    buttonGroup.classList = 'mpl-button-group';
+    for (var toolbar_ind in mpl.toolbar_items) {
+        var name = mpl.toolbar_items[toolbar_ind][0];
+        var tooltip = mpl.toolbar_items[toolbar_ind][1];
+        var image = mpl.toolbar_items[toolbar_ind][2];
+        var method_name = mpl.toolbar_items[toolbar_ind][3];
+
+        if (!name) {
+            /* Instead of a spacer, we start a new button group. */
+            if (buttonGroup.hasChildNodes()) {
+                toolbar.appendChild(buttonGroup);
+            }
+            buttonGroup = document.createElement('div');
+            buttonGroup.classList = 'mpl-button-group';
+            continue;
+        }
+
+        var button = (fig.buttons[name] = document.createElement('button'));
+        button.classList = 'mpl-widget';
+        button.setAttribute('role', 'button');
+        button.setAttribute('aria-disabled', 'false');
+        button.addEventListener('click', on_click_closure(method_name));
+        button.addEventListener('mouseover', on_mouseover_closure(tooltip));
+
+        var icon_img = document.createElement('img');
+        icon_img.src = '_images/' + image + '.png';
+        icon_img.srcset = '_images/' + image + '_large.png 2x';
+        icon_img.alt = tooltip;
+        button.appendChild(icon_img);
+
+        buttonGroup.appendChild(button);
+    }
+
+    if (buttonGroup.hasChildNodes()) {
+        toolbar.appendChild(buttonGroup);
+    }
+
+    var fmt_picker = document.createElement('select');
+    fmt_picker.classList = 'mpl-widget';
+    toolbar.appendChild(fmt_picker);
+    this.format_dropdown = fmt_picker;
+
+    for (var ind in mpl.extensions) {
+        var fmt = mpl.extensions[ind];
+        var option = document.createElement('option');
+        option.selected = fmt === mpl.default_extension;
+        option.innerHTML = fmt;
+        fmt_picker.appendChild(option);
+    }
+
+    var status_bar = document.createElement('span');
+    status_bar.classList = 'mpl-message';
+    toolbar.appendChild(status_bar);
+    this.message = status_bar;
+};
+
+mpl.figure.prototype.request_resize = function (x_pixels, y_pixels) {
+    // Request matplotlib to resize the figure. Matplotlib will then trigger a resize in the client,
+    // which will in turn request a refresh of the image.
+    this.send_message('resize', { width: x_pixels, height: y_pixels });
+};
+
+mpl.figure.prototype.send_message = function (type, properties) {
+    properties['type'] = type;
+    properties['figure_id'] = this.id;
+    this.ws.send(JSON.stringify(properties));
+};
+
+mpl.figure.prototype.send_draw_message = function () {
+    if (!this.waiting) {
+        this.waiting = true;
+        this.ws.send(JSON.stringify({ type: 'draw', figure_id: this.id }));
+    }
+};
+
+mpl.figure.prototype.handle_save = function (fig, _msg) {
+    var format_dropdown = fig.format_dropdown;
+    var format = format_dropdown.options[format_dropdown.selectedIndex].value;
+    fig.ondownload(fig, format);
+};
+
+mpl.figure.prototype.handle_resize = function (fig, msg) {
+    var size = msg['size'];
+    if (size[0] !== fig.canvas.width || size[1] !== fig.canvas.height) {
+        fig._resize_canvas(size[0], size[1], msg['forward']);
+        fig.send_message('refresh', {});
+    }
+};
+
+mpl.figure.prototype.handle_rubberband = function (fig, msg) {
+    var x0 = msg['x0'] / fig.ratio;
+    var y0 = (fig.canvas.height - msg['y0']) / fig.ratio;
+    var x1 = msg['x1'] / fig.ratio;
+    var y1 = (fig.canvas.height - msg['y1']) / fig.ratio;
+    x0 = Math.floor(x0) + 0.5;
+    y0 = Math.floor(y0) + 0.5;
+    x1 = Math.floor(x1) + 0.5;
+    y1 = Math.floor(y1) + 0.5;
+    var min_x = Math.min(x0, x1);
+    var min_y = Math.min(y0, y1);
+    var width = Math.abs(x1 - x0);
+    var height = Math.abs(y1 - y0);
+
+    fig.rubberband_context.clearRect(
+        0,
+        0,
+        fig.canvas.width / fig.ratio,
+        fig.canvas.height / fig.ratio
+    );
+
+    fig.rubberband_context.strokeRect(min_x, min_y, width, height);
+};
+
+mpl.figure.prototype.handle_figure_label = function (fig, msg) {
+    // Updates the figure title.
+    fig.header.textContent = msg['label'];
+};
+
+mpl.figure.prototype.handle_cursor = function (fig, msg) {
+    fig.rubberband_canvas.style.cursor = msg['cursor'];
+};
+
+mpl.figure.prototype.handle_message = function (fig, msg) {
+    fig.message.textContent = msg['message'];
+};
+
+mpl.figure.prototype.handle_draw = function (fig, _msg) {
+    // Request the server to send over a new figure.
+    fig.send_draw_message();
+};
+
+mpl.figure.prototype.handle_image_mode = function (fig, msg) {
+    fig.image_mode = msg['mode'];
+};
+
+mpl.figure.prototype.handle_history_buttons = function (fig, msg) {
+    for (var key in msg) {
+        if (!(key in fig.buttons)) {
+            continue;
+        }
+        fig.buttons[key].disabled = !msg[key];
+        fig.buttons[key].setAttribute('aria-disabled', !msg[key]);
+    }
+};
+
+mpl.figure.prototype.handle_navigate_mode = function (fig, msg) {
+    if (msg['mode'] === 'PAN') {
+        fig.buttons['Pan'].classList.add('active');
+        fig.buttons['Zoom'].classList.remove('active');
+    } else if (msg['mode'] === 'ZOOM') {
+        fig.buttons['Pan'].classList.remove('active');
+        fig.buttons['Zoom'].classList.add('active');
+    } else {
+        fig.buttons['Pan'].classList.remove('active');
+        fig.buttons['Zoom'].classList.remove('active');
+    }
+};
+
+mpl.figure.prototype.updated_canvas_event = function () {
+    // Called whenever the canvas gets updated.
+    this.send_message('ack', {});
+};
+
+// A function to construct a web socket function for onmessage handling.
+// Called in the figure constructor.
+mpl.figure.prototype._make_on_message_function = function (fig) {
+    return function socket_on_message(evt) {
+        if (evt.data instanceof Blob) {
+            var img = evt.data;
+            if (img.type !== 'image/png') {
+                /* FIXME: We get "Resource interpreted as Image but
+                 * transferred with MIME type text/plain:" errors on
+                 * Chrome.  But how to set the MIME type?  It doesn't seem
+                 * to be part of the websocket stream */
+                img.type = 'image/png';
+            }
+
+            /* Free the memory for the previous frames */
+            if (fig.imageObj.src) {
+                (window.URL || window.webkitURL).revokeObjectURL(
+                    fig.imageObj.src
+                );
+            }
+
+            fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
+                img
+            );
+            fig.updated_canvas_event();
+            fig.waiting = false;
+            return;
+        } else if (
+            typeof evt.data === 'string' &&
+            evt.data.slice(0, 21) === 'data:image/png;base64'
+        ) {
+            fig.imageObj.src = evt.data;
+            fig.updated_canvas_event();
+            fig.waiting = false;
+            return;
+        }
+
+        var msg = JSON.parse(evt.data);
+        var msg_type = msg['type'];
+
+        // Call the  "handle_{type}" callback, which takes
+        // the figure and JSON message as its only arguments.
+        try {
+            var callback = fig['handle_' + msg_type];
+        } catch (e) {
+            console.log(
+                "No handler for the '" + msg_type + "' message type: ",
+                msg
+            );
+            return;
+        }
+
+        if (callback) {
+            try {
+                // console.log("Handling '" + msg_type + "' message: ", msg);
+                callback(fig, msg);
+            } catch (e) {
+                console.log(
+                    "Exception inside the 'handler_" + msg_type + "' callback:",
+                    e,
+                    e.stack,
+                    msg
+                );
+            }
+        }
+    };
+};
+
+// from https://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
+
+/*
+ * return a copy of an object with only non-object keys
+ * we need this to avoid circular references
+ * https://stackoverflow.com/a/24161582/3208463
+ */
+function simpleKeys(original) {
+    return Object.keys(original).reduce(function (obj, key) {
+        if (typeof original[key] !== 'object') {
+            obj[key] = original[key];
+        }
+        return obj;
+    }, {});
+}
+
+mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
+    if (name === 'button_press') {
+        this.canvas.focus();
+        this.canvas_div.focus();
+    }
+
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
+
+    this.send_message(name, {
+        x: x,
+        y: y,
+        button: event.button,
+        step: event.step,
+        guiEvent: simpleKeys(event),
+    });
+
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
+    return false;
+};
+
+mpl.figure.prototype._key_event_extra = function (_event, _name) {
+    // Handle any extra behaviour associated with a key event
+};
+
+mpl.figure.prototype.key_event = function (event, name) {
+    // Prevent repeat events
+    if (name === 'key_press') {
+        if (event.key === this._key) {
+            return;
+        } else {
+            this._key = event.key;
+        }
+    }
+    if (name === 'key_release') {
+        this._key = null;
+    }
+
+    var value = '';
+    if (event.ctrlKey && event.key !== 'Control') {
+        value += 'ctrl+';
+    }
+    else if (event.altKey && event.key !== 'Alt') {
+        value += 'alt+';
+    }
+    else if (event.shiftKey && event.key !== 'Shift') {
+        value += 'shift+';
+    }
+
+    value += 'k' + event.key;
+
+    this._key_event_extra(event, name);
+
+    this.send_message(name, { key: value, guiEvent: simpleKeys(event) });
+    return false;
+};
+
+mpl.figure.prototype.toolbar_button_onclick = function (name) {
+    if (name === 'download') {
+        this.handle_save(this, null);
+    } else {
+        this.send_message('toolbar_button', { name: name });
+    }
+};
+
+mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
+    this.message.textContent = tooltip;
+};
+
+///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
+// prettier-ignore
+var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
+
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
+
+mpl.default_extension = "png";/* global mpl */
+
+var comm_websocket_adapter = function (comm) {
+    // Create a "websocket"-like object which calls the given IPython comm
+    // object with the appropriate methods. Currently this is a non binary
+    // socket, so there is still some room for performance tuning.
+    var ws = {};
+
+    ws.binaryType = comm.kernel.ws.binaryType;
+    ws.readyState = comm.kernel.ws.readyState;
+    function updateReadyState(_event) {
+        if (comm.kernel.ws) {
+            ws.readyState = comm.kernel.ws.readyState;
+        } else {
+            ws.readyState = 3; // Closed state.
+        }
+    }
+    comm.kernel.ws.addEventListener('open', updateReadyState);
+    comm.kernel.ws.addEventListener('close', updateReadyState);
+    comm.kernel.ws.addEventListener('error', updateReadyState);
+
+    ws.close = function () {
+        comm.close();
+    };
+    ws.send = function (m) {
+        //console.log('sending', m);
+        comm.send(m);
+    };
+    // Register the callback with on_msg.
+    comm.on_msg(function (msg) {
+        //console.log('receiving', msg['content']['data'], msg);
+        var data = msg['content']['data'];
+        if (data['blob'] !== undefined) {
+            data = {
+                data: new Blob(msg['buffers'], { type: data['blob'] }),
+            };
+        }
+        // Pass the mpl event to the overridden (by mpl) onmessage function.
+        ws.onmessage(data);
+    });
+    return ws;
+};
+
+mpl.mpl_figure_comm = function (comm, msg) {
+    // This is the function which gets called when the mpl process
+    // starts-up an IPython Comm through the "matplotlib" channel.
+
+    var id = msg.content.data.id;
+    // Get hold of the div created by the display call when the Comm
+    // socket was opened in Python.
+    var element = document.getElementById(id);
+    var ws_proxy = comm_websocket_adapter(comm);
+
+    function ondownload(figure, _format) {
+        window.open(figure.canvas.toDataURL());
+    }
+
+    var fig = new mpl.figure(id, ws_proxy, ondownload, element);
+
+    // Call onopen now - mpl needs it, as it is assuming we've passed it a real
+    // web socket which is closed, not our websocket->open comm proxy.
+    ws_proxy.onopen();
+
+    fig.parent_element = element;
+    fig.cell_info = mpl.find_output_cell("<div id='" + id + "'></div>");
+    if (!fig.cell_info) {
+        console.error('Failed to find cell for figure', id, fig);
+        return;
+    }
+    fig.cell_info[0].output_area.element.on(
+        'cleared',
+        { fig: fig },
+        fig._remove_fig_handler
+    );
+};
+
+mpl.figure.prototype.handle_close = function (fig, msg) {
+    var width = fig.canvas.width / fig.ratio;
+    fig.cell_info[0].output_area.element.off(
+        'cleared',
+        fig._remove_fig_handler
+    );
+    fig.resizeObserverInstance.unobserve(fig.canvas_div);
+
+    // Update the output cell to use the data from the current canvas.
+    fig.push_to_output();
+    var dataURL = fig.canvas.toDataURL();
+    // Re-enable the keyboard manager in IPython - without this line, in FF,
+    // the notebook keyboard shortcuts fail.
+    IPython.keyboard_manager.enable();
+    fig.parent_element.innerHTML =
+        '<img src="' + dataURL + '" width="' + width + '">';
+    fig.close_ws(fig, msg);
+};
+
+mpl.figure.prototype.close_ws = function (fig, msg) {
+    fig.send_message('closing', msg);
+    // fig.ws.close()
+};
+
+mpl.figure.prototype.push_to_output = function (_remove_interactive) {
+    // Turn the data on the canvas into data in the output cell.
+    var width = this.canvas.width / this.ratio;
+    var dataURL = this.canvas.toDataURL();
+    this.cell_info[1]['text/html'] =
+        '<img src="' + dataURL + '" width="' + width + '">';
+};
+
+mpl.figure.prototype.updated_canvas_event = function () {
+    // Tell IPython that the notebook contents must change.
+    IPython.notebook.set_dirty(true);
+    this.send_message('ack', {});
+    var fig = this;
+    // Wait a second, then push the new image to the DOM so
+    // that it is saved nicely (might be nice to debounce this).
+    setTimeout(function () {
+        fig.push_to_output();
+    }, 1000);
+};
+
+mpl.figure.prototype._init_toolbar = function () {
+    var fig = this;
+
+    var toolbar = document.createElement('div');
+    toolbar.classList = 'btn-toolbar';
+    this.root.appendChild(toolbar);
+
+    function on_click_closure(name) {
+        return function (_event) {
+            return fig.toolbar_button_onclick(name);
+        };
+    }
+
+    function on_mouseover_closure(tooltip) {
+        return function (event) {
+            if (!event.currentTarget.disabled) {
+                return fig.toolbar_button_onmouseover(tooltip);
+            }
+        };
+    }
+
+    fig.buttons = {};
+    var buttonGroup = document.createElement('div');
+    buttonGroup.classList = 'btn-group';
+    var button;
+    for (var toolbar_ind in mpl.toolbar_items) {
+        var name = mpl.toolbar_items[toolbar_ind][0];
+        var tooltip = mpl.toolbar_items[toolbar_ind][1];
+        var image = mpl.toolbar_items[toolbar_ind][2];
+        var method_name = mpl.toolbar_items[toolbar_ind][3];
+
+        if (!name) {
+            /* Instead of a spacer, we start a new button group. */
+            if (buttonGroup.hasChildNodes()) {
+                toolbar.appendChild(buttonGroup);
+            }
+            buttonGroup = document.createElement('div');
+            buttonGroup.classList = 'btn-group';
+            continue;
+        }
+
+        button = fig.buttons[name] = document.createElement('button');
+        button.classList = 'btn btn-default';
+        button.href = '#';
+        button.title = name;
+        button.innerHTML = '<i class="fa ' + image + ' fa-lg"></i>';
+        button.addEventListener('click', on_click_closure(method_name));
+        button.addEventListener('mouseover', on_mouseover_closure(tooltip));
+        buttonGroup.appendChild(button);
+    }
+
+    if (buttonGroup.hasChildNodes()) {
+        toolbar.appendChild(buttonGroup);
+    }
+
+    // Add the status bar.
+    var status_bar = document.createElement('span');
+    status_bar.classList = 'mpl-message pull-right';
+    toolbar.appendChild(status_bar);
+    this.message = status_bar;
+
+    // Add the close button to the window.
+    var buttongrp = document.createElement('div');
+    buttongrp.classList = 'btn-group inline pull-right';
+    button = document.createElement('button');
+    button.classList = 'btn btn-mini btn-primary';
+    button.href = '#';
+    button.title = 'Stop Interaction';
+    button.innerHTML = '<i class="fa fa-power-off icon-remove icon-large"></i>';
+    button.addEventListener('click', function (_evt) {
+        fig.handle_close(fig, {});
+    });
+    button.addEventListener(
+        'mouseover',
+        on_mouseover_closure('Stop Interaction')
+    );
+    buttongrp.appendChild(button);
+    var titlebar = this.root.querySelector('.ui-dialog-titlebar');
+    titlebar.insertBefore(buttongrp, titlebar.firstChild);
+};
+
+mpl.figure.prototype._remove_fig_handler = function (event) {
+    var fig = event.data.fig;
+    if (event.target !== this) {
+        // Ignore bubbled events from children.
+        return;
+    }
+    fig.close_ws(fig, {});
+};
+
+mpl.figure.prototype._root_extra_style = function (el) {
+    el.style.boxSizing = 'content-box'; // override notebook setting of border-box.
+};
+
+mpl.figure.prototype._canvas_extra_style = function (el) {
+    // this is important to make the div 'focusable
+    el.setAttribute('tabindex', 0);
+    // reach out to IPython and tell the keyboard manager to turn it's self
+    // off when our div gets focus
+
+    // location in version 3
+    if (IPython.notebook.keyboard_manager) {
+        IPython.notebook.keyboard_manager.register_events(el);
+    } else {
+        // location in version 2
+        IPython.keyboard_manager.register_events(el);
+    }
+};
+
+mpl.figure.prototype._key_event_extra = function (event, _name) {
+    // Check for shift+enter
+    if (event.shiftKey && event.which === 13) {
+        this.canvas_div.blur();
+        // select the cell after this one
+        var index = IPython.notebook.find_cell_index(this.cell_info[0]);
+        IPython.notebook.select(index + 1);
+    }
+};
+
+mpl.figure.prototype.handle_save = function (fig, _msg) {
+    fig.ondownload(fig, null);
+};
+
+mpl.find_output_cell = function (html_output) {
+    // Return the cell and output element which can be found *uniquely* in the notebook.
+    // Note - this is a bit hacky, but it is done because the "notebook_saving.Notebook"
+    // IPython event is triggered only after the cells have been serialised, which for
+    // our purposes (turning an active figure into a static one), is too late.
+    var cells = IPython.notebook.get_cells();
+    var ncells = cells.length;
+    for (var i = 0; i < ncells; i++) {
+        var cell = cells[i];
+        if (cell.cell_type === 'code') {
+            for (var j = 0; j < cell.output_area.outputs.length; j++) {
+                var data = cell.output_area.outputs[j];
+                if (data.data) {
+                    // IPython >= 3 moved mimebundle to data attribute of output
+                    data = data.data;
+                }
+                if (data['text/html'] === html_output) {
+                    return [cell, data, j];
+                }
+            }
+        }
+    }
+};
+
+// Register the function which deals with the matplotlib target/channel.
+// The kernel may be null if the page has been refreshed.
+if (IPython.notebook.kernel !== null) {
+    IPython.notebook.kernel.comm_manager.register_target(
+        'matplotlib',
+        mpl.mpl_figure_comm
+    );
+}
+
+</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<img src="data:image/png;base64,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" width="640.4999809116131"></div>
+</div>
+</div>
+<div class="section" id="Численное-решение.-Неявная-схема.">
+<h2>Численное решение. Неявная схема.<a class="headerlink" href="#Численное-решение.-Неявная-схема." title="Ссылка на этот заголовок"></a></h2>
+<ol class="arabic simple">
+<li>Построим конечно-разностную пространственную сетку:</li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">7</span> <span class="c1"># количество узлов</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># шаг конечной разности</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Используя конечные разности запишем уравнение для каждого узла:</li>
+</ol>
+<p><span class="math">\begin{align}
+\rho \frac{T_i^n - T_i^{n-1}}{\Delta t} = \lambda \frac{T_{i+1}^{n} - 2T_{i}^{n} + T_{i-1}^{n}}{h^2}
+\end{align}</span></p>
+<p>Используя матричную форму:</p>
+<p><span class="math">\begin{align}
+\rho \frac{\{T\}^{n} - \{T\}^{n-1}}{\Delta t} = [A]\{T\}^{n}  + \{f\}
+\end{align}</span></p>
+<dl class="docutils">
+<dt>:nbsphinx-math:<a href="#id6"><span class="problematic" id="id7">`</span></a>begin{align}</dt>
+<dd>(frac{rho}{Delta t }[I] - [A]){T}^{n}  = frac{rho}{Delta t } {T}^{n-1}    + {f}</dd>
+</dl>
+<p>end{align}`</p>
+<dl class="docutils">
+<dt>:nbsphinx-math:<a href="#id8"><span class="problematic" id="id9">`</span></a>begin{align}</dt>
+<dd>[M]{T}^{n}  = {b}</dd>
+</dl>
+<p>end{align}`</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T_1</span> <span class="o">=</span> <span class="mf">5.</span>
+<span class="n">T_2</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="n">l</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="c1"># индекс неизвестного</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span><span class="mi">2</span>
+
+        <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>  <span class="n">l</span> <span class="o">*</span> <span class="n">T_1</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span><span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+
+        <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">*</span> <span class="n">T_2</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span><span class="mi">2</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">l</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">n_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span> <span class="o">-</span> <span class="n">t_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta_t</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_time</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">/</span> <span class="n">delta_t</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">A</span>
+
+<span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_time</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">/</span> <span class="n">delta_t</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">time</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">f</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">time</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="n">time</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">im</span>
+
+<span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="output_javascript"></div>
+<script type="text/javascript">
+var element = document.currentScript.previousSibling.previousSibling;
+/* Put everything inside the global mpl namespace */
+/* global mpl */
+window.mpl = {};
+
+mpl.get_websocket_type = function () {
+    if (typeof WebSocket !== 'undefined') {
+        return WebSocket;
+    } else if (typeof MozWebSocket !== 'undefined') {
+        return MozWebSocket;
+    } else {
+        alert(
+            'Your browser does not have WebSocket support. ' +
+                'Please try Chrome, Safari or Firefox ≥ 6. ' +
+                'Firefox 4 and 5 are also supported but you ' +
+                'have to enable WebSockets in about:config.'
+        );
+    }
+};
+
+mpl.figure = function (figure_id, websocket, ondownload, parent_element) {
+    this.id = figure_id;
+
+    this.ws = websocket;
+
+    this.supports_binary = this.ws.binaryType !== undefined;
+
+    if (!this.supports_binary) {
+        var warnings = document.getElementById('mpl-warnings');
+        if (warnings) {
+            warnings.style.display = 'block';
+            warnings.textContent =
+                'This browser does not support binary websocket messages. ' +
+                'Performance may be slow.';
+        }
+    }
+
+    this.imageObj = new Image();
+
+    this.context = undefined;
+    this.message = undefined;
+    this.canvas = undefined;
+    this.rubberband_canvas = undefined;
+    this.rubberband_context = undefined;
+    this.format_dropdown = undefined;
+
+    this.image_mode = 'full';
+
+    this.root = document.createElement('div');
+    this.root.setAttribute('style', 'display: inline-block');
+    this._root_extra_style(this.root);
+
+    parent_element.appendChild(this.root);
+
+    this._init_header(this);
+    this._init_canvas(this);
+    this._init_toolbar(this);
+
+    var fig = this;
+
+    this.waiting = false;
+
+    this.ws.onopen = function () {
+        fig.send_message('supports_binary', { value: fig.supports_binary });
+        fig.send_message('send_image_mode', {});
+        if (fig.ratio !== 1) {
+            fig.send_message('set_device_pixel_ratio', {
+                device_pixel_ratio: fig.ratio,
+            });
+        }
+        fig.send_message('refresh', {});
+    };
+
+    this.imageObj.onload = function () {
+        if (fig.image_mode === 'full') {
+            // Full images could contain transparency (where diff images
+            // almost always do), so we need to clear the canvas so that
+            // there is no ghosting.
+            fig.context.clearRect(0, 0, fig.canvas.width, fig.canvas.height);
+        }
+        fig.context.drawImage(fig.imageObj, 0, 0);
+    };
+
+    this.imageObj.onunload = function () {
+        fig.ws.close();
+    };
+
+    this.ws.onmessage = this._make_on_message_function(this);
+
+    this.ondownload = ondownload;
+};
+
+mpl.figure.prototype._init_header = function () {
+    var titlebar = document.createElement('div');
+    titlebar.classList =
+        'ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix';
+    var titletext = document.createElement('div');
+    titletext.classList = 'ui-dialog-title';
+    titletext.setAttribute(
+        'style',
+        'width: 100%; text-align: center; padding: 3px;'
+    );
+    titlebar.appendChild(titletext);
+    this.root.appendChild(titlebar);
+    this.header = titletext;
+};
+
+mpl.figure.prototype._canvas_extra_style = function (_canvas_div) {};
+
+mpl.figure.prototype._root_extra_style = function (_canvas_div) {};
+
+mpl.figure.prototype._init_canvas = function () {
+    var fig = this;
+
+    var canvas_div = (this.canvas_div = document.createElement('div'));
+    canvas_div.setAttribute(
+        'style',
+        'border: 1px solid #ddd;' +
+            'box-sizing: content-box;' +
+            'clear: both;' +
+            'min-height: 1px;' +
+            'min-width: 1px;' +
+            'outline: 0;' +
+            'overflow: hidden;' +
+            'position: relative;' +
+            'resize: both;'
+    );
+
+    function on_keyboard_event_closure(name) {
+        return function (event) {
+            return fig.key_event(event, name);
+        };
+    }
+
+    canvas_div.addEventListener(
+        'keydown',
+        on_keyboard_event_closure('key_press')
+    );
+    canvas_div.addEventListener(
+        'keyup',
+        on_keyboard_event_closure('key_release')
+    );
+
+    this._canvas_extra_style(canvas_div);
+    this.root.appendChild(canvas_div);
+
+    var canvas = (this.canvas = document.createElement('canvas'));
+    canvas.classList.add('mpl-canvas');
+    canvas.setAttribute('style', 'box-sizing: content-box;');
+
+    this.context = canvas.getContext('2d');
+
+    var backingStore =
+        this.context.backingStorePixelRatio ||
+        this.context.webkitBackingStorePixelRatio ||
+        this.context.mozBackingStorePixelRatio ||
+        this.context.msBackingStorePixelRatio ||
+        this.context.oBackingStorePixelRatio ||
+        this.context.backingStorePixelRatio ||
+        1;
+
+    this.ratio = (window.devicePixelRatio || 1) / backingStore;
+
+    var rubberband_canvas = (this.rubberband_canvas = document.createElement(
+        'canvas'
+    ));
+    rubberband_canvas.setAttribute(
+        'style',
+        'box-sizing: content-box; position: absolute; left: 0; top: 0; z-index: 1;'
+    );
+
+    // Apply a ponyfill if ResizeObserver is not implemented by browser.
+    if (this.ResizeObserver === undefined) {
+        if (window.ResizeObserver !== undefined) {
+            this.ResizeObserver = window.ResizeObserver;
+        } else {
+            var obs = _JSXTOOLS_RESIZE_OBSERVER({});
+            this.ResizeObserver = obs.ResizeObserver;
+        }
+    }
+
+    this.resizeObserverInstance = new this.ResizeObserver(function (entries) {
+        var nentries = entries.length;
+        for (var i = 0; i < nentries; i++) {
+            var entry = entries[i];
+            var width, height;
+            if (entry.contentBoxSize) {
+                if (entry.contentBoxSize instanceof Array) {
+                    // Chrome 84 implements new version of spec.
+                    width = entry.contentBoxSize[0].inlineSize;
+                    height = entry.contentBoxSize[0].blockSize;
+                } else {
+                    // Firefox implements old version of spec.
+                    width = entry.contentBoxSize.inlineSize;
+                    height = entry.contentBoxSize.blockSize;
+                }
+            } else {
+                // Chrome <84 implements even older version of spec.
+                width = entry.contentRect.width;
+                height = entry.contentRect.height;
+            }
+
+            // Keep the size of the canvas and rubber band canvas in sync with
+            // the canvas container.
+            if (entry.devicePixelContentBoxSize) {
+                // Chrome 84 implements new version of spec.
+                canvas.setAttribute(
+                    'width',
+                    entry.devicePixelContentBoxSize[0].inlineSize
+                );
+                canvas.setAttribute(
+                    'height',
+                    entry.devicePixelContentBoxSize[0].blockSize
+                );
+            } else {
+                canvas.setAttribute('width', width * fig.ratio);
+                canvas.setAttribute('height', height * fig.ratio);
+            }
+            canvas.setAttribute(
+                'style',
+                'width: ' + width + 'px; height: ' + height + 'px;'
+            );
+
+            rubberband_canvas.setAttribute('width', width);
+            rubberband_canvas.setAttribute('height', height);
+
+            // And update the size in Python. We ignore the initial 0/0 size
+            // that occurs as the element is placed into the DOM, which should
+            // otherwise not happen due to the minimum size styling.
+            if (fig.ws.readyState == 1 && width != 0 && height != 0) {
+                fig.request_resize(width, height);
+            }
+        }
+    });
+    this.resizeObserverInstance.observe(canvas_div);
+
+    function on_mouse_event_closure(name) {
+        return function (event) {
+            return fig.mouse_event(event, name);
+        };
+    }
+
+    rubberband_canvas.addEventListener(
+        'mousedown',
+        on_mouse_event_closure('button_press')
+    );
+    rubberband_canvas.addEventListener(
+        'mouseup',
+        on_mouse_event_closure('button_release')
+    );
+    rubberband_canvas.addEventListener(
+        'dblclick',
+        on_mouse_event_closure('dblclick')
+    );
+    // Throttle sequential mouse events to 1 every 20ms.
+    rubberband_canvas.addEventListener(
+        'mousemove',
+        on_mouse_event_closure('motion_notify')
+    );
+
+    rubberband_canvas.addEventListener(
+        'mouseenter',
+        on_mouse_event_closure('figure_enter')
+    );
+    rubberband_canvas.addEventListener(
+        'mouseleave',
+        on_mouse_event_closure('figure_leave')
+    );
+
+    canvas_div.addEventListener('wheel', function (event) {
+        if (event.deltaY < 0) {
+            event.step = 1;
+        } else {
+            event.step = -1;
+        }
+        on_mouse_event_closure('scroll')(event);
+    });
+
+    canvas_div.appendChild(canvas);
+    canvas_div.appendChild(rubberband_canvas);
+
+    this.rubberband_context = rubberband_canvas.getContext('2d');
+    this.rubberband_context.strokeStyle = '#000000';
+
+    this._resize_canvas = function (width, height, forward) {
+        if (forward) {
+            canvas_div.style.width = width + 'px';
+            canvas_div.style.height = height + 'px';
+        }
+    };
+
+    // Disable right mouse context menu.
+    this.rubberband_canvas.addEventListener('contextmenu', function (_e) {
+        event.preventDefault();
+        return false;
+    });
+
+    function set_focus() {
+        canvas.focus();
+        canvas_div.focus();
+    }
+
+    window.setTimeout(set_focus, 100);
+};
+
+mpl.figure.prototype._init_toolbar = function () {
+    var fig = this;
+
+    var toolbar = document.createElement('div');
+    toolbar.classList = 'mpl-toolbar';
+    this.root.appendChild(toolbar);
+
+    function on_click_closure(name) {
+        return function (_event) {
+            return fig.toolbar_button_onclick(name);
+        };
+    }
+
+    function on_mouseover_closure(tooltip) {
+        return function (event) {
+            if (!event.currentTarget.disabled) {
+                return fig.toolbar_button_onmouseover(tooltip);
+            }
+        };
+    }
+
+    fig.buttons = {};
+    var buttonGroup = document.createElement('div');
+    buttonGroup.classList = 'mpl-button-group';
+    for (var toolbar_ind in mpl.toolbar_items) {
+        var name = mpl.toolbar_items[toolbar_ind][0];
+        var tooltip = mpl.toolbar_items[toolbar_ind][1];
+        var image = mpl.toolbar_items[toolbar_ind][2];
+        var method_name = mpl.toolbar_items[toolbar_ind][3];
+
+        if (!name) {
+            /* Instead of a spacer, we start a new button group. */
+            if (buttonGroup.hasChildNodes()) {
+                toolbar.appendChild(buttonGroup);
+            }
+            buttonGroup = document.createElement('div');
+            buttonGroup.classList = 'mpl-button-group';
+            continue;
+        }
+
+        var button = (fig.buttons[name] = document.createElement('button'));
+        button.classList = 'mpl-widget';
+        button.setAttribute('role', 'button');
+        button.setAttribute('aria-disabled', 'false');
+        button.addEventListener('click', on_click_closure(method_name));
+        button.addEventListener('mouseover', on_mouseover_closure(tooltip));
+
+        var icon_img = document.createElement('img');
+        icon_img.src = '_images/' + image + '.png';
+        icon_img.srcset = '_images/' + image + '_large.png 2x';
+        icon_img.alt = tooltip;
+        button.appendChild(icon_img);
+
+        buttonGroup.appendChild(button);
+    }
+
+    if (buttonGroup.hasChildNodes()) {
+        toolbar.appendChild(buttonGroup);
+    }
+
+    var fmt_picker = document.createElement('select');
+    fmt_picker.classList = 'mpl-widget';
+    toolbar.appendChild(fmt_picker);
+    this.format_dropdown = fmt_picker;
+
+    for (var ind in mpl.extensions) {
+        var fmt = mpl.extensions[ind];
+        var option = document.createElement('option');
+        option.selected = fmt === mpl.default_extension;
+        option.innerHTML = fmt;
+        fmt_picker.appendChild(option);
+    }
+
+    var status_bar = document.createElement('span');
+    status_bar.classList = 'mpl-message';
+    toolbar.appendChild(status_bar);
+    this.message = status_bar;
+};
+
+mpl.figure.prototype.request_resize = function (x_pixels, y_pixels) {
+    // Request matplotlib to resize the figure. Matplotlib will then trigger a resize in the client,
+    // which will in turn request a refresh of the image.
+    this.send_message('resize', { width: x_pixels, height: y_pixels });
+};
+
+mpl.figure.prototype.send_message = function (type, properties) {
+    properties['type'] = type;
+    properties['figure_id'] = this.id;
+    this.ws.send(JSON.stringify(properties));
+};
+
+mpl.figure.prototype.send_draw_message = function () {
+    if (!this.waiting) {
+        this.waiting = true;
+        this.ws.send(JSON.stringify({ type: 'draw', figure_id: this.id }));
+    }
+};
+
+mpl.figure.prototype.handle_save = function (fig, _msg) {
+    var format_dropdown = fig.format_dropdown;
+    var format = format_dropdown.options[format_dropdown.selectedIndex].value;
+    fig.ondownload(fig, format);
+};
+
+mpl.figure.prototype.handle_resize = function (fig, msg) {
+    var size = msg['size'];
+    if (size[0] !== fig.canvas.width || size[1] !== fig.canvas.height) {
+        fig._resize_canvas(size[0], size[1], msg['forward']);
+        fig.send_message('refresh', {});
+    }
+};
+
+mpl.figure.prototype.handle_rubberband = function (fig, msg) {
+    var x0 = msg['x0'] / fig.ratio;
+    var y0 = (fig.canvas.height - msg['y0']) / fig.ratio;
+    var x1 = msg['x1'] / fig.ratio;
+    var y1 = (fig.canvas.height - msg['y1']) / fig.ratio;
+    x0 = Math.floor(x0) + 0.5;
+    y0 = Math.floor(y0) + 0.5;
+    x1 = Math.floor(x1) + 0.5;
+    y1 = Math.floor(y1) + 0.5;
+    var min_x = Math.min(x0, x1);
+    var min_y = Math.min(y0, y1);
+    var width = Math.abs(x1 - x0);
+    var height = Math.abs(y1 - y0);
+
+    fig.rubberband_context.clearRect(
+        0,
+        0,
+        fig.canvas.width / fig.ratio,
+        fig.canvas.height / fig.ratio
+    );
+
+    fig.rubberband_context.strokeRect(min_x, min_y, width, height);
+};
+
+mpl.figure.prototype.handle_figure_label = function (fig, msg) {
+    // Updates the figure title.
+    fig.header.textContent = msg['label'];
+};
+
+mpl.figure.prototype.handle_cursor = function (fig, msg) {
+    fig.rubberband_canvas.style.cursor = msg['cursor'];
+};
+
+mpl.figure.prototype.handle_message = function (fig, msg) {
+    fig.message.textContent = msg['message'];
+};
+
+mpl.figure.prototype.handle_draw = function (fig, _msg) {
+    // Request the server to send over a new figure.
+    fig.send_draw_message();
+};
+
+mpl.figure.prototype.handle_image_mode = function (fig, msg) {
+    fig.image_mode = msg['mode'];
+};
+
+mpl.figure.prototype.handle_history_buttons = function (fig, msg) {
+    for (var key in msg) {
+        if (!(key in fig.buttons)) {
+            continue;
+        }
+        fig.buttons[key].disabled = !msg[key];
+        fig.buttons[key].setAttribute('aria-disabled', !msg[key]);
+    }
+};
+
+mpl.figure.prototype.handle_navigate_mode = function (fig, msg) {
+    if (msg['mode'] === 'PAN') {
+        fig.buttons['Pan'].classList.add('active');
+        fig.buttons['Zoom'].classList.remove('active');
+    } else if (msg['mode'] === 'ZOOM') {
+        fig.buttons['Pan'].classList.remove('active');
+        fig.buttons['Zoom'].classList.add('active');
+    } else {
+        fig.buttons['Pan'].classList.remove('active');
+        fig.buttons['Zoom'].classList.remove('active');
+    }
+};
+
+mpl.figure.prototype.updated_canvas_event = function () {
+    // Called whenever the canvas gets updated.
+    this.send_message('ack', {});
+};
+
+// A function to construct a web socket function for onmessage handling.
+// Called in the figure constructor.
+mpl.figure.prototype._make_on_message_function = function (fig) {
+    return function socket_on_message(evt) {
+        if (evt.data instanceof Blob) {
+            var img = evt.data;
+            if (img.type !== 'image/png') {
+                /* FIXME: We get "Resource interpreted as Image but
+                 * transferred with MIME type text/plain:" errors on
+                 * Chrome.  But how to set the MIME type?  It doesn't seem
+                 * to be part of the websocket stream */
+                img.type = 'image/png';
+            }
+
+            /* Free the memory for the previous frames */
+            if (fig.imageObj.src) {
+                (window.URL || window.webkitURL).revokeObjectURL(
+                    fig.imageObj.src
+                );
+            }
+
+            fig.imageObj.src = (window.URL || window.webkitURL).createObjectURL(
+                img
+            );
+            fig.updated_canvas_event();
+            fig.waiting = false;
+            return;
+        } else if (
+            typeof evt.data === 'string' &&
+            evt.data.slice(0, 21) === 'data:image/png;base64'
+        ) {
+            fig.imageObj.src = evt.data;
+            fig.updated_canvas_event();
+            fig.waiting = false;
+            return;
+        }
+
+        var msg = JSON.parse(evt.data);
+        var msg_type = msg['type'];
+
+        // Call the  "handle_{type}" callback, which takes
+        // the figure and JSON message as its only arguments.
+        try {
+            var callback = fig['handle_' + msg_type];
+        } catch (e) {
+            console.log(
+                "No handler for the '" + msg_type + "' message type: ",
+                msg
+            );
+            return;
+        }
+
+        if (callback) {
+            try {
+                // console.log("Handling '" + msg_type + "' message: ", msg);
+                callback(fig, msg);
+            } catch (e) {
+                console.log(
+                    "Exception inside the 'handler_" + msg_type + "' callback:",
+                    e,
+                    e.stack,
+                    msg
+                );
+            }
+        }
+    };
+};
+
+// from https://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas
+mpl.findpos = function (e) {
+    //this section is from http://www.quirksmode.org/js/events_properties.html
+    var targ;
+    if (!e) {
+        e = window.event;
+    }
+    if (e.target) {
+        targ = e.target;
+    } else if (e.srcElement) {
+        targ = e.srcElement;
+    }
+    if (targ.nodeType === 3) {
+        // defeat Safari bug
+        targ = targ.parentNode;
+    }
+
+    // pageX,Y are the mouse positions relative to the document
+    var boundingRect = targ.getBoundingClientRect();
+    var x = e.pageX - (boundingRect.left + document.body.scrollLeft);
+    var y = e.pageY - (boundingRect.top + document.body.scrollTop);
+
+    return { x: x, y: y };
+};
+
+/*
+ * return a copy of an object with only non-object keys
+ * we need this to avoid circular references
+ * https://stackoverflow.com/a/24161582/3208463
+ */
+function simpleKeys(original) {
+    return Object.keys(original).reduce(function (obj, key) {
+        if (typeof original[key] !== 'object') {
+            obj[key] = original[key];
+        }
+        return obj;
+    }, {});
+}
+
+mpl.figure.prototype.mouse_event = function (event, name) {
+    var canvas_pos = mpl.findpos(event);
+
+    if (name === 'button_press') {
+        this.canvas.focus();
+        this.canvas_div.focus();
+    }
+
+    var x = canvas_pos.x * this.ratio;
+    var y = canvas_pos.y * this.ratio;
+
+    this.send_message(name, {
+        x: x,
+        y: y,
+        button: event.button,
+        step: event.step,
+        guiEvent: simpleKeys(event),
+    });
+
+    /* This prevents the web browser from automatically changing to
+     * the text insertion cursor when the button is pressed.  We want
+     * to control all of the cursor setting manually through the
+     * 'cursor' event from matplotlib */
+    event.preventDefault();
+    return false;
+};
+
+mpl.figure.prototype._key_event_extra = function (_event, _name) {
+    // Handle any extra behaviour associated with a key event
+};
+
+mpl.figure.prototype.key_event = function (event, name) {
+    // Prevent repeat events
+    if (name === 'key_press') {
+        if (event.key === this._key) {
+            return;
+        } else {
+            this._key = event.key;
+        }
+    }
+    if (name === 'key_release') {
+        this._key = null;
+    }
+
+    var value = '';
+    if (event.ctrlKey && event.key !== 'Control') {
+        value += 'ctrl+';
+    }
+    else if (event.altKey && event.key !== 'Alt') {
+        value += 'alt+';
+    }
+    else if (event.shiftKey && event.key !== 'Shift') {
+        value += 'shift+';
+    }
+
+    value += 'k' + event.key;
+
+    this._key_event_extra(event, name);
+
+    this.send_message(name, { key: value, guiEvent: simpleKeys(event) });
+    return false;
+};
+
+mpl.figure.prototype.toolbar_button_onclick = function (name) {
+    if (name === 'download') {
+        this.handle_save(this, null);
+    } else {
+        this.send_message('toolbar_button', { name: name });
+    }
+};
+
+mpl.figure.prototype.toolbar_button_onmouseover = function (tooltip) {
+    this.message.textContent = tooltip;
+};
+
+///////////////// REMAINING CONTENT GENERATED BY embed_js.py /////////////////
+// prettier-ignore
+var _JSXTOOLS_RESIZE_OBSERVER=function(A){var t,i=new WeakMap,n=new WeakMap,a=new WeakMap,r=new WeakMap,o=new Set;function s(e){if(!(this instanceof s))throw new TypeError("Constructor requires 'new' operator");i.set(this,e)}function h(){throw new TypeError("Function is not a constructor")}function c(e,t,i,n){e=0 in arguments?Number(arguments[0]):0,t=1 in arguments?Number(arguments[1]):0,i=2 in arguments?Number(arguments[2]):0,n=3 in arguments?Number(arguments[3]):0,this.right=(this.x=this.left=e)+(this.width=i),this.bottom=(this.y=this.top=t)+(this.height=n),Object.freeze(this)}function d(){t=requestAnimationFrame(d);var s=new WeakMap,p=new Set;o.forEach((function(t){r.get(t).forEach((function(i){var r=t instanceof window.SVGElement,o=a.get(t),d=r?0:parseFloat(o.paddingTop),f=r?0:parseFloat(o.paddingRight),l=r?0:parseFloat(o.paddingBottom),u=r?0:parseFloat(o.paddingLeft),g=r?0:parseFloat(o.borderTopWidth),m=r?0:parseFloat(o.borderRightWidth),w=r?0:parseFloat(o.borderBottomWidth),b=u+f,F=d+l,v=(r?0:parseFloat(o.borderLeftWidth))+m,W=g+w,y=r?0:t.offsetHeight-W-t.clientHeight,E=r?0:t.offsetWidth-v-t.clientWidth,R=b+v,z=F+W,M=r?t.width:parseFloat(o.width)-R-E,O=r?t.height:parseFloat(o.height)-z-y;if(n.has(t)){var k=n.get(t);if(k[0]===M&&k[1]===O)return}n.set(t,[M,O]);var S=Object.create(h.prototype);S.target=t,S.contentRect=new c(u,d,M,O),s.has(i)||(s.set(i,[]),p.add(i)),s.get(i).push(S)}))})),p.forEach((function(e){i.get(e).call(e,s.get(e),e)}))}return s.prototype.observe=function(i){if(i instanceof window.Element){r.has(i)||(r.set(i,new Set),o.add(i),a.set(i,window.getComputedStyle(i)));var n=r.get(i);n.has(this)||n.add(this),cancelAnimationFrame(t),t=requestAnimationFrame(d)}},s.prototype.unobserve=function(i){if(i instanceof window.Element&&r.has(i)){var n=r.get(i);n.has(this)&&(n.delete(this),n.size||(r.delete(i),o.delete(i))),n.size||r.delete(i),o.size||cancelAnimationFrame(t)}},A.DOMRectReadOnly=c,A.ResizeObserver=s,A.ResizeObserverEntry=h,A}; // eslint-disable-line
+mpl.toolbar_items = [["Home", "Reset original view", "fa fa-home icon-home", "home"], ["Back", "Back to previous view", "fa fa-arrow-left icon-arrow-left", "back"], ["Forward", "Forward to next view", "fa fa-arrow-right icon-arrow-right", "forward"], ["", "", "", ""], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "fa fa-arrows icon-move", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis", "fa fa-square-o icon-check-empty", "zoom"], ["", "", "", ""], ["Download", "Download plot", "fa fa-floppy-o icon-save", "download"]];
+
+mpl.extensions = ["eps", "jpeg", "pgf", "pdf", "png", "ps", "raw", "svg", "tif"];
+
+mpl.default_extension = "png";/* global mpl */
+
+var comm_websocket_adapter = function (comm) {
+    // Create a "websocket"-like object which calls the given IPython comm
+    // object with the appropriate methods. Currently this is a non binary
+    // socket, so there is still some room for performance tuning.
+    var ws = {};
+
+    ws.binaryType = comm.kernel.ws.binaryType;
+    ws.readyState = comm.kernel.ws.readyState;
+    function updateReadyState(_event) {
+        if (comm.kernel.ws) {
+            ws.readyState = comm.kernel.ws.readyState;
+        } else {
+            ws.readyState = 3; // Closed state.
+        }
+    }
+    comm.kernel.ws.addEventListener('open', updateReadyState);
+    comm.kernel.ws.addEventListener('close', updateReadyState);
+    comm.kernel.ws.addEventListener('error', updateReadyState);
+
+    ws.close = function () {
+        comm.close();
+    };
+    ws.send = function (m) {
+        //console.log('sending', m);
+        comm.send(m);
+    };
+    // Register the callback with on_msg.
+    comm.on_msg(function (msg) {
+        //console.log('receiving', msg['content']['data'], msg);
+        var data = msg['content']['data'];
+        if (data['blob'] !== undefined) {
+            data = {
+                data: new Blob(msg['buffers'], { type: data['blob'] }),
+            };
+        }
+        // Pass the mpl event to the overridden (by mpl) onmessage function.
+        ws.onmessage(data);
+    });
+    return ws;
+};
+
+mpl.mpl_figure_comm = function (comm, msg) {
+    // This is the function which gets called when the mpl process
+    // starts-up an IPython Comm through the "matplotlib" channel.
+
+    var id = msg.content.data.id;
+    // Get hold of the div created by the display call when the Comm
+    // socket was opened in Python.
+    var element = document.getElementById(id);
+    var ws_proxy = comm_websocket_adapter(comm);
+
+    function ondownload(figure, _format) {
+        window.open(figure.canvas.toDataURL());
+    }
+
+    var fig = new mpl.figure(id, ws_proxy, ondownload, element);
+
+    // Call onopen now - mpl needs it, as it is assuming we've passed it a real
+    // web socket which is closed, not our websocket->open comm proxy.
+    ws_proxy.onopen();
+
+    fig.parent_element = element;
+    fig.cell_info = mpl.find_output_cell("<div id='" + id + "'></div>");
+    if (!fig.cell_info) {
+        console.error('Failed to find cell for figure', id, fig);
+        return;
+    }
+    fig.cell_info[0].output_area.element.on(
+        'cleared',
+        { fig: fig },
+        fig._remove_fig_handler
+    );
+};
+
+mpl.figure.prototype.handle_close = function (fig, msg) {
+    var width = fig.canvas.width / fig.ratio;
+    fig.cell_info[0].output_area.element.off(
+        'cleared',
+        fig._remove_fig_handler
+    );
+    fig.resizeObserverInstance.unobserve(fig.canvas_div);
+
+    // Update the output cell to use the data from the current canvas.
+    fig.push_to_output();
+    var dataURL = fig.canvas.toDataURL();
+    // Re-enable the keyboard manager in IPython - without this line, in FF,
+    // the notebook keyboard shortcuts fail.
+    IPython.keyboard_manager.enable();
+    fig.parent_element.innerHTML =
+        '<img src="' + dataURL + '" width="' + width + '">';
+    fig.close_ws(fig, msg);
+};
+
+mpl.figure.prototype.close_ws = function (fig, msg) {
+    fig.send_message('closing', msg);
+    // fig.ws.close()
+};
+
+mpl.figure.prototype.push_to_output = function (_remove_interactive) {
+    // Turn the data on the canvas into data in the output cell.
+    var width = this.canvas.width / this.ratio;
+    var dataURL = this.canvas.toDataURL();
+    this.cell_info[1]['text/html'] =
+        '<img src="' + dataURL + '" width="' + width + '">';
+};
+
+mpl.figure.prototype.updated_canvas_event = function () {
+    // Tell IPython that the notebook contents must change.
+    IPython.notebook.set_dirty(true);
+    this.send_message('ack', {});
+    var fig = this;
+    // Wait a second, then push the new image to the DOM so
+    // that it is saved nicely (might be nice to debounce this).
+    setTimeout(function () {
+        fig.push_to_output();
+    }, 1000);
+};
+
+mpl.figure.prototype._init_toolbar = function () {
+    var fig = this;
+
+    var toolbar = document.createElement('div');
+    toolbar.classList = 'btn-toolbar';
+    this.root.appendChild(toolbar);
+
+    function on_click_closure(name) {
+        return function (_event) {
+            return fig.toolbar_button_onclick(name);
+        };
+    }
+
+    function on_mouseover_closure(tooltip) {
+        return function (event) {
+            if (!event.currentTarget.disabled) {
+                return fig.toolbar_button_onmouseover(tooltip);
+            }
+        };
+    }
+
+    fig.buttons = {};
+    var buttonGroup = document.createElement('div');
+    buttonGroup.classList = 'btn-group';
+    var button;
+    for (var toolbar_ind in mpl.toolbar_items) {
+        var name = mpl.toolbar_items[toolbar_ind][0];
+        var tooltip = mpl.toolbar_items[toolbar_ind][1];
+        var image = mpl.toolbar_items[toolbar_ind][2];
+        var method_name = mpl.toolbar_items[toolbar_ind][3];
+
+        if (!name) {
+            /* Instead of a spacer, we start a new button group. */
+            if (buttonGroup.hasChildNodes()) {
+                toolbar.appendChild(buttonGroup);
+            }
+            buttonGroup = document.createElement('div');
+            buttonGroup.classList = 'btn-group';
+            continue;
+        }
+
+        button = fig.buttons[name] = document.createElement('button');
+        button.classList = 'btn btn-default';
+        button.href = '#';
+        button.title = name;
+        button.innerHTML = '<i class="fa ' + image + ' fa-lg"></i>';
+        button.addEventListener('click', on_click_closure(method_name));
+        button.addEventListener('mouseover', on_mouseover_closure(tooltip));
+        buttonGroup.appendChild(button);
+    }
+
+    if (buttonGroup.hasChildNodes()) {
+        toolbar.appendChild(buttonGroup);
+    }
+
+    // Add the status bar.
+    var status_bar = document.createElement('span');
+    status_bar.classList = 'mpl-message pull-right';
+    toolbar.appendChild(status_bar);
+    this.message = status_bar;
+
+    // Add the close button to the window.
+    var buttongrp = document.createElement('div');
+    buttongrp.classList = 'btn-group inline pull-right';
+    button = document.createElement('button');
+    button.classList = 'btn btn-mini btn-primary';
+    button.href = '#';
+    button.title = 'Stop Interaction';
+    button.innerHTML = '<i class="fa fa-power-off icon-remove icon-large"></i>';
+    button.addEventListener('click', function (_evt) {
+        fig.handle_close(fig, {});
+    });
+    button.addEventListener(
+        'mouseover',
+        on_mouseover_closure('Stop Interaction')
+    );
+    buttongrp.appendChild(button);
+    var titlebar = this.root.querySelector('.ui-dialog-titlebar');
+    titlebar.insertBefore(buttongrp, titlebar.firstChild);
+};
+
+mpl.figure.prototype._remove_fig_handler = function (event) {
+    var fig = event.data.fig;
+    if (event.target !== this) {
+        // Ignore bubbled events from children.
+        return;
+    }
+    fig.close_ws(fig, {});
+};
+
+mpl.figure.prototype._root_extra_style = function (el) {
+    el.style.boxSizing = 'content-box'; // override notebook setting of border-box.
+};
+
+mpl.figure.prototype._canvas_extra_style = function (el) {
+    // this is important to make the div 'focusable
+    el.setAttribute('tabindex', 0);
+    // reach out to IPython and tell the keyboard manager to turn it's self
+    // off when our div gets focus
+
+    // location in version 3
+    if (IPython.notebook.keyboard_manager) {
+        IPython.notebook.keyboard_manager.register_events(el);
+    } else {
+        // location in version 2
+        IPython.keyboard_manager.register_events(el);
+    }
+};
+
+mpl.figure.prototype._key_event_extra = function (event, _name) {
+    // Check for shift+enter
+    if (event.shiftKey && event.which === 13) {
+        this.canvas_div.blur();
+        // select the cell after this one
+        var index = IPython.notebook.find_cell_index(this.cell_info[0]);
+        IPython.notebook.select(index + 1);
+    }
+};
+
+mpl.figure.prototype.handle_save = function (fig, _msg) {
+    fig.ondownload(fig, null);
+};
+
+mpl.find_output_cell = function (html_output) {
+    // Return the cell and output element which can be found *uniquely* in the notebook.
+    // Note - this is a bit hacky, but it is done because the "notebook_saving.Notebook"
+    // IPython event is triggered only after the cells have been serialised, which for
+    // our purposes (turning an active figure into a static one), is too late.
+    var cells = IPython.notebook.get_cells();
+    var ncells = cells.length;
+    for (var i = 0; i < ncells; i++) {
+        var cell = cells[i];
+        if (cell.cell_type === 'code') {
+            for (var j = 0; j < cell.output_area.outputs.length; j++) {
+                var data = cell.output_area.outputs[j];
+                if (data.data) {
+                    // IPython >= 3 moved mimebundle to data attribute of output
+                    data = data.data;
+                }
+                if (data['text/html'] === html_output) {
+                    return [cell, data, j];
+                }
+            }
+        }
+    }
+};
+
+// Register the function which deals with the matplotlib target/channel.
+// The kernel may be null if the page has been refreshed.
+if (IPython.notebook.kernel !== null) {
+    IPython.notebook.kernel.comm_manager.register_target(
+        'matplotlib',
+        mpl.mpl_figure_comm
+    );
+}
+
+</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<img src="data:image/png;base64,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" width="640.4999809116131"></div>
+</div>
+<div class="section" id="Упражнения">
+<h3>Упражнения<a class="headerlink" href="#Упражнения" title="Ссылка на этот заголовок"></a></h3>
+<ol class="arabic simple">
+<li>Учесть граничные условия, зависящие от времени:</li>
+</ol>
+<p><span class="math">\begin{align}
+&T(0, t) = sin(t) \\
+&T(L, t) = cos(t) \\
+\end{align}</span></p>
+<ol class="arabic simple" start="2">
+<li>Учесть распределенные по длине балки объемные источники тепла:</li>
+</ol>
+<p><span class="math">\begin{align}
+f = sin(x) cos(t)
+\end{align}</span></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Нижняя область">
+        <a href="2d_elliptic.html" class="btn btn-neutral float-left" title="МКР для решения 2D линейного эллиптического уравнения скалярного переменного" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Предыдущая</a>
+        <a href="../lab4.html" class="btn btn-neutral float-right" title="МКЭ для решения 1D линейного эллиптического уравнения" accesskey="n" rel="next">Следующая <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Vitaliy Schetinin.</p>
+  </div>
+
+  Собрано при помощи <a href="https://www.sphinx-doc.org/">Sphinx</a> с использованием
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы,</a>
+    предоставленной <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

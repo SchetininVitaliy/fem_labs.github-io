@@ -10,7 +10,7 @@
    common
    notebooks/1d_elliptic
    notebooks/2d_elliptic
-   lab3
+   notebooks/1d_parabolic
    lab4
    lab5
    lab6
