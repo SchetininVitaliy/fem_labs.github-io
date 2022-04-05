@@ -366,13 +366,14 @@ div.rendered_html tbody tr:hover {
 <p><img alt="fd_2d_task" src="../_images/fd_2d_task.svg" /></p>
 <div class="section" id="Формулировка-математической-модели">
 <h3>Формулировка математической модели<a class="headerlink" href="#Формулировка-математической-модели" title="Ссылка на этот заголовок"></a></h3>
-<p><span class="math">\begin{align}
-&\frac{\partial}{\partial x_1}\left(\lambda \frac{\partial T}{\partial x_1}\right) + \frac{\partial}{\partial x_2}\left(\lambda \frac{\partial T}{\partial x_2}\right) + f  = 0. \\
-&T = T_1, x_1 \in [0, L_1], x2 = 0 \\
-&T = T_2, x_1 = 0, x2 \in [0, L_2] \\
-&T = T_3, x_1 \in [0, L_1], x2 = L_2\\
-&T = T_4, x_1 = L_1, x2 \in [0, L_2]
-\end{align}</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\frac{\partial}{\partial x_1}\left(\lambda \frac{\partial T}{\partial x_1}\right) + \frac{\partial}{\partial x_2}\left(\lambda \frac{\partial T}{\partial x_2}\right) + f  = 0. \\
+&amp;T = T_1, x_1 \in [0, L_1], x2 = 0 \\
+&amp;T = T_2, x_1 = 0, x2 \in [0, L_2] \\
+&amp;T = T_3, x_1 \in [0, L_1], x2 = L_2\\
+&amp;T = T_4, x_1 = L_1, x2 \in [0, L_2]
+\end{align}\end{split}\]</div>
 </div>
 <div class="section" id="Численное-решение">
 <h3>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h3>
@@ -1379,18 +1380,21 @@ if (IPython.notebook.kernel !== null) {
 <ol class="arabic simple" start="2">
 <li>Используя конечно разностные аппроксимации производных запишем уравнение для каждого узла <span class="math notranslate nohighlight">\((i, j)\)</span> конечно-разностной сетки:</li>
 </ol>
-<p><span class="math">\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
 \frac{\partial}{\partial x_1} \left(\lambda \frac{\partial T_{i,j}}{\partial x_1}\right)\approx \lambda \frac{T_{i+1, j} - 2T_{i, j} + T_{i-1, j}}{h_1^2} \\
 \frac{\partial}{\partial x_2} \left(\lambda \frac{\partial T_{i, j}}{\partial x_2}\right)\approx \lambda \frac{T_{i, j+1} - 2T_{i, j} + T_{i, j-1}}{h_2^2}
-\end{align}</span></p>
+\end{align}\end{split}\]</div>
 <p><img alt="fd_1d" src="../_images/fd_2d_schema.svg" /></p>
-<p><span class="math">\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{align}
 \lambda \frac{T_{i+1, j} - 2T_{i, j} + T_{i-1, j}}{h_1^2} + \lambda \frac{T_{i, j+1} - 2T_{i, j} + T_{i, j-1}}{h_2^2} + f_i = 0
-\end{align}</span></p>
+\end{align}\]</div>
 <p>Для поиска решения с помощью методов линейной алгебры необходимо свести систему к матричному виду:</p>
-<p><span class="math">\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{align}
 [A] \{T\} = \{f\},
-\end{align}</span></p>
+\end{align}\]</div>
 <p>где <span class="math notranslate nohighlight">\([A]\)</span> - матрица коэфициентов, <span class="math notranslate nohighlight">\(\{T\}\)</span> - вектор температур в узлах сетки.</p>
 <p>Для построения матрицы коэффициентов необходимо двумерную нумерацию узлов свести к одномерной. Для этого заменим индексы <span class="math notranslate nohighlight">\(i, j\)</span> на индекс <span class="math notranslate nohighlight">\(k = i * n_1 + j\)</span></p>
 <div class="nbinput nblast docutils container">
@@ -3449,13 +3453,14 @@ if (IPython.notebook.kernel !== null) {
 <p><img alt="fd_2d_task_2" src="../_images/fd_2d_task_2.svg" /></p>
 <div class="section" id="id5">
 <h3>Формулировка математической модели<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
-<p><span class="math">\begin{align}
-&\frac{\partial}{\partial x_1}\left(\lambda \frac{\partial T}{\partial x_1}\right) + \frac{\partial}{\partial x_2}\left(\lambda \frac{\partial T}{\partial x_2}\right) + f  = 0. \\
-&T = T_b, & x_1 \in [0, L_1], x2 = 0 \\
-&-\vec{q} \cdot \vec{n} = q_l, & x_1 = 0, x2 \in [0, L_2] \\
-&T = T_t, & x_1 \in [0, L_1], x2 = L_2\\
-&-\vec{q} \cdot \vec{n} = -q_r, & x_1 = L_1, x2 \in [0, L_2]
-\end{align}</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\frac{\partial}{\partial x_1}\left(\lambda \frac{\partial T}{\partial x_1}\right) + \frac{\partial}{\partial x_2}\left(\lambda \frac{\partial T}{\partial x_2}\right) + f  = 0. \\
+&amp;T = T_b, &amp; x_1 \in [0, L_1], x2 = 0 \\
+&amp;-\vec{q} \cdot \vec{n} = q_l, &amp; x_1 = 0, x2 \in [0, L_2] \\
+&amp;T = T_t, &amp; x_1 \in [0, L_1], x2 = L_2\\
+&amp;-\vec{q} \cdot \vec{n} = -q_r, &amp; x_1 = L_1, x2 \in [0, L_2]
+\end{align}\end{split}\]</div>
 </div>
 <div class="section" id="id6">
 <h3>Численное решение<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h3>
@@ -3511,24 +3516,21 @@ if (IPython.notebook.kernel !== null) {
 <li>Добавим в систему граничные условия:</li>
 </ol>
 <p>Слева нормаль направлена противоположно потоку (знак скалярного произведения будет отрицателен):</p>
-<dl class="docutils">
-<dt>:nbsphinx-math:<a href="#id7"><span class="problematic" id="id8">`</span></a>begin{align}</dt>
-<dd>lambda frac{partial T}{partial x_1} = q_l</dd>
-</dl>
-<p>end{align}`</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+    \lambda \frac{\partial T}{\partial x_1} = q_l
+\end{align}\]</div>
 <p>Справа нормаль сонаправлена потоку (знак скалярного произведения будет положителен):</p>
-<dl class="docutils">
-<dt>:nbsphinx-math:<a href="#id9"><span class="problematic" id="id10">`</span></a>begin{align}</dt>
-<dd>&amp;lambda frac{partial T}{partial x_1} = -q_r</dd>
-</dl>
-<p>end{align}`</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+    &amp;\lambda \frac{\partial T}{\partial x_1} = -q_r
+\end{align}\]</div>
 <p>В конечно-разностном виде:</p>
-<dl class="docutils">
-<dt>:nbsphinx-math:<a href="#id11"><span class="problematic" id="id12">`</span></a>begin{align}</dt>
-<dd>&amp;lambda frac{T_{i, j+1} - T_{i, j}}{h_1} = q_l \
-&amp;lambda frac{T_{i, j} - T_{i, j-1}}{h_1} = -q_r</dd>
-</dl>
-<p>end{align}`</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+    &amp;\lambda \frac{T_{i, j+1} - T_{i, j}}{h_1} = q_l \\
+    &amp;\lambda \frac{T_{i, j} - T_{i, j-1}}{h_1} = -q_r
+\end{align}\end{split}\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
