@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html4" lang="ru" >
+<html class="writer-html5" lang="ru" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>МКР для решения 1D линейного эллиптического уравнения &mdash; Документация fem_labs </title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>МКР для решения 1D линейного эллиптического уравнения &mdash; Документация fem_labs </title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-        <script type="text/javascript" src="../_static/translations.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
@@ -446,7 +447,7 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="section" id="Численное-решение">
 <h3>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h3>
 <ol class="arabic simple">
-<li>Определяем узлы конечно-разностной сетки</li>
+<li><p>Определяем узлы конечно-разностной сетки</p></li>
 </ol>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -1446,7 +1447,7 @@ if (IPython.notebook.kernel !== null) {
 </pre></div></div>
 </div>
 <ol class="arabic simple" start="2">
-<li>Используя конечные разности и полагая Е постоянной:</li>
+<li><p>Используя конечные разности и полагая Е постоянной:</p></li>
 </ol>
 <p><span class="math">\begin{align}
 \frac{\partial}{\partial x} \left(E \frac{\partial u_{i}}{\partial x}\right) \approx E \frac{u_{i+1} - 2u_{i} + u_{i-1}}{h^2}
@@ -1518,7 +1519,7 @@ f:
 </pre></div></div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Добавим в систему граничные условия:</li>
+<li><p>Добавим в систему граничные условия:</p></li>
 </ol>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -1574,7 +1575,7 @@ f:
 </pre></div></div>
 </div>
 <ol class="arabic simple" start="4">
-<li>Решим систему линейных алгебраических уравнений</li>
+<li><p>Решим систему линейных алгебраических уравнений</p></li>
 </ol>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -5793,10 +5794,10 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="section" id="Упражнения">
 <h2>Упражнения<a class="headerlink" href="#Упражнения" title="Ссылка на этот заголовок"></a></h2>
 <ol class="arabic simple">
-<li>Аналитически и численно найти поле температур в балке длиной <span class="math notranslate nohighlight">\(L=10 [м]\)</span>. С одного конца балки поддерживается температура <span class="math notranslate nohighlight">\(T_0 = 10[K]\)</span>, с другого конца балки температура отводится таким образом, чтобы тепловой поток был постоянен и равен <span class="math notranslate nohighlight">\(j_t=1 [Вт/м]\)</span>. Коэффициент теплопроводности материала равен 10 [Вт/(м·K)].</li>
-<li>Аналитически и численно найти поле перемещений в вертикальной балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Один конец балки зафиксирван, другой перемещен на 0.1[м]. Модуль Юнга балки равен 70e9[Па]. Плотность балки <span class="math notranslate nohighlight">\(\rho=2.7e6[кг/м]\)</span>. Учесть влияние силы тяжести.</li>
-<li>Численно найти поле перемещений в балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Модуль Юнга одной половины балки равен 70e9[Па], второй - 140e9[Па]. Один конец балки закреплен, второй - перемещен на 0.1[м].</li>
-<li>Численно найти поле температур в балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Коэффициент теплопроводности материала одной половины балки равен 10[Вт/(м·K)], второй - 20[Вт/(м·K)]. С одного конца балки поддерживается температура <span class="math notranslate nohighlight">\(T_0 = 10[K]\)</span>, с другого конца - <span class="math notranslate nohighlight">\(T_1 = 20[K]\)</span></li>
+<li><p>Аналитически и численно найти поле температур в балке длиной <span class="math notranslate nohighlight">\(L=10 [м]\)</span>. С одного конца балки поддерживается температура <span class="math notranslate nohighlight">\(T_0 = 10[K]\)</span>, с другого конца балки температура отводится таким образом, чтобы тепловой поток был постоянен и равен <span class="math notranslate nohighlight">\(j_t=1 [Вт/м]\)</span>. Коэффициент теплопроводности материала равен 10 [Вт/(м·K)].</p></li>
+<li><p>Аналитически и численно найти поле перемещений в вертикальной балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Один конец балки зафиксирван, другой перемещен на 0.1[м]. Модуль Юнга балки равен 70e9[Па]. Плотность балки <span class="math notranslate nohighlight">\(\rho=2.7e6[кг/м]\)</span>. Учесть влияние силы тяжести.</p></li>
+<li><p>Численно найти поле перемещений в балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Модуль Юнга одной половины балки равен 70e9[Па], второй - 140e9[Па]. Один конец балки закреплен, второй - перемещен на 0.1[м].</p></li>
+<li><p>Численно найти поле температур в балке длиной <span class="math notranslate nohighlight">\(L=1[м]\)</span>. Коэффициент теплопроводности материала одной половины балки равен 10[Вт/(м·K)], второй - 20[Вт/(м·K)]. С одного конца балки поддерживается температура <span class="math notranslate nohighlight">\(T_0 = 10[K]\)</span>, с другого конца - <span class="math notranslate nohighlight">\(T_1 = 20[K]\)</span></p></li>
 </ol>
 </div>
 </div>

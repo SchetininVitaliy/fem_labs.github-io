@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html4" lang="ru" >
+<html class="writer-html5" lang="ru" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>МКР для решения 2D линейного эллиптического уравнения скалярного переменного &mdash; Документация fem_labs </title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <title>МКР для решения 2D линейного эллиптического уравнения скалярного переменного &mdash; Документация fem_labs </title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-        <script type="text/javascript" src="../_static/translations.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
@@ -378,7 +379,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Численное-решение">
 <h3>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h3>
 <ol class="arabic simple">
-<li>Построим конечно-разностную сетку:</li>
+<li><p>Построим конечно-разностную сетку:</p></li>
 </ol>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -1378,7 +1379,7 @@ if (IPython.notebook.kernel !== null) {
 </pre></div></div>
 </div>
 <ol class="arabic simple" start="2">
-<li>Используя конечно разностные аппроксимации производных запишем уравнение для каждого узла <span class="math notranslate nohighlight">\((i, j)\)</span> конечно-разностной сетки:</li>
+<li><p>Используя конечно разностные аппроксимации производных запишем уравнение для каждого узла <span class="math notranslate nohighlight">\((i, j)\)</span> конечно-разностной сетки:</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
@@ -1426,7 +1427,7 @@ if (IPython.notebook.kernel !== null) {
 </div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Добавим в систему граничные условия:</li>
+<li><p>Добавим в систему граничные условия:</p></li>
 </ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -1459,7 +1460,7 @@ if (IPython.notebook.kernel !== null) {
 </div>
 </div>
 <ol class="arabic simple" start="4">
-<li>Решим СЛАУ:</li>
+<li><p>Решим СЛАУ:</p></li>
 </ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -3465,7 +3466,7 @@ if (IPython.notebook.kernel !== null) {
 <div class="section" id="id6">
 <h3>Численное решение<a class="headerlink" href="#id6" title="Ссылка на этот заголовок"></a></h3>
 <ol class="arabic simple">
-<li>Построим конечно-разностную сетку:</li>
+<li><p>Построим конечно-разностную сетку:</p></li>
 </ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -3482,7 +3483,7 @@ if (IPython.notebook.kernel !== null) {
 </div>
 </div>
 <ol class="arabic simple" start="2">
-<li>Используя конечно-разностные аппроксимации производных запишем уравнение для каждого узла <span class="math notranslate nohighlight">\((i, j)\)</span> конечно-разностной сетки:</li>
+<li><p>Используя конечно-разностные аппроксимации производных запишем уравнение для каждого узла <span class="math notranslate nohighlight">\((i, j)\)</span> конечно-разностной сетки:</p></li>
 </ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -3513,7 +3514,7 @@ if (IPython.notebook.kernel !== null) {
 </div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Добавим в систему граничные условия:</li>
+<li><p>Добавим в систему граничные условия:</p></li>
 </ol>
 <p>Слева нормаль направлена противоположно потоку (знак скалярного произведения будет отрицателен):</p>
 <div class="math notranslate nohighlight">
@@ -3564,7 +3565,7 @@ if (IPython.notebook.kernel !== null) {
 </div>
 </div>
 <ol class="arabic simple" start="4">
-<li>Решим СЛАУ:</li>
+<li><p>Решим СЛАУ:</p></li>
 </ol>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -5546,9 +5547,9 @@ if (IPython.notebook.kernel !== null) {
 <div class="section" id="Упражнения">
 <h2>Упражнения<a class="headerlink" href="#Упражнения" title="Ссылка на этот заголовок"></a></h2>
 <ol class="arabic simple">
-<li>Учет граничных условий Дирихле без увеличения размерности задачи.</li>
-<li>Необходимо найти поле температуры <span class="math notranslate nohighlight">\(T\)</span> в прямоугольной пластине. Значение температуры известно для левой границы пластины. К нижней грани подводят тепло со значением теплового потока <span class="math notranslate nohighlight">\(q_l = 1\)</span>, а справа и сверху отводят тепло со значением плотности теплового потока <span class="math notranslate nohighlight">\(q_r = 10\)</span>. По площади пластины распределены однородные источники тепла с плотностью <span class="math notranslate nohighlight">\(f = 5.\)</span>. Пластина изотропна и коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda=1.\)</span>.</li>
-<li>Необходимо найти поле температуры <span class="math notranslate nohighlight">\(T\)</span> в прямоугольной пластине. Значение температуры известно для нижней и верхней граней пластины. К левой грани подводят тепло со значением теплового потока <span class="math notranslate nohighlight">\(q_l = 1\)</span>, а справа отводят тепло со значением плотности теплового потока <span class="math notranslate nohighlight">\(q_r = 10\)</span>. По площади пластины распределены однородные источники тепла с плотностью <span class="math notranslate nohighlight">\(f = sin(x_1) \dot cos(x_2)\)</span>. Пластина изотропна и коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda=1.\)</span>.</li>
+<li><p>Учет граничных условий Дирихле без увеличения размерности задачи.</p></li>
+<li><p>Необходимо найти поле температуры <span class="math notranslate nohighlight">\(T\)</span> в прямоугольной пластине. Значение температуры известно для левой границы пластины. К нижней грани подводят тепло со значением теплового потока <span class="math notranslate nohighlight">\(q_l = 1\)</span>, а справа и сверху отводят тепло со значением плотности теплового потока <span class="math notranslate nohighlight">\(q_r = 10\)</span>. По площади пластины распределены однородные источники тепла с плотностью <span class="math notranslate nohighlight">\(f = 5.\)</span>. Пластина изотропна и коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda=1.\)</span>.</p></li>
+<li><p>Необходимо найти поле температуры <span class="math notranslate nohighlight">\(T\)</span> в прямоугольной пластине. Значение температуры известно для нижней и верхней граней пластины. К левой грани подводят тепло со значением теплового потока <span class="math notranslate nohighlight">\(q_l = 1\)</span>, а справа отводят тепло со значением плотности теплового потока <span class="math notranslate nohighlight">\(q_r = 10\)</span>. По площади пластины распределены однородные источники тепла с плотностью <span class="math notranslate nohighlight">\(f = sin(x_1) \dot cos(x_2)\)</span>. Пластина изотропна и коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda=1.\)</span>.</p></li>
 </ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:

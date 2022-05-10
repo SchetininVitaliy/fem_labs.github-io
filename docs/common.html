@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html4" lang="ru" >
+<html class="writer-html5" lang="ru" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Дифференциальные уравнения и математические модели &mdash; Документация fem_labs </title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Дифференциальные уравнения и математические модели &mdash; Документация fem_labs </title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-        <script type="text/javascript" src="_static/translations.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
@@ -117,15 +118,15 @@
 <p>Рассмотрим постановку задачи решения линейного одномерного эллиптического дифференциального уравнения.</p>
 <p><strong>Модели механики сплошной среды, которые описывает данный тип уравнений:</strong></p>
 <ul class="simple">
-<li>Статика упругой среды;</li>
-<li>Стационарная теплопроводность;</li>
-<li>Стационарная массовая диффузия.</li>
+<li><p>Статика упругой среды;</p></li>
+<li><p>Стационарная теплопроводность;</p></li>
+<li><p>Стационарная массовая диффузия.</p></li>
 </ul>
 <p>Будем рассматривать постановку задачи в терминах <em>статики упругой среды</em>.</p>
 <p>Представим одномерную балку длиной <span class="math notranslate nohighlight">\(L\)</span>. Один конец балки зафиксирован (перемещение равно нулю), а второй может:</p>
 <ul class="simple">
-<li>быть перемещен на величину <span class="math notranslate nohighlight">\(u_g\)</span> (given);</li>
-<li>испытывать реакцию <span class="math notranslate nohighlight">\(t\)</span> (вектор нормальных напряжений).</li>
+<li><p>быть перемещен на величину <span class="math notranslate nohighlight">\(u_g\)</span> (given);</p></li>
+<li><p>испытывать реакцию <span class="math notranslate nohighlight">\(t\)</span> (вектор нормальных напряжений).</p></li>
 </ul>
 <p>По длине балки распределена нагрузка <span class="math notranslate nohighlight">\(f\)</span> - вектор плотности объемных сил (в случае гравитационных сил:
 <span class="math notranslate nohighlight">\(f(x) = \rho(x) * g\)</span>, где <span class="math notranslate nohighlight">\(\rho(x)\)</span> - плотность тела, <span class="math notranslate nohighlight">\(g\)</span> - ускорение свободного падения).</p>
@@ -134,25 +135,25 @@
 <p>Необходимо найти <cite>поле перемещений</cite> <span class="math notranslate nohighlight">\(u(x)\)</span>, которое является отображением из <span class="math notranslate nohighlight">\((0, L)\)</span> в <span class="math notranslate nohighlight">\(\mathbb{R}^1\)</span>
 при том, что известны:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(u_0\)</span>;</li>
-<li><span class="math notranslate nohighlight">\(u_g\)</span> или <span class="math notranslate nohighlight">\(t\)</span>;</li>
-<li><span class="math notranslate nohighlight">\(f\)</span>;</li>
-<li><cite>определяющие соотношения среды</cite>: <span class="math notranslate nohighlight">\(\sigma = E \frac{\partial u}{\partial x}\)</span>,</li>
+<li><p><span class="math notranslate nohighlight">\(u_0\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_g\)</span> или <span class="math notranslate nohighlight">\(t\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span>;</p></li>
+<li><p><cite>определяющие соотношения среды</cite>: <span class="math notranslate nohighlight">\(\sigma = E \frac{\partial u}{\partial x}\)</span>,</p></li>
 </ul>
 <p>удовлетворяющее уравнению статики упругой среды:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial{\sigma}}{\partial{x}} + f = 0 \in (0, L),\]</div>
 <p>c граничными условиями:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(u(0) = u_0\)</span>;</li>
-<li><span class="math notranslate nohighlight">\(u(L) = u_g\)</span> или <span class="math notranslate nohighlight">\(\sigma(L) = t\)</span>.</li>
+<li><p><span class="math notranslate nohighlight">\(u(0) = u_0\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(u(L) = u_g\)</span> или <span class="math notranslate nohighlight">\(\sigma(L) = t\)</span>.</p></li>
 </ul>
 <div class="section" id="id3">
 <h3>Граничные условия<a class="headerlink" href="#id3" title="Ссылка на этот заголовок"></a></h3>
 <p>В курсе лабораторных рассматриваются только два типа граничных условий:</p>
 <ul class="simple">
-<li>Граничные условия Дирихле (1-го рода, условие на значение): <span class="math notranslate nohighlight">\(u(0) = u_0\)</span> и <span class="math notranslate nohighlight">\(u(L) = u_g\)</span>;</li>
-<li>Граничные условия Неймана (2-го рода, условие на значение производной): <span class="math notranslate nohighlight">\(\sigma(L) = t \implies  E \left.\frac{\partial u}{\partial x}\right|_{x=L} = t\)</span>.</li>
+<li><p>Граничные условия Дирихле (1-го рода, условие на значение): <span class="math notranslate nohighlight">\(u(0) = u_0\)</span> и <span class="math notranslate nohighlight">\(u(L) = u_g\)</span>;</p></li>
+<li><p>Граничные условия Неймана (2-го рода, условие на значение производной): <span class="math notranslate nohighlight">\(\sigma(L) = t \implies  E \left.\frac{\partial u}{\partial x}\right|_{x=L} = t\)</span>.</p></li>
 </ul>
 </div>
 <div class="section" id="id4">
@@ -173,35 +174,35 @@
 <h3>Уравнения стационарной теплопроводности и диффузии<a class="headerlink" href="#id5" title="Ссылка на этот заголовок"></a></h3>
 <p>Эллиптические уравнения также являются моделью для стационарной теплопроводности и массовой диффузии.</p>
 <p>Таблица с аналогиями физических величин и соотношений:</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="23%" />
-<col width="17%" />
-<col width="27%" />
-<col width="33%" />
+<col style="width: 23%" />
+<col style="width: 17%" />
+<col style="width: 27%" />
+<col style="width: 33%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Модель</th>
-<th class="head">Поле типа «потенциал»</th>
-<th class="head">Поле типа «поток»</th>
-<th class="head">Константы определяющих соотношений</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Модель</p></th>
+<th class="head"><p>Поле типа «потенциал»</p></th>
+<th class="head"><p>Поле типа «поток»</p></th>
+<th class="head"><p>Константы определяющих соотношений</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Статика упругой среды</td>
-<td>Перемещения <span class="math notranslate nohighlight">\(u\)</span></td>
-<td>Напряжения <span class="math notranslate nohighlight">\(\sigma\)</span></td>
-<td>Модуль Юнга <span class="math notranslate nohighlight">\(E\)</span></td>
+<tbody>
+<tr class="row-even"><td><p>Статика упругой среды</p></td>
+<td><p>Перемещения <span class="math notranslate nohighlight">\(u\)</span></p></td>
+<td><p>Напряжения <span class="math notranslate nohighlight">\(\sigma\)</span></p></td>
+<td><p>Модуль Юнга <span class="math notranslate nohighlight">\(E\)</span></p></td>
 </tr>
-<tr class="row-odd"><td>Стационарная теплопроводность</td>
-<td>Температура <span class="math notranslate nohighlight">\(T\)</span></td>
-<td>Плотность теплового потока <span class="math notranslate nohighlight">\(q\)</span></td>
-<td>Коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda\)</span></td>
+<tr class="row-odd"><td><p>Стационарная теплопроводность</p></td>
+<td><p>Температура <span class="math notranslate nohighlight">\(T\)</span></p></td>
+<td><p>Плотность теплового потока <span class="math notranslate nohighlight">\(q\)</span></p></td>
+<td><p>Коэффициент теплопроводности <span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
 </tr>
-<tr class="row-even"><td>Стационарная массовая диффузия</td>
-<td>Масса <span class="math notranslate nohighlight">\(m\)</span></td>
-<td>Плотность потока массы <span class="math notranslate nohighlight">\(q\)</span></td>
-<td>Коэффициент диффузии <span class="math notranslate nohighlight">\(D\)</span></td>
+<tr class="row-even"><td><p>Стационарная массовая диффузия</p></td>
+<td><p>Масса <span class="math notranslate nohighlight">\(m\)</span></p></td>
+<td><p>Плотность потока массы <span class="math notranslate nohighlight">\(q\)</span></p></td>
+<td><p>Коэффициент диффузии <span class="math notranslate nohighlight">\(D\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -213,8 +214,8 @@
 переменного.</p>
 <p><strong>Модели механики сплошной среды, которые описывает данный тип уравнений:</strong></p>
 <ul class="simple">
-<li>Стационарная теплопроводность;</li>
-<li>Стационарная массовая диффузия.</li>
+<li><p>Стационарная теплопроводность;</p></li>
+<li><p>Стационарная массовая диффузия.</p></li>
 </ul>
 <p>Будем рассматривать постановку задачи в терминах стационарной теплопроводности.</p>
 <p>Представим двумерную область <span class="math notranslate nohighlight">\(\Omega\)</span> с границей <span class="math notranslate nohighlight">\(\partial \Omega\)</span>. На части границы <span class="math notranslate nohighlight">\(\partial \Omega_T\)</span>
@@ -227,18 +228,18 @@
 <p>Необходимо найти <cite>поле температур</cite> <span class="math notranslate nohighlight">\(T(x)\)</span>, которое является отображением из <span class="math notranslate nohighlight">\(\Omega\)</span> в <span class="math notranslate nohighlight">\(\mathbb{R}^1\)</span>
 при том, что известны:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(T_g\)</span> - заданная температура;</li>
-<li><span class="math notranslate nohighlight">\(q_n\)</span> - заданный тепловой поток в нормальном направлении;</li>
-<li><span class="math notranslate nohighlight">\(f\)</span> - плотность источников теплового потока в <span class="math notranslate nohighlight">\(\Omega\)</span>;</li>
-<li><cite>определяющие соотношения среды</cite>: <span class="math notranslate nohighlight">\(\vec{q} = - \hat{\lambda} \nabla T\)</span>,</li>
+<li><p><span class="math notranslate nohighlight">\(T_g\)</span> - заданная температура;</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_n\)</span> - заданный тепловой поток в нормальном направлении;</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span> - плотность источников теплового потока в <span class="math notranslate nohighlight">\(\Omega\)</span>;</p></li>
+<li><p><cite>определяющие соотношения среды</cite>: <span class="math notranslate nohighlight">\(\vec{q} = - \hat{\lambda} \nabla T\)</span>,</p></li>
 </ul>
 <p>удовлетворяющее уравнению стационарной теплопроводности:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial{q_1}}{\partial{x_1}} + \frac{\partial{q_2}}{\partial{x_2}} + f = 0, \vec{x} \in (\Omega),\]</div>
 <p>c граничными условиями:</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(T = T_g, \vec{x} \in \partial \Omega_T\)</span> - граничные условия Дирихле;</li>
-<li><span class="math notranslate nohighlight">\(-\vec{q} \cdot \vec{n} = q_n, \vec{x} \in \partial \Omega_q\)</span> - граничные условия Неймана.</li>
+<li><p><span class="math notranslate nohighlight">\(T = T_g, \vec{x} \in \partial \Omega_T\)</span> - граничные условия Дирихле;</p></li>
+<li><p><span class="math notranslate nohighlight">\(-\vec{q} \cdot \vec{n} = q_n, \vec{x} \in \partial \Omega_q\)</span> - граничные условия Неймана.</p></li>
 </ul>
 <div class="section" id="id7">
 <h3>Определяющие соотношения среды<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h3>
