@@ -3481,7 +3481,7 @@
     "\n",
     "equation = (E * u(x).diff(x, 1)).diff(x, 1) + f\n",
     "\n",
-    "exact = sp.dsolve(equation, \n",
+    "exact = sp.dsolve(equation, Discontinuous type Argument must be restricted.\n",
     "                  ics={u(0):u_s, \n",
     "                       u(x).diff(x).subs(x, 1):t / E})\n",
     "display(exact)"

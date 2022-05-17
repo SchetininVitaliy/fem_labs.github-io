@@ -64,9 +64,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="2d_elliptic.html">МКР для решения 2D линейного эллиптического уравнения скалярного переменного</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1d_parabolic.html">МКР для решения 1D параболического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab4.html">МКЭ для решения 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5.html">МКЭ c квадратичными функциями формы для 1D линейного эллиптического уравнения</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6.html">МКЭ для решения 2D и 3D линейного эллиптического уравнения скалярного переменного</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fem.html">МКЭ для решения линейного эллиптического уравнения</a></li>
 </ul>
 
         </div>
@@ -3699,7 +3697,7 @@ Text(0, 0.5, &#39;u&#39;)
 
 <span class="n">equation</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span>
 
-<span class="n">exact</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span>
+<span class="n">exact</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="n">Discontinuous</span> <span class="nb">type</span> <span class="n">Argument</span> <span class="n">must</span> <span class="n">be</span> <span class="n">restricted</span><span class="o">.</span>
                   <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span><span class="n">u_s</span><span class="p">,</span>
                        <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span><span class="n">t</span> <span class="o">/</span> <span class="n">E</span><span class="p">})</span>
 <span class="n">display</span><span class="p">(</span><span class="n">exact</span><span class="p">)</span>
