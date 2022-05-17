@@ -438,6 +438,50 @@ Text(0, 0.5, &#39;u&#39;)
 </div>
 <div class="section" id="Численное-решение">
 <h3>Численное решение<a class="headerlink" href="#Численное-решение" title="Ссылка на этот заголовок"></a></h3>
+<p>Для общности и краткости изложения запишем уравнение через оператор Лапласа:</p>
+<p><span class="math">\begin{align}
+E \nabla^2 u + f = 0.
+\end{align}</span></p>
+<ol class="arabic simple">
+<li><p>Переход к вариационной формулировке задачи:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Введем весовые функции <span class="math notranslate nohighlight">\(v\)</span> принадлежащие пространству функций <span class="math notranslate nohighlight">\(\hat{V} = \{v \in H^1(\Omega)|v = 0; x \in \partial\Omega_u\}\)</span>, где <span class="math notranslate nohighlight">\(\Omega\)</span> - вычислительный домен; <span class="math notranslate nohighlight">\(\partial\Omega_u\)</span> - граница домена, на которой заданы граничные условия Дирихле; <span class="math notranslate nohighlight">\(H^1(\Omega)\)</span> - Соболевское функциональное пространство.</p></li>
+<li><p>Умножим уравнение на весовую функцию <span class="math notranslate nohighlight">\(v\)</span> и интегрируем по всему домену <span class="math notranslate nohighlight">\(\Omega\)</span>:</p></li>
+</ul>
+<p><span class="math">\begin{align}
+\int_{\Omega} E \nabla^2 u v dx + \int_{\Omega} f v dx   = 0.
+\end{align}</span></p>
+<ul class="simple">
+<li><p>Используем интегрирование по частям, чтобы понизить степень производной:</p></li>
+</ul>
+<p><span class="math">\begin{align}
+-\int_{\Omega} E \nabla u \nabla v dx + \int_{\partial\Omega} E \frac{\partial u}{\partial n} v dS + \int_{\Omega} f v dx   = 0.
+\end{align}</span></p>
+<p><span class="math">\begin{align}
+\int_{\Omega} E \nabla u \nabla v dx = \int_{\partial\Omega} E \frac{\partial u}{\partial n} v dS + \int_{\Omega} f v dx.
+\end{align}</span></p>
+<ul class="simple">
+<li><p>Выберем пространство функций, которому принадлежит решение:</p></li>
+</ul>
+<p><span class="math">\begin{align}
+V = \{u \in H^1(\Omega)|u = u_g;  x \in \partial\Omega_u\}
+\end{align}</span></p>
+<ol class="arabic simple" start="2">
+<li><p>Операторная формулировка вариационной задачи:</p></li>
+</ol>
+<p><span class="math">\begin{align}
+a(u, v) = L(v) \\
+v \in \hat{V}, u \in V,
+\end{align}</span></p>
+<p>где</p>
+<p><span class="math">\begin{align}
+a(u, v) &= \int_{\Omega} E \nabla u \nabla v dx \\
+L(v) &=  \int_{\partial\Omega} E \frac{\partial u}{\partial n} v dS + \int_{\Omega} f v dx.
+\end{align}</span></p>
+<ol class="arabic simple" start="3">
+<li><p>Построим сетку:</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -448,6 +492,9 @@ Text(0, 0.5, &#39;u&#39;)
 </pre></div>
 </div>
 </div>
+<ol class="arabic simple" start="4">
+<li><p>Введем пространство функций для Лагражева семейства конечных элементов (“CG”) с одной степенью свободы в узле:</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -457,6 +504,9 @@ Text(0, 0.5, &#39;u&#39;)
 </pre></div>
 </div>
 </div>
+<ol class="arabic simple" start="5">
+<li><p>Введем функцию решения и функцию весов:</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -467,27 +517,39 @@ Text(0, 0.5, &#39;u&#39;)
 </pre></div>
 </div>
 </div>
+<ol class="arabic simple" start="6">
+<li><p>Создадим билинейную форму вариационной задачи <span class="math notranslate nohighlight">\(a(u, v)\)</span>:</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dolfinx.fem</span> <span class="kn">import</span> <span class="n">Constant</span><span class="p">,</span> <span class="n">Function</span>
 <span class="kn">from</span> <span class="nn">petsc4py.PETSc</span> <span class="kn">import</span> <span class="n">ScalarType</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1e2</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.7e9</span><span class="p">)</span>
+
 <span class="n">E</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">ScalarType</span><span class="p">(</span><span class="mf">70e9</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
 </pre></div>
 </div>
 </div>
+<ol class="arabic simple" start="7">
+<li><p>Создадим линейную форму задачи <span class="math notranslate nohighlight">\(L(v)\)</span>:</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1e2</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.7e9</span><span class="p">)</span>
+
 <span class="n">L</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
 </pre></div>
 </div>
 </div>
+<ol class="arabic simple" start="8">
+<li><p>Создадим систему граничных условий Дирихле</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -504,6 +566,9 @@ Text(0, 0.5, &#39;u&#39;)
 </pre></div>
 </div>
 </div>
+<ol class="arabic simple" start="9">
+<li><p>Решим линейную систему</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -514,25 +579,11 @@ Text(0, 0.5, &#39;u&#39;)
 </pre></div>
 </div>
 </div>
+<ol class="arabic simple" start="10">
+<li><p>Анализ результата</p></li>
+</ol>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">uh</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[0.         0.00335938 0.00611607 0.00827009 0.00982143 0.01077009
- 0.01111607 0.01085938 0.01      ]
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -549,7 +600,7 @@ Text(0, 0.5, &#39;u&#39;)
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -561,7 +612,7 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_fem_13_1.png" src="../_images/notebooks_fem_13_1.png" />
+<img alt="../_images/notebooks_fem_19_1.png" src="../_images/notebooks_fem_19_1.png" />
 </div>
 </div>
 </div>
@@ -583,7 +634,7 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="section" id="id7">
 <h3>Аналитическое решение<a class="headerlink" href="#id7" title="Ссылка на этот заголовок"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
@@ -616,37 +667,33 @@ Text(0, 0.5, &#39;u&#39;)
 $\displaystyle u{\left(x \right)} = - \frac{x^{3}}{4200000000} - \frac{27 x^{2}}{1400} + 0.0528571435714286 x$</div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
 <span class="kn">from</span> <span class="nn">dolfinx</span> <span class="kn">import</span> <span class="n">mesh</span>
 <span class="n">num_elements</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">domain</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">create_interval</span><span class="p">(</span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">,</span> <span class="n">num_elements</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dolfinx.fem</span> <span class="kn">import</span> <span class="n">FunctionSpace</span>
+
+<span class="kn">from</span> <span class="nn">dolfinx.fem</span> <span class="kn">import</span> <span class="n">FunctionSpace</span>
 <span class="n">V</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;CG&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ufl</span>
+
+<span class="kn">import</span> <span class="nn">ufl</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TrialFunction</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TestFunction</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">dolfinx.fem</span> <span class="kn">import</span> <span class="n">Constant</span><span class="p">,</span> <span class="n">Function</span>
+<span class="kn">from</span> <span class="nn">petsc4py.PETSc</span> <span class="kn">import</span> <span class="n">ScalarType</span>
+
+<span class="n">E</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">ScalarType</span><span class="p">(</span><span class="mf">70e9</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
 </pre></div>
 </div>
 </div>
+<p>Подготовим субдомен границы, на котором прикладываются граничные условия Неймана:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dolfinx.mesh</span> <span class="kn">import</span> <span class="n">locate_entities_boundary</span>
@@ -659,22 +706,12 @@ $\displaystyle u{\left(x \right)} = - \frac{x^{3}}{4200000000} - \frac{27 x^{2}}
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dolfinx.fem</span> <span class="kn">import</span> <span class="n">Constant</span>
-<span class="kn">from</span> <span class="nn">petsc4py.PETSc</span> <span class="kn">import</span> <span class="n">ScalarType</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1e2</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.7e9</span><span class="p">)</span>
-<span class="n">E</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">ScalarType</span><span class="p">(</span><span class="mf">70e9</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">ufl</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
+
 <span class="n">t</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">ScalarType</span><span class="p">(</span><span class="mf">1e9</span><span class="p">))</span>
 <span class="n">L</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> <span class="n">ufl</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">dS</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -733,7 +770,15 @@ Text(0, 0.5, &#39;u&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_fem_24_1.png" src="../_images/notebooks_fem_24_1.png" />
+<img alt="../_images/notebooks_fem_28_1.png" src="../_images/notebooks_fem_28_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </div>
 </div>

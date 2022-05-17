@@ -121,7 +121,55 @@
    "id": "a3a8d731-54cd-469b-9d6f-039895d614a7",
    "metadata": {},
    "source": [
-    "### Численное решение"
+    "### Численное решение\n",
+    "\n",
+    "Для общности и краткости изложения запишем уравнение через оператор Лапласа:\n",
+    "\n",
+    "\\begin{align}\n",
+    "E \\nabla^2 u + f = 0.\n",
+    "\\end{align}\n",
+    "\n",
+    "1. Переход к вариационной формулировке задачи:\n",
+    "\n",
+    "* Введем весовые функции $v$ принадлежащие пространству функций $\\hat{V} = \\{v \\in H^1(\\Omega)|v = 0;  x \\in \\partial\\Omega_u\\}$, где $\\Omega$ - вычислительный домен; $\\partial\\Omega_u$ - граница домена, на которой заданы граничные условия Дирихле; $H^1(\\Omega)$ - Соболевское функциональное пространство. \n",
+    "\n",
+    "* Умножим уравнение на весовую функцию $v$ и интегрируем по всему домену $\\Omega$:\n",
+    "\n",
+    "\\begin{align}\n",
+    "\\int_{\\Omega} E \\nabla^2 u v dx + \\int_{\\Omega} f v dx   = 0.\n",
+    "\\end{align}\n",
+    "\n",
+    "* Используем интегрирование по частям, чтобы понизить степень производной:\n",
+    "\n",
+    "\\begin{align}\n",
+    "-\\int_{\\Omega} E \\nabla u \\nabla v dx + \\int_{\\partial\\Omega} E \\frac{\\partial u}{\\partial n} v dS + \\int_{\\Omega} f v dx   = 0.\n",
+    "\\end{align}\n",
+    "\n",
+    "\\begin{align}\n",
+    "\\int_{\\Omega} E \\nabla u \\nabla v dx = \\int_{\\partial\\Omega} E \\frac{\\partial u}{\\partial n} v dS + \\int_{\\Omega} f v dx.\n",
+    "\\end{align}\n",
+    "\n",
+    "* Выберем пространство функций, которому принадлежит решение:\n",
+    "\n",
+    "\\begin{align}\n",
+    "V = \\{u \\in H^1(\\Omega)|u = u_g;  x \\in \\partial\\Omega_u\\}\n",
+    "\\end{align}\n",
+    "\n",
+    "2. Операторная формулировка вариационной задачи:\n",
+    "\n",
+    "\\begin{align}\n",
+    "a(u, v) = L(v) \\\\\n",
+    "v \\in \\hat{V}, u \\in V,\n",
+    "\\end{align}\n",
+    "\n",
+    "где\n",
+    "\n",
+    "\\begin{align}\n",
+    "a(u, v) &= \\int_{\\Omega} E \\nabla u \\nabla v dx \\\\\n",
+    "L(v) &=  \\int_{\\partial\\Omega} E \\frac{\\partial u}{\\partial n} v dS + \\int_{\\Omega} f v dx.\n",
+    "\\end{align}\n",
+    "\n",
+    "3. Построим сетку:"
    ]
   },
   {
@@ -137,6 +185,14 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "10892b36-de68-48df-bbda-9f69212226eb",
+   "metadata": {},
+   "source": [
+    "4. Введем пространство функций для Лагражева семейства конечных элементов (\"CG\") с одной степенью свободы в узле:"
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 4,
    "id": "92630672-b689-4b64-b72e-3ad67dc6730e",
@@ -145,6 +201,14 @@
    "source": [
     "from dolfinx.fem import FunctionSpace\n",
     "V = FunctionSpace(domain, (\"CG\", 1))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "48ad503f-06c4-4a74-be37-b577e690f88f",
+   "metadata": {},
+   "source": [
+    "5. Введем функцию решения и функцию весов:"
    ]
   },
   {
@@ -160,6 +224,14 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "691994b9-98a5-4559-abf3-5a3aa2145c06",
+   "metadata": {},
+   "source": [
+    "6. Создадим билинейную форму вариационной задачи $a(u, v)$:"
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 6,
    "id": "d37cac92-f9ad-4ed8-bf35-41e18d4f6d96",
@@ -168,9 +240,18 @@
    "source": [
     "from dolfinx.fem import Constant, Function\n",
     "from petsc4py.PETSc import ScalarType\n",
-    "f = Function(V)\n",
-    "f.interpolate(lambda x: 1e2 * x[0] + 2.7e9)\n",
-    "E = Constant(domain, ScalarType(70e9))"
+    "\n",
+    "E = Constant(domain, ScalarType(70e9))\n",
+    "\n",
+    "a = ufl.inner(E * ufl.grad(u), ufl.grad(v)) * ufl.dx"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "73579070-658e-472f-99ac-133c004d6872",
+   "metadata": {},
+   "source": [
+    "7. Создадим линейную форму задачи $L(v)$:"
    ]
   },
   {
@@ -180,8 +261,18 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "a = ufl.inner(E * ufl.grad(u), ufl.grad(v)) * ufl.dx\n",
+    "f = Function(V)\n",
+    "f.interpolate(lambda x: 1e2 * x[0] + 2.7e9)\n",
+    "\n",
     "L = ufl.inner(f, v) * ufl.dx"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a1eeec77-fb6c-4c4c-a1d5-86954cc23094",
+   "metadata": {},
+   "source": [
+    "8. Создадим систему граничных условий Дирихле"
    ]
   },
   {
@@ -203,6 +294,14 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "id": "ed9d0778-29d1-48aa-864e-cbeeb966f4e6",
+   "metadata": {},
+   "source": [
+    "9. Решим линейную систему"
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 9,
    "id": "c44fd053-9266-4cf3-b2f1-ef25d9305091",
@@ -215,27 +314,16 @@
    ]
   },
   {
-   "cell_type": "code",
-   "execution_count": 10,
-   "id": "1391e4eb-9a2c-454f-b039-d69c8c5eeeff",
+   "cell_type": "markdown",
+   "id": "9a57d302-4e7b-430a-a59a-0bd759cf0630",
    "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "[0.         0.00335938 0.00611607 0.00827009 0.00982143 0.01077009\n",
-      " 0.01111607 0.01085938 0.01      ]\n"
-     ]
-    }
-   ],
    "source": [
-    "print(uh.x.array.real)"
+    "10. Анализ результата"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
+   "execution_count": 10,
    "id": "be5951e8-0499-4e97-a836-e924f05e909f",
    "metadata": {},
    "outputs": [
@@ -245,7 +333,7 @@
        "Text(0, 0.5, 'u')"
       ]
      },
-     "execution_count": 11,
+     "execution_count": 10,
      "metadata": {},
      "output_type": "execute_result"
     },
@@ -303,7 +391,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
+   "execution_count": 11,
    "id": "35e85d67-07c6-4bc4-b47b-583626274244",
    "metadata": {},
    "outputs": [
@@ -348,7 +436,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 13,
+   "execution_count": 18,
    "id": "8196ad0f-9e55-43e6-948c-46b4f39d8c9e",
    "metadata": {},
    "outputs": [],
@@ -356,36 +444,35 @@
     "from mpi4py import MPI\n",
     "from dolfinx import mesh\n",
     "num_elements = 8\n",
-    "domain = mesh.create_interval(MPI.COMM_WORLD, num_elements, [0, 1])"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 14,
-   "id": "561f9d09-db00-41bf-b02e-01927f99fa59",
-   "metadata": {},
-   "outputs": [],
-   "source": [
+    "domain = mesh.create_interval(MPI.COMM_WORLD, num_elements, [0, 1])\n",
+    "\n",
     "from dolfinx.fem import FunctionSpace\n",
-    "V = FunctionSpace(domain, (\"CG\", 1))"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 15,
-   "id": "6934c6dc-4f84-4de4-a332-c9a1a2d2a4af",
-   "metadata": {},
-   "outputs": [],
-   "source": [
+    "V = FunctionSpace(domain, (\"CG\", 1))\n",
+    "\n",
     "import ufl\n",
     "u = ufl.TrialFunction(V)\n",
-    "v = ufl.TestFunction(V)"
+    "v = ufl.TestFunction(V)\n",
+    "\n",
+    "from dolfinx.fem import Constant, Function\n",
+    "from petsc4py.PETSc import ScalarType\n",
+    "\n",
+    "E = Constant(domain, ScalarType(70e9))\n",
+    "\n",
+    "a = ufl.inner(E * ufl.grad(u), ufl.grad(v)) * ufl.dx"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "84b0996e-334f-49ba-a592-77ab654c9d56",
+   "metadata": {},
+   "source": [
+    "Подготовим субдомен границы, на котором прикладываются граничные условия Неймана:"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
-   "id": "8658fa49-f9b3-4ddd-abe8-2e5c120b0a14",
+   "execution_count": 13,
+   "id": "561f9d09-db00-41bf-b02e-01927f99fa59",
    "metadata": {},
    "outputs": [],
    "source": [
@@ -399,26 +486,14 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
-   "id": "02fcf73e-5e54-4db6-a9d4-93febb04e645",
+   "execution_count": 14,
+   "id": "6934c6dc-4f84-4de4-a332-c9a1a2d2a4af",
    "metadata": {},
    "outputs": [],
    "source": [
-    "from dolfinx.fem import Constant\n",
-    "from petsc4py.PETSc import ScalarType\n",
     "f = fem.Function(V)\n",
     "f.interpolate(lambda x: 1e2 * x[0] + 2.7e9)\n",
-    "E = Constant(domain, ScalarType(70e9))"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 18,
-   "id": "c442e909-32f3-48b7-96a0-1e5c7eb7c115",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "a = ufl.inner(E * ufl.grad(u), ufl.grad(v)) * ufl.dx\n",
+    "\n",
     "t = Constant(domain, ScalarType(1e9))\n",
     "L = ufl.inner(f, v) * ufl.dx + ufl.inner(t, v) * dS(1)"
    ]
@@ -491,6 +566,14 @@
     "plt.xlabel('x')\n",
     "plt.ylabel('u')"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "14a3554b-9756-4180-9c1a-8fb1bbd64e7d",
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
